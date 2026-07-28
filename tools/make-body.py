@@ -19,11 +19,12 @@ N = 48
 OUT = "packages/hyper-identicons/art-source/body/base.txt"
 ANCHORS = "tools/anchors.json"
 
-# Near ear: outer edge is a straight vertical at col 7, inner edge a staircase
-# descending one column per row. Both read directly off the reference.
+# Near ear: outer edge is a straight vertical, inner edge a staircase descending
+# one column per row. Read off the reference, then pulled in a column with the
+# rest of the near side of the head.
 EAR_NEAR = {
-    6: (8, 9), 7: (7, 10), 8: (7, 11), 9: (7, 12), 10: (7, 13), 11: (7, 14),
-    12: (7, 15), 13: (7, 16), 14: (7, 17), 15: (7, 18), 16: (7, 19),
+    6: (9, 10), 7: (8, 10), 8: (8, 11), 9: (8, 12), 10: (8, 13), 11: (8, 14),
+    12: (8, 15), 13: (8, 16), 14: (8, 17), 15: (8, 18), 16: (8, 19),
 }
 
 # Far ear: the reference only shows rows 9-14 above the cap. Below that it is
@@ -40,19 +41,23 @@ CROWN = {13: (21, 26), 14: (18, 29), 15: (15, 32), 16: (11, 34)}
 
 # The face. Rows 21-27 sit behind the sunglasses in the reference, so their
 # edges are interpolated between the brow at row 20 and the cheek at row 26.
+# The near side runs a column tighter than the trace: at full width the reference
+# reads as too much cheek on the near side. The chin tip at rows 38-39 is left
+# alone so it stays under the muzzle, which puts the whole column of slack into
+# the jaw between rows 36 and 38.
 HEAD = {
-    17: (8, 38), 18: (8, 38), 19: (8, 38), 20: (8, 38),
-    21: (7, 39), 22: (7, 39), 23: (7, 39), 24: (7, 40),
-    25: (6, 40), 26: (6, 40), 27: (6, 40), 28: (6, 40),
-    29: (7, 40), 30: (7, 39), 31: (8, 38), 32: (9, 38),
-    33: (11, 37), 34: (13, 36), 35: (15, 34), 36: (18, 33),
-    37: (21, 31), 38: (24, 30), 39: (26, 29),
+    17: (9, 38), 18: (9, 38), 19: (9, 38), 20: (9, 38),
+    21: (8, 39), 22: (8, 39), 23: (8, 39), 24: (8, 40),
+    25: (7, 40), 26: (7, 40), 27: (7, 40), 28: (7, 40),
+    29: (8, 40), 30: (8, 39), 31: (9, 38), 32: (10, 38),
+    33: (12, 37), 34: (14, 36), 35: (16, 34), 36: (19, 33),
+    37: (22, 31), 38: (24, 30), 39: (26, 29),
 }
 
 # Both inner ears hug the outer edge of their ear, as in the reference.
 PINK = [
-    (10, 9, 9), (11, 9, 9), (12, 9, 10), (13, 9, 11), (14, 9, 12),
-    (15, 9, 11), (16, 9, 10),
+    (10, 10, 10), (11, 10, 10), (12, 10, 11), (13, 10, 12), (14, 10, 13),
+    (15, 10, 12), (16, 10, 11),
     (12, 36, 36), (13, 35, 36), (14, 34, 36), (15, 35, 36), (16, 36, 36),
 ]
 
@@ -68,7 +73,7 @@ WHISKERS = [
 
 # Reconstructed: the hoodie hides the shoulders completely.
 SHOULDER = {
-    32: (19, 31), 33: (15, 34), 34: (12, 37), 35: (9, 39), 36: (7, 40),
+    32: (19, 31), 33: (13, 34), 34: (12, 37), 35: (9, 39), 36: (7, 40),
     37: (6, 41), 38: (5, 41), 39: (5, 42),
     40: (4, 42), 41: (4, 42), 42: (4, 43), 43: (4, 43),
     44: (3, 43), 45: (3, 44), 46: (3, 44), 47: (3, 44),
