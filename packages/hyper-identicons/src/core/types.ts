@@ -12,6 +12,21 @@ export const LAYER_ORDER = [
 
 export type LayerId = (typeof LAYER_ORDER)[number];
 
+/**
+ * The order the draws happen in, which is not the order the layers are painted
+ * in. The body goes first so the background can be picked to contrast with the
+ * cat that is about to sit on it. See spec/v1.md §3.2.
+ */
+export const SELECT_ORDER = [
+  'body',
+  'background',
+  'clothing',
+  'mouth',
+  'eyes',
+  'accessory',
+  'headwear',
+] as const satisfies readonly LayerId[];
+
 /** Layers painted by the `mini` detail level. See spec/v1.md §6. */
 export const MINI_LAYERS = [
   'background',
@@ -29,10 +44,20 @@ export interface Art {
   weight: number;
 }
 
+/**
+ * Which side of the lightness gap a colourway sits on. See AGENTS.md for the
+ * bands and the reasoning; the short version is that the cat and the background
+ * are always drawn from opposite tones, which is what makes every combination
+ * legible without having to check the pairs one by one.
+ */
+export type Tone = 'deep' | 'bright';
+
 export interface Colorway {
   id: string;
   name: string;
   weight: number;
+  /** Carried only by layers big enough for their tone to matter: body and background. */
+  tone?: Tone;
   colors: Partial<Record<SlotChar, string>>;
 }
 

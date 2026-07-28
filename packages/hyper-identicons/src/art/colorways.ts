@@ -1,52 +1,97 @@
 import type { Colorway, LayerId } from '../core/types.js';
 
-/** Hyperliquid's brand aquamarine. Used sparingly, as an accent, on rarer traits. */
+/** Hyperliquid's brand aquamarine. The one colour the whole palette is built around. */
 export const HYPER = '#97FCE4';
 
+/**
+ * Every colour here was placed by OKLab lightness first and hue second. The bands,
+ * the pairing rule and the reasoning are in AGENTS.md; `pnpm tsx scripts/audit-colors.ts`
+ * prints every contrast the palette has to survive and the test suite fails the
+ * build if one slips. Do not add a colour here by eye without running that.
+ *
+ * Hues come from Hyperliquid (aquamarine, foam, dolphin, firefly, ebony, all sitting
+ * on hue 180) and from Bounce (violet and indigo, on hue 285-300), with a small
+ * spread of warm and cool neighbours so a wallet does not always land on teal.
+ */
 export const COLORWAYS: Record<LayerId, Colorway[]> = {
+  // Deep and bright are never mixed in one identicon: whichever tone the cat is,
+  // the background takes the other. Weights are relative within a tone, since the
+  // cat has already decided which half of this list is in play.
   background: [
-    { id: 'void', name: 'Void', weight: 20, colors: { a: '#0B1614', b: '#12211E' } },
-    { id: 'ink', name: 'Ink', weight: 14, colors: { a: '#050807', b: '#0D1412' } },
-    { id: 'slate', name: 'Slate', weight: 14, colors: { a: '#1B2430', b: '#253040' } },
-    { id: 'deep', name: 'Deep', weight: 12, colors: { a: '#0F2E28', b: '#143B33' } },
-    { id: 'plum', name: 'Plum', weight: 10, colors: { a: '#241B33', b: '#322446' } },
-    { id: 'ember', name: 'Ember', weight: 10, colors: { a: '#331F1B', b: '#452924' } },
-    { id: 'sand', name: 'Sand', weight: 8, colors: { a: '#E8DFC8', b: '#D6CBB0' } },
-    { id: 'mint', name: 'Mint', weight: 8, colors: { a: '#D8FBF0', b: '#BEF2E2' } },
-    { id: 'rose', name: 'Rose', weight: 6, colors: { a: '#F3D9E2', b: '#E4C0CE' } },
-    { id: 'sun', name: 'Sun', weight: 6, colors: { a: '#F7E7A6', b: '#EFD97E' } },
-    { id: 'cyan', name: 'Cyan', weight: 5, colors: { a: '#A6E9F7', b: '#7FD8EE' } },
-    { id: 'aqua', name: 'Aqua', weight: 2, colors: { a: HYPER, b: '#7BE9CE' } },
+    { id: 'ebony', name: 'Ebony', tone: 'deep', weight: 22, colors: { a: '#060911', b: '#0F141E' } },
+    { id: 'abyss', name: 'Abyss', tone: 'deep', weight: 20, colors: { a: '#031A16', b: '#082621' } },
+    { id: 'firefly', name: 'Firefly', tone: 'deep', weight: 16, colors: { a: '#052824', b: '#0C3630' } },
+    { id: 'slate', name: 'Slate', tone: 'deep', weight: 15, colors: { a: '#102031', b: '#1A2D40' } },
+    { id: 'indigo', name: 'Indigo', tone: 'deep', weight: 12, colors: { a: '#1C163F', b: '#272251' } },
+    { id: 'plum', name: 'Plum', tone: 'deep', weight: 8, colors: { a: '#2A0C2C', b: '#38173B' } },
+    { id: 'ember', name: 'Ember', tone: 'deep', weight: 7, colors: { a: '#341303', b: '#441E0B' } },
+    { id: 'foam', name: 'Foam', tone: 'bright', weight: 20, colors: { a: '#E4F6F4', b: '#CEE3E1' } },
+    { id: 'dolphin', name: 'Dolphin', tone: 'bright', weight: 18, colors: { a: '#C3F3EC', b: '#AAE1D9' } },
+    { id: 'sand', name: 'Sand', tone: 'bright', weight: 16, colors: { a: '#F1DFBC', b: '#DFCCA3' } },
+    { id: 'sky', name: 'Sky', tone: 'bright', weight: 13, colors: { a: '#B5E2FD', b: '#9CCFEE' } },
+    { id: 'orchid', name: 'Orchid', tone: 'bright', weight: 12, colors: { a: '#DBCAFF', b: '#CAB4F4' } },
+    { id: 'sun', name: 'Sun', tone: 'bright', weight: 11, colors: { a: '#F7DD7D', b: '#E7C955' } },
+    { id: 'blush', name: 'Blush', tone: 'bright', weight: 8, colors: { a: '#FFCCCE', b: '#F1B6B9' } },
+    { id: 'aqua', name: 'Aqua', tone: 'bright', weight: 2, colors: { a: HYPER, b: '#72EBD0' } },
   ],
-  // 's' is the whisker line and 'p' the inner ear. Neither is a fill: both have
-  // to stay legible against 'f', which means going darker on pale cats and
-  // lighter on dark ones. The reference draws the inner ear as solid black, so
-  // 'p' tracks the outline rather than the pink a cat's ear would really be.
+  // 'o' is the ink line, 's' the whiskers, 'p' the inner ear.
+  //
+  // Only 'o' is allowed to disappear into the fur, and only on a deep cat, where
+  // it has a different job: there the silhouette is carried by the fur against a
+  // bright field and the ink is just the rim, so it is measured against the
+  // background rather than the fur. 's' and 'p' have no such excuse. Both are
+  // drawn on the fur and have to be read off it, which on a deep cat means going
+  // lighter -- there is nothing left underneath. The reference draws the inner ear
+  // solid black and bright cats keep that, but on a deep cat a black ear is a hole,
+  // so it flips to the warm tint a real cat's ear has.
+  //
+  // Deep fur stops at L 0.34 rather than going to true black, which is what leaves
+  // the whiskers and the ear anywhere to go.
   body: [
-    { id: 'snow', name: 'Snow', weight: 18, colors: { o: '#101010', f: '#FDFDFD', s: '#2E2E2E', l: '#FFFFFF', p: '#141414' } },
-    { id: 'void', name: 'Void', weight: 16, colors: { o: '#000000', f: '#1B1B1B', s: '#5C5C5C', l: '#2E2E2E', p: '#4E4E4E' } },
-    { id: 'ash', name: 'Ash', weight: 14, colors: { o: '#1A1A1A', f: '#9AA3A8', s: '#2F3639', l: '#D8DEE1', p: '#232A2E' } },
-    { id: 'ginger', name: 'Ginger', weight: 13, colors: { o: '#2A1408', f: '#E08A3C', s: '#7A3F10', l: '#F7D9B0', p: '#5E2C0C' } },
-    { id: 'cocoa', name: 'Cocoa', weight: 11, colors: { o: '#1F1207', f: '#7A4A22', s: '#D8B48A', l: '#C79A6A', p: '#2E1B0C' } },
-    { id: 'cream', name: 'Cream', weight: 10, colors: { o: '#241C0F', f: '#F0DFC0', s: '#8A7550', l: '#FFF6E4', p: '#463620' } },
-    { id: 'slate', name: 'Slate', weight: 8, colors: { o: '#0D1218', f: '#4A5A6B', s: '#A8BCCB', l: '#8FA3B4', p: '#151D26' } },
-    { id: 'lilac', name: 'Lilac', weight: 5, colors: { o: '#1D1428', f: '#B9A7E0', s: '#5B4A85', l: '#E6DCFA', p: '#392A55' } },
-    { id: 'ghost', name: 'Ghost', weight: 3, colors: { o: '#0A1A18', f: '#5F8F86', s: '#C8EDE6', l: '#9CC7BF', p: '#12302B' } },
-    { id: 'aqua', name: 'Aqua', weight: 2, colors: { o: '#06231D', f: HYPER, s: '#25806A', l: '#DBFFF6', p: '#0C382E' } },
+    { id: 'snow', name: 'Snow', tone: 'bright', weight: 16, colors: { o: '#222222', f: '#F5F5F5', s: '#A8A8A8', p: '#303030' } },
+    { id: 'ginger', name: 'Ginger', tone: 'bright', weight: 12, colors: { o: '#1B0B02', f: '#F7A062', s: '#8A664D', p: '#2B1305' } },
+    { id: 'cream', name: 'Cream', tone: 'bright', weight: 10, colors: { o: '#1A1304', f: '#EFE0C0', s: '#A19479', p: '#2A2009' } },
+    { id: 'ash', name: 'Ash', tone: 'bright', weight: 10, colors: { o: '#0C1114', f: '#B6BFC4', s: '#6E767A', p: '#181F23' } },
+    { id: 'aqua', name: 'Aqua', tone: 'bright', weight: 6, colors: { o: '#051B16', f: HYPER, s: '#70A598', p: '#0A2B24' } },
+    { id: 'lilac', name: 'Lilac', tone: 'bright', weight: 5, colors: { o: '#0F0B1C', f: '#CEC0FF', s: '#8279A1', p: '#1D1530' } },
+    { id: 'sage', name: 'Sage', tone: 'bright', weight: 3, colors: { o: '#0A1211', f: '#ABC8C3', s: '#657D79', p: '#141E1C' } },
+    { id: 'void', name: 'Void', tone: 'deep', weight: 14, colors: { o: '#000000', f: '#383838', s: '#959595', p: '#A9817D' } },
+    { id: 'firefly', name: 'Firefly', tone: 'deep', weight: 8, colors: { o: '#000100', f: '#13463F', s: '#87A19C', p: '#AF8682' } },
+    { id: 'slate', name: 'Slate', tone: 'deep', weight: 8, colors: { o: '#000001', f: '#354A5C', s: '#9BAAB7', p: '#BC938F' } },
+    { id: 'cocoa', name: 'Cocoa', tone: 'deep', weight: 6, colors: { o: '#010000', f: '#6A4225', s: '#BDA99C', p: '#C29995' } },
+    { id: 'indigo', name: 'Indigo', tone: 'deep', weight: 2, colors: { o: '#000003', f: '#3F3C68', s: '#9F9FB7', p: '#B68D89' } },
   ],
+  // Garments take the cat's own tone, which is the background rule seen from the
+  // other side: a hoodie reaches the canvas edge, so it has to clear the field as
+  // well as the fur. That squeezes them into a narrower band than either -- deep
+  // garments go darker than any deep cat, bright ones sit below any bright cat --
+  // and it is why the light ones are mid-tones rather than pastels. The Hyperliquid
+  // accent survives in 'h', which flips with the tone so the logo always reads.
   clothing: [
-    { id: 'hyper', name: 'Hyper', weight: 18, colors: { a: '#141414', b: '#2A2A2A', c: '#4A4A4A', h: HYPER, w: '#FFFFFF' } },
-    { id: 'crimson', name: 'Crimson', weight: 14, colors: { a: '#B3283C', b: '#8C1B2C', c: '#D9556A', h: '#F5D6DA', w: '#FFFFFF' } },
-    { id: 'cobalt', name: 'Cobalt', weight: 14, colors: { a: '#24479B', b: '#1A3577', c: '#4E70C4', h: '#CFE0FF', w: '#FFFFFF' } },
-    { id: 'moss', name: 'Moss', weight: 12, colors: { a: '#3C6B3A', b: '#2B5029', c: '#5E9159', h: '#D6F0C8', w: '#FFFFFF' } },
-    { id: 'bone', name: 'Bone', weight: 12, colors: { a: '#EDE7D8', b: '#D8CFB8', c: '#B9AE93', h: '#2B2B2B', w: '#FFFFFF' } },
-    { id: 'ash', name: 'Ash', weight: 10, colors: { a: '#6E7780', b: '#545C64', c: '#8D96A0', h: '#E4EAEE', w: '#FFFFFF' } },
-    { id: 'violet', name: 'Violet', weight: 8, colors: { a: '#6A3CB5', b: '#522C90', c: '#8B5FD6', h: '#E5D6FF', w: '#FFFFFF' } },
-    { id: 'aqua', name: 'Aqua', weight: 3, colors: { a: HYPER, b: '#7BE9CE', c: '#B8FFEE', h: '#06231D', w: '#FFFFFF' } },
+    { id: 'ink', name: 'Ink', tone: 'deep', weight: 22, colors: { a: '#090B0F', b: '#020204', c: '#191B1E', h: HYPER, w: '#FFFFFF' } },
+    { id: 'navy', name: 'Navy', tone: 'deep', weight: 18, colors: { a: '#000728', b: '#00020F', c: '#001449', h: HYPER, w: '#FFFFFF' } },
+    { id: 'oxblood', name: 'Oxblood', tone: 'deep', weight: 16, colors: { a: '#1F0001', b: '#0A0000', c: '#3A0003', h: HYPER, w: '#FFFFFF' } },
+    { id: 'pine', name: 'Pine', tone: 'deep', weight: 14, colors: { a: '#001003', b: '#000401', c: '#00220A', h: HYPER, w: '#FFFFFF' } },
+    { id: 'aubergine', name: 'Aubergine', tone: 'deep', weight: 12, colors: { a: '#130024', b: '#05000D', c: '#280043', h: HYPER, w: '#FFFFFF' } },
+    { id: 'abyss', name: 'Abyss', tone: 'deep', weight: 8, colors: { a: '#000F0C', b: '#000303', c: '#00201C', h: HYPER, w: '#FFFFFF' } },
+    { id: 'cobalt', name: 'Cobalt', tone: 'bright', weight: 20, colors: { a: '#377EE3', b: '#236BCF', c: '#5E96E8', h: '#08102E', w: '#FFFFFF' } },
+    { id: 'crimson', name: 'Crimson', tone: 'bright', weight: 18, colors: { a: '#DB4241', b: '#C52B30', c: '#E36B64', h: '#2A0A0E', w: '#FFFFFF' } },
+    { id: 'moss', name: 'Moss', tone: 'bright', weight: 16, colors: { a: '#2E9848', b: '#128537', c: '#5DA96A', h: '#08190B', w: '#FFFFFF' } },
+    { id: 'gold', name: 'Gold', tone: 'bright', weight: 14, colors: { a: '#A1790C', b: '#8C6800', c: '#B0914B', h: '#211808', w: '#FFFFFF' } },
+    { id: 'violet', name: 'Violet', tone: 'bright', weight: 12, colors: { a: '#8B61E3', b: '#7A4ECF', c: '#9D7FE8', h: '#150826', w: '#FFFFFF' } },
+    { id: 'teal', name: 'Teal', tone: 'bright', weight: 10, colors: { a: '#239382', b: '#008171', c: '#59A697', h: '#04201B', w: '#FFFFFF' } },
   ],
+  // The mouth is a line drawn straight onto the fur with nothing else to carry it,
+  // so it takes the tone opposite the cat's: dark on a bright cat, light on a deep
+  // one. The eyes get away without this because each polarity has something that
+  // rescues it -- on a deep cat the white sclera reads where the eye outline cannot,
+  // and on a bright cat the outline reads where the sclera cannot. The mouth has no
+  // such second chance, which is why a dark mouth on a dark cat simply vanished.
   mouth: [
-    { id: 'coal', name: 'Coal', weight: 30, colors: { o: '#141414', k: '#3A2126' } },
-    { id: 'soft', name: 'Soft', weight: 10, colors: { o: '#4A3238', k: '#6B4750' } },
+    { id: 'coal', name: 'Coal', tone: 'deep', weight: 30, colors: { o: '#141414', k: '#3A2126' } },
+    { id: 'soft', name: 'Soft', tone: 'deep', weight: 10, colors: { o: '#4A3238', k: '#6B4750' } },
+    { id: 'chalk', name: 'Chalk', tone: 'bright', weight: 26, colors: { o: '#A8ABB1', k: '#7B808A' } },
+    { id: 'rose', name: 'Rose', tone: 'bright', weight: 14, colors: { o: '#CD9392', k: '#B35D5E' } },
   ],
   eyes: [
     { id: 'coal', name: 'Coal', weight: 26, colors: { e: '#FFFFFF', i: '#101010', k: '#101010', h: HYPER } },
@@ -61,13 +106,18 @@ export const COLORWAYS: Record<LayerId, Colorway[]> = {
     { id: 'rose', name: 'Rose', weight: 8, colors: { o: '#3A1420', g: '#E48AA8', w: '#FFE7EF', h: HYPER, c: '#D96D91' } },
     { id: 'aqua', name: 'Aqua', weight: 5, colors: { o: '#06231D', g: HYPER, w: '#FFFFFF', h: HYPER, c: '#7BE9CE' } },
   ],
+  // Same bands as clothing. A hat sits against the background on three sides, so
+  // it is the garment least able to get away with matching the field.
   headwear: [
-    { id: 'hyper', name: 'Hyper', weight: 20, colors: { a: '#141414', b: '#2A2A2A', o: '#000000', h: HYPER, c: '#C9C9C9' } },
-    { id: 'crimson', name: 'Crimson', weight: 14, colors: { a: '#B3283C', b: '#8C1B2C', o: '#3A0A11', h: '#F5D6DA', c: '#D9556A' } },
-    { id: 'cobalt', name: 'Cobalt', weight: 14, colors: { a: '#24479B', b: '#1A3577', o: '#0B173A', h: '#CFE0FF', c: '#4E70C4' } },
-    { id: 'bone', name: 'Bone', weight: 12, colors: { a: '#EDE7D8', b: '#D8CFB8', o: '#2B2B2B', h: '#2B2B2B', c: '#B9AE93' } },
-    { id: 'moss', name: 'Moss', weight: 10, colors: { a: '#3C6B3A', b: '#2B5029', o: '#16250F', h: '#D6F0C8', c: '#5E9159' } },
-    { id: 'gold', name: 'Gold', weight: 6, colors: { a: '#E0B54A', b: '#C29A34', o: '#3A2B08', h: '#FFF6DC', c: '#F2C14E' } },
-    { id: 'aqua', name: 'Aqua', weight: 3, colors: { a: HYPER, b: '#7BE9CE', o: '#06231D', h: '#06231D', c: '#06231D' } },
+    { id: 'ink', name: 'Ink', tone: 'deep', weight: 24, colors: { a: '#090B0F', b: '#020204', o: '#000000', h: HYPER, c: '#191B1E' } },
+    { id: 'navy', name: 'Navy', tone: 'deep', weight: 20, colors: { a: '#000728', b: '#00020F', o: '#000004', h: HYPER, c: '#001449' } },
+    { id: 'oxblood', name: 'Oxblood', tone: 'deep', weight: 16, colors: { a: '#1F0001', b: '#0A0000', o: '#040000', h: HYPER, c: '#3A0003' } },
+    { id: 'pine', name: 'Pine', tone: 'deep', weight: 14, colors: { a: '#001003', b: '#000401', o: '#000100', h: HYPER, c: '#00220A' } },
+    { id: 'abyss', name: 'Abyss', tone: 'deep', weight: 8, colors: { a: '#000F0C', b: '#000303', o: '#000100', h: HYPER, c: '#00201C' } },
+    { id: 'cobalt', name: 'Cobalt', tone: 'bright', weight: 22, colors: { a: '#377EE3', b: '#236BCF', o: '#08102E', h: '#08102E', c: '#5E96E8' } },
+    { id: 'crimson', name: 'Crimson', tone: 'bright', weight: 20, colors: { a: '#DB4241', b: '#C52B30', o: '#2A0A0E', h: '#2A0A0E', c: '#E36B64' } },
+    { id: 'moss', name: 'Moss', tone: 'bright', weight: 16, colors: { a: '#2E9848', b: '#128537', o: '#08190B', h: '#08190B', c: '#5DA96A' } },
+    { id: 'gold', name: 'Gold', tone: 'bright', weight: 14, colors: { a: '#A1790C', b: '#8C6800', o: '#211808', h: '#211808', c: '#B0914B' } },
+    { id: 'teal', name: 'Teal', tone: 'bright', weight: 10, colors: { a: '#239382', b: '#008171', o: '#04201B', h: '#04201B', c: '#59A697' } },
   ],
 };

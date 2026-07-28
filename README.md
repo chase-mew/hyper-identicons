@@ -39,10 +39,17 @@ fits one body and not another.
 never imports the art it drops. Its render agrees with `full` on every layer they
 share, so an address is recognisably the same character at both.
 
+**Legibility is guaranteed, not hoped for.** Fur and backgrounds are split into a deep
+band and a bright band with a wide gap between them, and the background is always drawn
+from the band the cat did not take. No address can produce a cat that sinks into its own
+backdrop. `AGENTS.md` has the reasoning and the numbers; `scripts/audit-colors.ts`
+prints them and the test suite enforces them.
+
 ## Layout
 
 | Path | What it is |
 |---|---|
+| `AGENTS.md` | Working notes: the art pipeline, the colour system, known gaps. |
 | `spec/v1.md` | The normative spec. Any port must match it byte for byte. |
 | `spec/vectors.json` | Addresses pinned to their traits and output hashes. |
 | `packages/hyper-identicons` | The library: engine, art data, both entry points. |

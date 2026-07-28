@@ -23,7 +23,7 @@ export { pick, selectTraits } from './select.js';
 export { CANVAS, SLOT_BY_CHAR, SLOT_CHARS, TRANSPARENT } from './slots.js';
 export { toDataUri, toSvg } from './svg.js';
 export type { SvgOptions } from './svg.js';
-export { LAYER_ORDER, MINI_LAYERS } from './types.js';
+export { LAYER_ORDER, MINI_LAYERS, SELECT_ORDER } from './types.js';
 export type {
   Art,
   ArtData,
@@ -34,4 +34,5 @@ export type {
   LayerChoice,
   LayerId,
   Manifest,
+  Tone,
 } from './types.js';

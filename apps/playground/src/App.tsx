@@ -12,7 +12,7 @@ import {
   toSvg,
 } from 'hyper-identicons';
 import { identiconUri as identiconUriMini } from 'hyper-identicons/mini';
-import type { DetailLevel, LayerChoice, LayerId } from 'hyper-identicons';
+import type { DetailLevel, LayerChoice, LayerId, Tone } from 'hyper-identicons';
 
 const DEFAULT_ART: Record<LayerId, string> = {
   background: 'plain',
@@ -29,18 +29,34 @@ function randomAddress(): string {
   return `0x${[...bytes].map((byte) => byte.toString(16).padStart(2, '0')).join('')}`;
 }
 
-/** Renders an explicit trait combination rather than one derived from an address. */
+const flip = (tone: Tone): Tone => (tone === 'deep' ? 'bright' : 'deep');
+
+/** The tone a layer takes once the cat's is known. Mirrors the rule in the library. */
+function toneFor(layer: LayerId, cat: Tone): Tone | undefined {
+  if (layer === 'background') return flip(cat);
+  if (layer === 'body' || layer === 'clothing' || layer === 'headwear') return cat;
+  return undefined;
+}
+
+/**
+ * Renders an explicit trait combination rather than one derived from an address.
+ *
+ * The rest of the composition follows the tone of whatever is being shown, so a
+ * preview is always a combination an address could actually produce. Without that
+ * the explorer happily draws a black hoodie on a black field, which is the thing
+ * the palette exists to prevent.
+ */
 function previewUri(layer: LayerId, artId: string, colorwayId: string): string {
+  const shown = COLORWAYS[layer].find((colorway) => colorway.id === colorwayId);
+  const cat: Tone = layer === 'background' ? flip(shown?.tone ?? 'deep') : (shown?.tone ?? 'bright');
+
   const choices: LayerChoice[] = LAYER_ORDER.map((id) => {
-    const wanted = id === layer ? artId : DEFAULT_ART[id];
-    const chosen = id === layer ? COLORWAYS[id].find((colorway) => colorway.id === colorwayId) : undefined;
-    // Dark garments on the default dark background are indistinguishable, so previews
-    // of other layers sit on a light backdrop.
-    const fallback = id === 'background' && layer !== 'background' ? COLORWAYS[id].find((c) => c.id === 'sand') : undefined;
+    const wanted = toneFor(id, cat);
+    const matching = wanted ? COLORWAYS[id].filter((colorway) => colorway.tone === wanted) : COLORWAYS[id];
     return {
       layer: id,
-      art: MANIFEST[id].art.find((art) => art.id === wanted) ?? MANIFEST[id].art[0]!,
-      colorway: chosen ?? fallback ?? COLORWAYS[id][0]!,
+      art: MANIFEST[id].art.find((art) => art.id === (id === layer ? artId : DEFAULT_ART[id])) ?? MANIFEST[id].art[0]!,
+      colorway: (id === layer ? shown : undefined) ?? matching[0] ?? COLORWAYS[id][0]!,
     };
   });
   return toDataUri(toSvg(renderPixels(choices, ART_DATA)));
@@ -71,11 +87,28 @@ const HERO = 48 * 9;
 
 function BasePurrbit() {
   const [fur, setFur] = useState('snow');
-  const [backdrop, setBackdrop] = useState('sand');
+  const [backdrop, setBackdrop] = useState('abyss');
   const [face, setFace] = useState(true);
 
+  // Only the backdrops this cat can actually be paired with are offered, so the
+  // panel shows combinations an address could produce rather than every product
+  // of the two lists. Switching to a fur of the other tone flips the whole set,
+  // which leaves the old backdrop stranded; fall back to the first legal one.
+  const backdropsFor = (furId: string) => {
+    const cat = COLORWAYS.body.find((colorway) => colorway.id === furId)!.tone!;
+    return COLORWAYS.background.filter((colorway) => colorway.tone === toneFor('background', cat));
+  };
+  const fieldFor = (furId: string) => {
+    const legal = backdropsFor(furId);
+    return legal.some((colorway) => colorway.id === backdrop) ? backdrop : legal[0]!.id;
+  };
+
+  const tone = COLORWAYS.body.find((colorway) => colorway.id === fur)!.tone!;
+  const backdrops = backdropsFor(fur);
+  const field = fieldFor(fur);
+
   const art = face ? BODY_WITH_FACE : BODY;
-  const hero = bareUri(art, fur, backdrop);
+  const hero = bareUri(art, fur, field);
 
   return (
     <div className="panel purrbit">
@@ -84,7 +117,9 @@ function BasePurrbit() {
       <div className="controls">
         <p className="hint">
           Everything else is drawn on top of this. A three-quarter view: the near ear is full size with a dark
-          inner, the far one is foreshortened, and the muzzle sits five columns right of the skull.
+          inner, the far one is foreshortened, and the muzzle sits four columns right of the skull. A{' '}
+          {tone} cat is only ever shown on a {tone === 'deep' ? 'bright' : 'deep'} field, which is the rule the
+          generator follows.
         </p>
 
         <div className="row" style={{ marginTop: 0 }}>
@@ -106,18 +141,18 @@ function BasePurrbit() {
               title={colorway.name}
               onClick={() => setFur(colorway.id)}
             >
-              <img src={bareUri(art, colorway.id, backdrop)} width={44} height={44} alt={colorway.name} />
+              <img src={bareUri(art, colorway.id, fieldFor(colorway.id))} width={44} height={44} alt={colorway.name} />
             </button>
           ))}
         </div>
 
         <h4>Backdrop</h4>
         <div className="swatches">
-          {COLORWAYS.background.map((colorway) => (
+          {backdrops.map((colorway) => (
             <button
               key={colorway.id}
               className="swatch chip"
-              aria-pressed={colorway.id === backdrop}
+              aria-pressed={colorway.id === field}
               title={colorway.name}
               onClick={() => setBackdrop(colorway.id)}
               style={{ background: colorway.colors.a }}

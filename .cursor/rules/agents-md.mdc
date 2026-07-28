@@ -1,0 +1,31 @@
+---
+description: Read and maintain AGENTS.md, the project's carried-over working notes
+alwaysApply: true
+---
+
+# Start with AGENTS.md
+
+Read `AGENTS.md` at the repository root before doing any work here. It carries
+the decisions and dead ends from earlier sessions that are not obvious from the
+code: the art pipeline and the order its generators must run in, the cat's
+three-quarter geometry, and the colour system that guarantees any cat is legible
+on any background it can be paired with.
+
+Two rules it exists to enforce, worth repeating because they are easy to break
+by accident:
+
+- Grids under `art-source/` are generated. Edit `tools/make-body.py` or
+  `tools/make-traits.py`, not the `.txt` files.
+- Colours are chosen by lightness first, not by eye. Before touching
+  `src/art/colorways.ts`, read the Colour section, then run
+  `npx tsx scripts/audit-colors.ts` and check it still reports zero failures.
+
+# Keep it current
+
+Update `AGENTS.md` in the same change that makes it wrong, and add to it when
+you learn something a future session would otherwise have to rediscover — a
+constraint that took real work to find, a decision and the option it beat, a
+tool that is not obvious, a gap you knowingly left open.
+
+Keep it to things that stay true. Task status, progress notes and anything a
+`git log` already says do not belong there.

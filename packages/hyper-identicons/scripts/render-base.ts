@@ -16,7 +16,8 @@ import { encodePng, hex } from './png.js';
 
 // No clothing, headwear or accessory: those are the things being applied to it.
 const WANTED: Partial<Record<LayerId, [art: string, colorway: string]>> = {
-  background: ['plain', 'sand'],
+  // A bright cat, so a deep field: the two are never drawn from the same tone.
+  background: ['plain', 'abyss'],
   body: ['base', 'snow'],
   mouth: ['smile', 'coal'],
   eyes: ['round', 'coal'],

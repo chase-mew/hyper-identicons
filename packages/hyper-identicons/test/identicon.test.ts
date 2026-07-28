@@ -7,6 +7,8 @@ import { MINI_ART_DATA, identiconOf as identiconOfMini } from '../src/mini.js';
 import { InvalidAddressError, decodeRle, encodeRle, normalizeAddress } from '../src/core/index.js';
 import { CANVAS } from '../src/core/slots.js';
 import { LAYER_ORDER, MINI_LAYERS } from '../src/core/types.js';
+import type { Tone } from '../src/core/types.js';
+import { apca, contrast, lightness, separation } from '../../hyper-identicons/scripts/color.js';
 
 const VITALIK = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045';
 
@@ -95,6 +97,138 @@ test('weights are positive integers and colourways are non-empty', () => {
     for (const candidate of [...art, ...colorways]) {
       assert.ok(Number.isInteger(candidate.weight) && candidate.weight >= 1, `${layer}/${candidate.id}`);
     }
+  }
+});
+
+/** The layers whose tone is part of the guarantee. See spec/v1.md §3.2. */
+const TONED = ['body', 'background', 'clothing', 'headwear', 'mouth'] as const;
+
+test('every colourway that covers real area declares a tone', () => {
+  for (const layer of TONED) {
+    for (const colorway of MANIFEST[layer].colorways) {
+      assert.ok(
+        colorway.tone === 'deep' || colorway.tone === 'bright',
+        `${layer}/${colorway.id} has no tone; see spec/v1.md §3.2`,
+      );
+    }
+    for (const tone of ['deep', 'bright'] as const) {
+      assert.ok(
+        MANIFEST[layer].colorways.some((colorway) => colorway.tone === tone),
+        `${layer} has no ${tone} colourway, so the opposite tone would have nothing to pair with`,
+      );
+    }
+  }
+});
+
+test('the tone bands do not overlap', () => {
+  // The guarantee in the next two tests is only as good as this gap. Deep tops out
+  // well below where bright starts, for backgrounds and fur alike.
+  for (const [layer, slot] of [
+    ['background', 'a'],
+    ['body', 'f'],
+    ['clothing', 'a'],
+    ['headwear', 'a'],
+  ] as const) {
+    const of = (tone: Tone) =>
+      MANIFEST[layer].colorways.filter((c) => c.tone === tone).map((c) => lightness(c.colors[slot]!));
+    assert.ok(
+      Math.max(...of('deep')) < Math.min(...of('bright')),
+      `${layer}: a deep colourway is lighter than a bright one`,
+    );
+  }
+});
+
+test('any cat is legible on any background it can be paired with', () => {
+  // Every pair the generator can actually produce, which is every opposite-tone
+  // pair. WCAG's 3:1 floor for graphical objects, plus a perceptual lightness gap,
+  // because the ratio alone passes things that look muddy.
+  for (const body of MANIFEST.body.colorways) {
+    for (const background of MANIFEST.background.colorways) {
+      if (background.tone === body.tone) continue;
+      const fur = body.colors.f!;
+      const field = background.colors.a!;
+      const pair = `${body.id} on ${background.id}`;
+      assert.ok(contrast(fur, field) >= 3, `${pair}: ${contrast(fur, field).toFixed(2)}:1 is under 3:1`);
+      assert.ok(
+        separation(fur, field) >= 0.3,
+        `${pair}: lightness gap ${separation(fur, field).toFixed(2)} is under 0.30`,
+      );
+    }
+  }
+});
+
+test('every cat has a visible face', () => {
+  // Whiskers, inner ear and mouth are drawn straight onto the fur with nothing
+  // else to carry them. Gated on APCA, whose Lc 30 is its own floor for a solid
+  // pictogram, because neither of the other two metrics catches this: WCAG
+  // collapses towards 1:1 on a dark cat whatever the colours, and a lightness gap
+  // ignores that two colours the same distance apart in L can differ in luminance
+  // by 1.4x. A black mouth on charcoal fur passed a 0.20 lightness gap and scored
+  // Lc 0 — invisible — which is how it shipped that way.
+  for (const body of MANIFEST.body.colorways) {
+    const fur = body.colors.f!;
+    for (const slot of ['s', 'p'] as const) {
+      const line = body.colors[slot];
+      assert.ok(line, `${body.id} has no '${slot}'`);
+      assert.ok(apca(line, fur) >= 30, `${body.id}/${slot}: Lc ${apca(line, fur).toFixed(1)} is under 30`);
+    }
+    for (const mouth of MANIFEST.mouth.colorways) {
+      if (mouth.tone === body.tone) continue;
+      const lc = apca(mouth.colors.o!, fur);
+      assert.ok(lc >= 30, `mouth/${mouth.id} on ${body.id}: Lc ${lc.toFixed(1)} is under 30`);
+    }
+  }
+});
+
+test('the ink line reads against whatever it borders', () => {
+  // The outline is the one line allowed to vanish into the fur, and only on a deep
+  // cat, where its job is different. There the silhouette is the fur against a
+  // bright field and the ink is only the rim, so it is measured against the
+  // background. On a bright cat it is the reverse.
+  for (const body of MANIFEST.body.colorways) {
+    const ink = body.colors.o!;
+    if (body.tone === 'deep') {
+      for (const background of MANIFEST.background.colorways) {
+        if (background.tone === body.tone) continue;
+        const lc = apca(ink, background.colors.a!);
+        assert.ok(lc >= 30, `${body.id} ink on ${background.id}: Lc ${lc.toFixed(1)} is under 30`);
+      }
+    } else {
+      const lc = apca(ink, body.colors.f!);
+      assert.ok(lc >= 30, `${body.id} ink on its own fur: Lc ${lc.toFixed(1)} is under 30`);
+    }
+  }
+});
+
+test('anything the cat wears is legible against the field behind it', () => {
+  // A garment reaches past the cat to the canvas edge, so it meets the background
+  // as well as the fur. It takes the cat's tone, which means the backgrounds it can
+  // meet are exactly the ones of the other tone.
+  for (const layer of ['clothing', 'headwear'] as const) {
+    for (const garment of MANIFEST[layer].colorways) {
+      for (const background of MANIFEST.background.colorways) {
+        if (background.tone === garment.tone) continue;
+        const worn = garment.colors.a!;
+        const field = background.colors.a!;
+        const pair = `${layer}/${garment.id} on ${background.id}`;
+        assert.ok(contrast(worn, field) >= 3, `${pair}: ${contrast(worn, field).toFixed(2)}:1 is under 3:1`);
+        assert.ok(
+          separation(worn, field) >= 0.3,
+          `${pair}: lightness gap ${separation(worn, field).toFixed(2)} is under 0.30`,
+        );
+      }
+    }
+  }
+});
+
+test('the cat decides the tone of everything around it', () => {
+  for (const address of sample(2000)) {
+    const choices = identiconTraits(address);
+    const tone = (layer: string) => choices.find((choice) => choice.layer === layer)!.colorway.tone;
+    assert.notEqual(tone('background'), tone('body'), `${address}: cat and background share a tone`);
+    assert.notEqual(tone('mouth'), tone('body'), `${address}: the mouth is the same tone as the fur`);
+    assert.equal(tone('clothing'), tone('body'), `${address}: clothing does not match the cat's tone`);
+    assert.equal(tone('headwear'), tone('body'), `${address}: headwear does not match the cat's tone`);
   }
 });
 
