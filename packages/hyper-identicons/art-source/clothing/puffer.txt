@@ -1,14 +1,14 @@
-# Quilted puffer. Slots: a fabric, b seams.
+# Quilted puffer. Slots: a fabric, b collar, o seams.
 @ 36 5
-......aaaaa...................aaaa.....
-....aaaaaaaaaa...............aaaaaa....
-...aaaaaaaaaaaaa............aaaaaaaa...
-..aaaaaaaaaaaaaaaaa.......aaaaaaaaaa...
-..bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb..
-.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa..
-.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa..
-.bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.
-.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.
-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+......ooooo...................oooo.....
+....oobbbbbooo...............obbbbo....
+...obbbbbbbbbboo............obbbbbbo...
+..obbbbbbbbbbbbbooo.......oobbbbbbbo...
+..oaaaaaaaaaaaaaaaaoooooooaaaaaaaaaao..
+.oooooooooooooooooooooooooooooooooooo..
+.oaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaao..
+.oaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaao.
+.ooooooooooooooooooooooooooooooooooooo.
+oaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaao.
+oaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaao
+ooooooooooooooooooooooooooooooooooooooo

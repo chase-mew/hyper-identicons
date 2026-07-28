@@ -1,14 +1,14 @@
 # Suit with shirt and tie. Slots: a jacket, w shirt, h tie.
 @ 36 5
-......aaaaa...................aaaa.....
-....aaaaaaaaaa...............aaaaaa....
-...aaaaaaaaaaaaa............aaaaaaaa...
-..aaaaaaaaaaaaaaaaa.......aaaaaaaaaa...
-..aaaaaaaaaaaaawwwaaawwwaaaaaaaaaaaaa..
-.aaaaaaaaaaaaaaawwwawwwaaaaaaaaaaaaaa..
-.aaaaaaaaaaaaaaaawwwwwaaaaaaaaaaaaaaa..
-.aaaaaaaaaaaaaaaahhhhhaaaaaaaaaaaaaaaa.
-.aaaaaaaaaaaaaaaaahhhaaaaaaaaaaaaaaaaa.
-aaaaaaaaaaaaaaaaaahhhaaaaaaaaaaaaaaaaa.
-aaaaaaaaaaaaaaaaaahhhaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaahhhaaaaaaaaaaaaaaaaaa
+......ooooo...................oooo.....
+....ooaaaaaooo...............oaaaao....
+...oaaaaaaaaaaoo............oaaaaaao...
+..oaaaaaaaaaaaaaooo.......ooaaaaaaao...
+..oaaaaaaaaaaaawwwaoooooooaaaaaaaaaao..
+.oaaaaaaaaaaaaaawwwawwwaaaaaaaaaaaaao..
+.oaaaaaaaaaaaaaaawwwwwaaaaaaaaaaaaaao..
+.oaaaaaaaaaaaaaaahhhhhaaaaaaaaaaaaaaao.
+.oaaaaaaaaaaaaaaaahhhaaaaaaaaaaaaaaaao.
+oaaaaaaaaaaaaaaaaahhhaaaaaaaaaaaaaaaao.
+oaaaaaaaaaaaaaaaaahhhaaaaaaaaaaaaaaaaao
+oaaaaaaaaaaaaaaaaahhhaaaaaaaaaaaaaaaaao

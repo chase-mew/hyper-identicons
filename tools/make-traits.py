@@ -137,7 +137,7 @@ def garment(extra=None, fill="a"):
                 keep.append((max(x0, chin[1] + 1), x1, ch))
         if keep:
             clipped[y] = keep
-    return clipped
+    return inked(clipped, floor=N - 1 - DROP)
 
 
 def subtract(runs, holes):
@@ -178,7 +178,7 @@ def hat(spans, ears=True):
     }
 
 
-def inked(spans, slot="o"):
+def inked(spans, slot="o", floor=None):
     """Ring a shape in its own outline, the way the body is.
 
     Without this a hat is a flat colour field pasted onto a cat that is drawn with
@@ -186,6 +186,10 @@ def inked(spans, slot="o"):
     of the picture rather than a thing the cat is wearing. Erodes inward, so the
     shape keeps the size it was authored at, and leaves interior detail alone --
     which means an explicitly placed 'o' stays put and can be used as a seam.
+
+    `floor` is the last row the canvas shows: past it there is no edge to draw,
+    only the bottom of the picture, and inking that puts a black bar under a
+    torso that is meant to run off the frame.
     """
     cells = {}
     for y, runs in spans.items():
@@ -194,7 +198,10 @@ def inked(spans, slot="o"):
                 cells[(y, x)] = ch
     out = {}
     for (y, x), ch in sorted(cells.items()):
-        edge = any((y + dy, x + dx) not in cells for dy, dx in ((1, 0), (-1, 0), (0, 1), (0, -1)))
+        edge = any(
+            (y + dy, x + dx) not in cells and not (floor is not None and y + dy > floor)
+            for dy, dx in ((1, 0), (-1, 0), (0, 1), (0, -1))
+        )
         out.setdefault(y, []).append((x, x, slot if edge else ch))
     return out
 
@@ -436,11 +443,14 @@ emit("clothing/hoodie.txt", garment({
     44: [(21, 21, "c"), (27, 27, "c")],
 }), "# Hoodie with drawstrings. Slots: a fabric, b collar, c cords.")
 
+# Quilting is a recess, so the seams are ink. Drawn in the trim slot they came out
+# as three bright stripes and the coat read as a rugby shirt.
 emit("clothing/puffer.txt", garment({
-    39: [(0, 47, "b")],
-    42: [(0, 47, "b")],
-    45: [(0, 47, "b")],
-}), "# Quilted puffer. Slots: a fabric, b seams.")
+    **COLLAR,
+    40: [(0, 47, "o")],
+    43: [(0, 47, "o")],
+    46: [(0, 47, "o")],
+}), "# Quilted puffer. Slots: a fabric, b collar, o seams.")
 
 # The V starts at row 39, the first row the chin has cleared. Above that the jaw
 # cuts the collar in half and the shirt comes out as two floating chips.
@@ -456,8 +466,9 @@ emit("clothing/suit.txt", garment({
 }), "# Suit with shirt and tie. Slots: a jacket, w shirt, h tie.")
 
 emit("clothing/jersey.txt", garment({
-    41: [(0, 47, "b")],
+    39: [(19, 29, "b")],
+    40: [(20, 28, "b")],
+    41: [(0, 47, "h")],
     42: [(0, 47, "h")],
     43: [(0, 47, "h")],
-    44: [(0, 47, "b")],
-}), "# Banded jersey. Slots: a fabric, b trim, h band.")
+}), "# Banded jersey. Slots: a fabric, b neck, h band.")
