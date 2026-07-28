@@ -1,0 +1,27 @@
+{
+  "name": "hyper-identicons",
+  "version": "0.0.0",
+  "description": "Deterministic pixel-art identicons for HyperEVM addresses",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "files": ["dist", "spec"],
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "default": "./dist/index.js" },
+    "./mini": { "types": "./dist/mini.d.ts", "default": "./dist/mini.js" },
+    "./core": { "types": "./dist/core/index.d.ts", "default": "./dist/core/index.js" }
+  },
+  "scripts": {
+    "build:art": "tsx scripts/build-art.ts",
+    "build": "pnpm build:art && tsc -p tsconfig.json",
+    "vectors": "tsx scripts/vectors.ts",
+    "test": "tsx --test test/*.test.ts"
+  },
+  "dependencies": {
+    "@noble/hashes": "^1.6.1"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

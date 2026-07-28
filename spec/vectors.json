@@ -1,0 +1,519 @@
+{
+  "version": "v1",
+  "canvas": 48,
+  "note": "See spec/v1.md §7. Regenerate only when the version namespace changes.",
+  "vectors": [
+    {
+      "address": "0x0000000000000000000000000000000000000000",
+      "traits": {
+        "background": "plain/mint",
+        "body": "base/cocoa",
+        "clothing": "puffer/moss",
+        "mouth": "frown/coal",
+        "eyes": "hyper/coal",
+        "accessory": "shades-thug/rose",
+        "headwear": "cap-h/bone"
+      },
+      "svgSha256": {
+        "full": "17735a0eb0ccad1f1e8ab849c12b93ea5f5f278d7bd43118eb64d78d80d4d3c4",
+        "mini": "88fd14af94a3f11d0d77a5e58b41a7a8cc5587dceb3bd7c8dbdb9d4a8d4ebc3f"
+      }
+    },
+    {
+      "address": "0x0000000000000000000000000000000000000001",
+      "traits": {
+        "background": "plain/void",
+        "body": "base/snow",
+        "clothing": "puffer/hyper",
+        "mouth": "frown/coal",
+        "eyes": "round/coal",
+        "accessory": "monocle/noir",
+        "headwear": "cap-h/cobalt"
+      },
+      "svgSha256": {
+        "full": "5a213e8cac50513fcbd94ae835b1590bf7ef81c2a28c238aa42428014ad7b553",
+        "mini": "4c98880cf94d4dc90e9f6a60f12451dbfe5e02500c0d16e9b83170a4654f30b3"
+      }
+    },
+    {
+      "address": "0xffffffffffffffffffffffffffffffffffffffff",
+      "traits": {
+        "background": "rays/sand",
+        "body": "base/void",
+        "clothing": "tee/hyper",
+        "mouth": "neutral/coal",
+        "eyes": "squint/amber",
+        "accessory": "monocle/noir",
+        "headwear": "bucket/hyper"
+      },
+      "svgSha256": {
+        "full": "abf1d92edbda897957469b4a7d86886ed73f586b54aa2ff475156558a008096b",
+        "mini": "ddd60cb8e6a1d4ef1abafca0af726807796ff684f4549ff5bf80e5af6f3f3f7b"
+      }
+    },
+    {
+      "address": "0xd8da6bf26964af9d7eed9e03e53415d37aa96045",
+      "traits": {
+        "background": "plain/void",
+        "body": "base/ginger",
+        "clothing": "suit/violet",
+        "mouth": "frown/coal",
+        "eyes": "round/coal",
+        "accessory": "specs/noir",
+        "headwear": "cap-h/bone"
+      },
+      "svgSha256": {
+        "full": "f60bc0d1ec3d5d3ff3aeb2a427a9e540fc5458a383eb13bd6881db8d853f6699",
+        "mini": "9579dadfbd1810d6ad38cc383b6616be9849e3eb6bf32174bb6ae8f4b1d71388"
+      }
+    },
+    {
+      "address": "0x000000000000000000000000000000000000dead",
+      "traits": {
+        "background": "arc/deep",
+        "body": "base/lilac",
+        "clothing": "hoodie-h/cobalt",
+        "mouth": "smirk/coal",
+        "eyes": "wide/violet",
+        "accessory": "shades-thug/gold",
+        "headwear": "cap-h/moss"
+      },
+      "svgSha256": {
+        "full": "f31b96e4bc00505d23e593e3414a3692def42accff364361f15ef5388646577d",
+        "mini": "00ce4733b66e5560ba5bdd0b03dd1ba1b223a2e944e1c74ea591d92cd0bbe737"
+      }
+    },
+    {
+      "address": "0x0f9e1b94cc9bae6b45291ab64c7be8befe26dfc1",
+      "traits": {
+        "background": "horizon/void",
+        "body": "base/lilac",
+        "clothing": "jersey/ash",
+        "mouth": "smile/coal",
+        "eyes": "round/coal",
+        "accessory": "specs/aqua",
+        "headwear": "bucket/bone"
+      },
+      "svgSha256": {
+        "full": "082a3e689843b7725d76e2e7240b0c489923dafe7e24cbd04631c971e2e54a73",
+        "mini": "5546bf3a4d2ddfd35d49d242578319d6fbead11589a53ba10a96febc04224dcc"
+      }
+    },
+    {
+      "address": "0x448fc7d06a8594fd15a5ed779d4833e50e30b1c8",
+      "traits": {
+        "background": "plain/ember",
+        "body": "base/cream",
+        "clothing": "hoodie-h/cobalt",
+        "mouth": "frown/coal",
+        "eyes": "round/aqua",
+        "accessory": "shades-thug/aqua",
+        "headwear": "cap-h/cobalt"
+      },
+      "svgSha256": {
+        "full": "735ddbb56b81c59b9454a99bdc86e4c6c8d95cd85c0d303357b15054047ea0f0",
+        "mini": "c590d30bf2a74ea72bb0a66f347be0e1519414dd07538f885e1d684bdf623125"
+      }
+    },
+    {
+      "address": "0x36f0b3f59f2f349e523f955bda0dba5b734864ee",
+      "traits": {
+        "background": "rays/cyan",
+        "body": "base/cocoa",
+        "clothing": "jersey/ash",
+        "mouth": "open/coal",
+        "eyes": "wide/violet",
+        "accessory": "visor/noir",
+        "headwear": "cap-h/moss"
+      },
+      "svgSha256": {
+        "full": "536aff3f7add1c4325e4027dfdd08c55b83643122058972493d4e8c650b3d497",
+        "mini": "1b9289805e1dd14f40690f96e6c3b40ea7977811acc19b0799023236254fe0b7"
+      }
+    },
+    {
+      "address": "0x36509a8b25af062aee41956f07c49c14a299705f",
+      "traits": {
+        "background": "horizon/void",
+        "body": "base/cream",
+        "clothing": "hoodie/cobalt",
+        "mouth": "frown/coal",
+        "eyes": "round/coal",
+        "accessory": "none/noir",
+        "headwear": "bucket/crimson"
+      },
+      "svgSha256": {
+        "full": "88b244086913be752c1ff2cf38d3aa02c5fc1aae314cb871042289e02f6f4110",
+        "mini": "56f0969ab36b8974825393fdafe673ef38e95e3b4944da9c68c48faeaa2db809"
+      }
+    },
+    {
+      "address": "0x9aec4afb1298aef40c99a2b8e6da25370e59e69c",
+      "traits": {
+        "background": "arc/aqua",
+        "body": "base/snow",
+        "clothing": "puffer/crimson",
+        "mouth": "neutral/coal",
+        "eyes": "wide/aqua",
+        "accessory": "none/gold",
+        "headwear": "bucket/gold"
+      },
+      "svgSha256": {
+        "full": "b519d698bfd0e956132c82c348b8af9830a0f79665d1b2b455412e873f197f6d",
+        "mini": "5746a173ed198b1953024615dcdd8602a0af5c17e5568ba682d4fce3b0149e78"
+      }
+    },
+    {
+      "address": "0x68bbf063085af71168aa15fe85154007ebaf995e",
+      "traits": {
+        "background": "rays/ember",
+        "body": "base/void",
+        "clothing": "tee/hyper",
+        "mouth": "frown/soft",
+        "eyes": "round/crimson",
+        "accessory": "shades-thug/noir",
+        "headwear": "headphones/hyper"
+      },
+      "svgSha256": {
+        "full": "ad5388f7521dc664944125b0873f6721e0c91fccdb8c2d08d464a145baa327f8",
+        "mini": "19246a1194f208e108e41ed17d325e50cc213e9d73e56b2519ff68d4fc0597e8"
+      }
+    },
+    {
+      "address": "0x14da62acbf99b8cae34007092cdd8fb5d1b9087a",
+      "traits": {
+        "background": "rays/void",
+        "body": "base/snow",
+        "clothing": "hoodie-h/bone",
+        "mouth": "smile/coal",
+        "eyes": "sleepy/amber",
+        "accessory": "none/noir",
+        "headwear": "none/cobalt"
+      },
+      "svgSha256": {
+        "full": "1930fe20d7b077dfaec5920771b84cff07d3379bd4b3e814b761f32445a27f74",
+        "mini": "235d3edd87437bef8140ee76a373a533771b5f5e971b240e622eb50b944cd3e7"
+      }
+    },
+    {
+      "address": "0x854a87854ea6e6a8a208acfdd98d0ec2e3c31040",
+      "traits": {
+        "background": "glow/rose",
+        "body": "base/cream",
+        "clothing": "hoodie/crimson",
+        "mouth": "smile/coal",
+        "eyes": "wide/coal",
+        "accessory": "visor/noir",
+        "headwear": "none/cobalt"
+      },
+      "svgSha256": {
+        "full": "87248ce2044f72674a6181824480bb6dc62d25ea3578f4a9a1d29c9025209285",
+        "mini": "4d6dd34a2c015881a8ab96460eab17d1074d5798316f7606986ba186a77d54e5"
+      }
+    },
+    {
+      "address": "0xa87620277d9aefb14502b27b19ee34d950039a3e",
+      "traits": {
+        "background": "arc/sun",
+        "body": "base/ginger",
+        "clothing": "puffer/cobalt",
+        "mouth": "neutral/soft",
+        "eyes": "round/aqua",
+        "accessory": "visor/noir",
+        "headwear": "none/moss"
+      },
+      "svgSha256": {
+        "full": "ebbe2e2944a70bee38e1708506cf748e528087c0f4d6c2f6ff063416d539ea01",
+        "mini": "7f1a6b4569e6f94094dca5f2464724a2ab539f5b88f9c907d7aae56d2fe81ebf"
+      }
+    },
+    {
+      "address": "0x7a1180ad8bb89f0ec4806aafc372121b0ae557bb",
+      "traits": {
+        "background": "plain/cyan",
+        "body": "base/cream",
+        "clothing": "suit/violet",
+        "mouth": "smirk/coal",
+        "eyes": "hyper/coal",
+        "accessory": "none/noir",
+        "headwear": "cap-h/moss"
+      },
+      "svgSha256": {
+        "full": "8cb9412c4c4d113062f98e18d74b40c1ac9c9e96035e129a2f561ff019ab8d36",
+        "mini": "f2160c9eeb65eef3f5b4e756278a65d217d7ed301897fc02cd734a2e17731836"
+      }
+    },
+    {
+      "address": "0xc6c009b24be8f89eacc42c8295bbf2be9c0f9908",
+      "traits": {
+        "background": "horizon/plum",
+        "body": "base/lilac",
+        "clothing": "hoodie-h/moss",
+        "mouth": "smile/coal",
+        "eyes": "round/amber",
+        "accessory": "none/aqua",
+        "headwear": "bucket/cobalt"
+      },
+      "svgSha256": {
+        "full": "6848d2dbf9989abe930517131e62e6c573f22daa0045dcafabb51dbb75bca2f5",
+        "mini": "6b6ea5e47bcf68afac4f34ac607f29b26e6f82e6880cced3e48220625e446707"
+      }
+    },
+    {
+      "address": "0xb3819ded236fa8339a29a8d5ecd4d3ac98667a28",
+      "traits": {
+        "background": "plain/plum",
+        "body": "base/ash",
+        "clothing": "hoodie-h/cobalt",
+        "mouth": "open/coal",
+        "eyes": "wide/coal",
+        "accessory": "shades-thug/noir",
+        "headwear": "cap-h/crimson"
+      },
+      "svgSha256": {
+        "full": "020a1d599fb7950a50c6c6a8295ccf0713e6aa017c1943b16b46778ddd0ccfd1",
+        "mini": "452e8622a5c7716d39089677ca802ce8b3ae66c115b1e2fd71408e7fc5c44738"
+      }
+    },
+    {
+      "address": "0x6336edea610450e19c17c45e4e42bcfdbad4ff45",
+      "traits": {
+        "background": "frame/cyan",
+        "body": "base/slate",
+        "clothing": "hoodie-h/hyper",
+        "mouth": "smirk/coal",
+        "eyes": "round/coal",
+        "accessory": "specs/rose",
+        "headwear": "crown/gold"
+      },
+      "svgSha256": {
+        "full": "b81504f33cac1cc8c63397ec20f652e3e130cd689b45e95e0ae0252b0cbd76b1",
+        "mini": "aadf7f88499eea7e494b19cfd31e804b48fd01e39b51313ab7d93c6e37c4d88e"
+      }
+    },
+    {
+      "address": "0x4d0c870833844e5d6224eb48c0ead024b941dac1",
+      "traits": {
+        "background": "rays/deep",
+        "body": "base/lilac",
+        "clothing": "hoodie-h/violet",
+        "mouth": "frown/coal",
+        "eyes": "round/coal",
+        "accessory": "none/noir",
+        "headwear": "beanie/cobalt"
+      },
+      "svgSha256": {
+        "full": "140be5961700a043580f3615f3e044e67376b3e1fb18c24a5654c74216c13580",
+        "mini": "2748a4d2b585fff00df490927524ca93abd9c4da9bb5fa62f65d4d9f021c7399"
+      }
+    },
+    {
+      "address": "0xc6edfdbfa2b93432d563afb27e0cc463b4915c18",
+      "traits": {
+        "background": "rays/void",
+        "body": "base/snow",
+        "clothing": "jersey/hyper",
+        "mouth": "smirk/coal",
+        "eyes": "sleepy/aqua",
+        "accessory": "shades-thug/aqua",
+        "headwear": "none/cobalt"
+      },
+      "svgSha256": {
+        "full": "808aba3cfc443171181d53d7bf974c9c948a2d164da0557671791204a0afa3c6",
+        "mini": "235d3edd87437bef8140ee76a373a533771b5f5e971b240e622eb50b944cd3e7"
+      }
+    },
+    {
+      "address": "0x4822bd0eb8eca3c5e70a3c4d21b1d3390661475a",
+      "traits": {
+        "background": "grid/deep",
+        "body": "base/void",
+        "clothing": "suit/violet",
+        "mouth": "smirk/coal",
+        "eyes": "squint/coal",
+        "accessory": "visor/aqua",
+        "headwear": "none/hyper"
+      },
+      "svgSha256": {
+        "full": "c19e89eda31ae9e4a27c1b93a766492d61cb91f182c178dcb290f811eb00ae19",
+        "mini": "c9f40307e7d06abef9fde3a9d1dd01b879fc7984bd3fc7f043dff9099a7a5553"
+      }
+    },
+    {
+      "address": "0xac3e948677f3944d6f4614e5c2286e72d20b3cbd",
+      "traits": {
+        "background": "glow/sand",
+        "body": "base/cream",
+        "clothing": "tee/hyper",
+        "mouth": "neutral/coal",
+        "eyes": "wide/coal",
+        "accessory": "none/noir",
+        "headwear": "beanie/crimson"
+      },
+      "svgSha256": {
+        "full": "067ef9641784f9b13bbbbcb6e5a6be7efea87e05c60b8b7183255e29bfcdba01",
+        "mini": "557377195d88b493b8083bfa0cc00e4d3ca9e1059d77732674180d89e0945982"
+      }
+    },
+    {
+      "address": "0xc9b1a83b6d7db817affcd154ffbcadb2363cf813",
+      "traits": {
+        "background": "glow/sand",
+        "body": "base/slate",
+        "clothing": "hoodie/violet",
+        "mouth": "neutral/soft",
+        "eyes": "squint/violet",
+        "accessory": "none/rose",
+        "headwear": "cap-h/bone"
+      },
+      "svgSha256": {
+        "full": "62ff3ac3e0d31b2fdb10628319f8b283648fd2221e352289c2447431c330b775",
+        "mini": "d1de512d5c1e46cfe01585e03d33a38ecc0c66529f445086efc5d11d8e144319"
+      }
+    },
+    {
+      "address": "0x35aace61f1a56e10ab38fca40816639eb5a5b6a1",
+      "traits": {
+        "background": "plain/void",
+        "body": "base/snow",
+        "clothing": "jersey/cobalt",
+        "mouth": "neutral/coal",
+        "eyes": "round/coal",
+        "accessory": "shades-thug/noir",
+        "headwear": "halo/hyper"
+      },
+      "svgSha256": {
+        "full": "5565db38c7d0d1f59bb634b5208d5ad6bfd0d31080ef3ed5c7aa0a0473879012",
+        "mini": "fce0ec9a7f84474050e2ae75955cf50c486e5703e2fb1442bb95f67dd2ec0a48"
+      }
+    },
+    {
+      "address": "0x4f957ccf43c0218dd3deab8fc7bafead1675d811",
+      "traits": {
+        "background": "frame/deep",
+        "body": "base/snow",
+        "clothing": "tee/aqua",
+        "mouth": "smile/coal",
+        "eyes": "hyper/aqua",
+        "accessory": "visor/rose",
+        "headwear": "crown/moss"
+      },
+      "svgSha256": {
+        "full": "318ce9501eba4067ba3911139c7bf4cbc8dbc2f4fb4931cbc600b62e41baad7c",
+        "mini": "7ff78fdb71c7bb52d86cc5414932fb72c67b3a73b95134ac4a4ab3e76725cfd7"
+      }
+    },
+    {
+      "address": "0x196849b5094b3536d31f62697d8ad268a04b6a47",
+      "traits": {
+        "background": "plain/sand",
+        "body": "base/void",
+        "clothing": "suit/hyper",
+        "mouth": "open/soft",
+        "eyes": "squint/amber",
+        "accessory": "none/noir",
+        "headwear": "none/gold"
+      },
+      "svgSha256": {
+        "full": "5dcc5239655761684d4a1377414e80357714057f2a1b9536522d7accc149937f",
+        "mini": "7a0804aaef9f7b03afb85e0410def87e40055adb72459a06505f155f59f9a954"
+      }
+    },
+    {
+      "address": "0x8b7dd995e2a32bab7e69844caab562f64e68dc11",
+      "traits": {
+        "background": "plain/cyan",
+        "body": "base/cocoa",
+        "clothing": "tee/hyper",
+        "mouth": "neutral/soft",
+        "eyes": "round/aqua",
+        "accessory": "monocle/aqua",
+        "headwear": "beanie/cobalt"
+      },
+      "svgSha256": {
+        "full": "1b085ce105830687f16ac969dfecca4ef11d4678737a2a69b5914761669c153d",
+        "mini": "fdf559d2cba03e4bd6541c7a2adfe88aef634c664e3354c9d396287b8cba815b"
+      }
+    },
+    {
+      "address": "0xb2fafea10e1a715c7258144d03ebfd52c12e7440",
+      "traits": {
+        "background": "grid/void",
+        "body": "base/ash",
+        "clothing": "tee/cobalt",
+        "mouth": "smile/soft",
+        "eyes": "wide/violet",
+        "accessory": "none/noir",
+        "headwear": "headphones/aqua"
+      },
+      "svgSha256": {
+        "full": "f934346f6f81767baf54aa757369a17a2feadbcd0ad2c6bea35a2e4d2942994b",
+        "mini": "99ac19ea09b54887ce56214f39a75f2501b5db36026fa60ddd0c882e8c1b5b28"
+      }
+    },
+    {
+      "address": "0x358ab147b71bf561826f7fd07c187a73b2639595",
+      "traits": {
+        "background": "plain/deep",
+        "body": "base/cream",
+        "clothing": "hoodie-h/hyper",
+        "mouth": "smile/coal",
+        "eyes": "squint/coal",
+        "accessory": "none/rose",
+        "headwear": "cap-h/cobalt"
+      },
+      "svgSha256": {
+        "full": "0eec82db4a20984d32980ebc4e633b5d4b3d6ad7230ad6fe3c02dd82a4e77e15",
+        "mini": "46a2314eb528c1e776665eace88084ab4f70cbc49d66eefffc6c65a719f807f1"
+      }
+    },
+    {
+      "address": "0xfa4411908444e225513f4c4d75da22f8323438eb",
+      "traits": {
+        "background": "arc/plum",
+        "body": "base/slate",
+        "clothing": "tee/crimson",
+        "mouth": "smirk/coal",
+        "eyes": "wide/amber",
+        "accessory": "none/rose",
+        "headwear": "beanie/hyper"
+      },
+      "svgSha256": {
+        "full": "fb89d7bd6a59c1bea66837e87d8f0c4d78438fb9fbbdf15345441e2fba574197",
+        "mini": "9547157656d9e19169cfa20df963a1b911faa8c6ad36f245e0e3ac58a27bb66d"
+      }
+    },
+    {
+      "address": "0x842c8b81199019bd48c476250d34ae603c7bfa41",
+      "traits": {
+        "background": "plain/ember",
+        "body": "base/cream",
+        "clothing": "hoodie-h/hyper",
+        "mouth": "smirk/coal",
+        "eyes": "squint/violet",
+        "accessory": "monocle/noir",
+        "headwear": "none/cobalt"
+      },
+      "svgSha256": {
+        "full": "3e007bd391ee3a2a358c70eacb47d03ca8d58259201913be38ae7ac0dbfd3c9e",
+        "mini": "1407b7479d41bf16b857dab52fa11d911af2ebfd5d7d2ed3d52a63055a590a17"
+      }
+    },
+    {
+      "address": "0xcca8bbd8d7986fb8e4a00861db109fe03d257caa",
+      "traits": {
+        "background": "horizon/ember",
+        "body": "base/void",
+        "clothing": "tee/bone",
+        "mouth": "smile/coal",
+        "eyes": "sleepy/aqua",
+        "accessory": "none/noir",
+        "headwear": "headphones/cobalt"
+      },
+      "svgSha256": {
+        "full": "18140bda6138c0860ff8d0c97b3b16543439655cecc411c2cb86b97174a128d6",
+        "mini": "c68e03f0ab2fc55a8bc85f7c178dda43dd43f6846821b818784618c8692bcf61"
+      }
+    }
+  ]
+}

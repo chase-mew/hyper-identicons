@@ -1,0 +1,9 @@
+# Five-point crown. Slots: a band, h jewels.
+@ 9 11
+..a....a....a....a....a..
+..a....a....a....a....a..
+.aaa..aaa..aaa..aaa..aaa.
+.aaa..aaa..aaa..aaa..aaa.
+aaaaaaaaaaaaaaaaaaaaaaaaa
+aaaahaaaaaaahaaaaaaahaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaa

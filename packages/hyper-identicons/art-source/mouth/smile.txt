@@ -1,0 +1,8 @@
+# The classic cat curve.
+@ 26 25
+..ooo..
+..ooo..
+...o...
+...o...
+o..o..o
+.oo.oo.

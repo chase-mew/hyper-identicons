@@ -1,0 +1,7 @@
+# Round spectacles. Slots: o frame, g lens.
+@ 20 14
+...oooooo.......oooooo...
+..oggggggo.....oggggggo..
+oooggggggoooooooggggggooo
+..oggggggo.....oggggggo..
+...oooooo.......oooooo...

@@ -1,0 +1,295 @@
+:root {
+  --hyper: #97fce4;
+  --bg: #070b0a;
+  --panel: #0e1614;
+  --line: #1d2b28;
+  --text: #e6f2ef;
+  --muted: #7d938e;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 15px/1.5 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+img {
+  image-rendering: pixelated;
+}
+
+code,
+.mono {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+  font-size: 0.86em;
+}
+
+.wrap {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 48px 24px 96px;
+}
+
+header h1 {
+  margin: 0 0 6px;
+  font-size: 30px;
+  letter-spacing: -0.02em;
+}
+
+header h1 span {
+  color: var(--hyper);
+}
+
+header p {
+  margin: 0;
+  color: var(--muted);
+  max-width: 62ch;
+}
+
+.draft {
+  display: inline-block;
+  margin-top: 18px;
+  padding: 7px 12px;
+  border: 1px solid #4a3a12;
+  background: #1d1708;
+  color: #e8cf87;
+  border-radius: 7px;
+  font-size: 13px;
+}
+
+section {
+  margin-top: 44px;
+}
+
+section > h2 {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--muted);
+  margin: 0 0 14px;
+  font-weight: 600;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 22px;
+}
+
+.purrbit {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.purrbit .hero {
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  max-width: 100%;
+  height: auto;
+}
+
+.purrbit .controls {
+  flex: 1;
+  min-width: 280px;
+}
+
+.purrbit h4 {
+  margin: 22px 0 10px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.swatches {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.swatch {
+  padding: 3px;
+  line-height: 0;
+  border-radius: 8px;
+}
+
+.swatch[aria-pressed='true'] {
+  background: none;
+  border-color: var(--hyper);
+}
+
+.swatch img {
+  border-radius: 5px;
+}
+
+.swatch.chip {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+}
+
+.tiny {
+  margin: 0;
+  text-align: center;
+  line-height: 0;
+}
+
+.tiny figcaption {
+  margin-top: 6px;
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+.inspect {
+  display: flex;
+  gap: 26px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.inspect img {
+  border-radius: 10px;
+  border: 1px solid var(--line);
+}
+
+.inspect .fields {
+  flex: 1;
+  min-width: 300px;
+}
+
+input[type='text'] {
+  width: 100%;
+  padding: 11px 13px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: #060a09;
+  color: var(--text);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 13px;
+}
+
+input[type='text']:focus {
+  outline: none;
+  border-color: var(--hyper);
+}
+
+input[type='text'].invalid {
+  border-color: #b3283c;
+}
+
+button {
+  padding: 9px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: #131f1c;
+  color: var(--text);
+  cursor: pointer;
+  font-size: 13px;
+}
+
+button:hover {
+  border-color: var(--hyper);
+}
+
+button[aria-pressed='true'] {
+  background: var(--hyper);
+  border-color: var(--hyper);
+  color: #04100d;
+  font-weight: 600;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.row label {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+table.traits {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 18px;
+}
+
+table.traits td {
+  padding: 6px 0;
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+}
+
+table.traits td:first-child {
+  color: var(--muted);
+  text-transform: capitalize;
+  width: 120px;
+}
+
+table.traits td:last-child {
+  text-align: right;
+  color: var(--muted);
+}
+
+.sheet {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.sheet img {
+  border-radius: 3px;
+}
+
+.explorer {
+  display: grid;
+  gap: 20px;
+}
+
+.explorer .layer h3 {
+  margin: 0 0 10px;
+  font-size: 14px;
+  text-transform: capitalize;
+}
+
+.explorer .items {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.explorer figure {
+  margin: 0;
+  text-align: center;
+  width: 76px;
+}
+
+.explorer figcaption {
+  margin-top: 5px;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.explorer img {
+  border-radius: 6px;
+  border: 1px solid var(--line);
+}
+
+.hint {
+  color: var(--muted);
+  font-size: 13px;
+  margin: 0 0 14px;
+}

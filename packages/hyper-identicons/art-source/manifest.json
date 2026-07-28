@@ -1,0 +1,56 @@
+{
+  "comment": "Order is significant: it is part of the v1 spec. Append only once frozen. Weights are relative, not percentages.",
+  "layers": {
+    "background": [
+      { "id": "plain", "name": "Plain", "weight": 34 },
+      { "id": "horizon", "name": "Horizon", "weight": 16 },
+      { "id": "glow", "name": "Glow", "weight": 14 },
+      { "id": "frame", "name": "Frame", "weight": 10 },
+      { "id": "rays", "name": "Rays", "weight": 8 },
+      { "id": "grid", "name": "Grid", "weight": 8 },
+      { "id": "arc", "name": "Arc", "weight": 5 }
+    ],
+    "body": [{ "id": "base", "name": "Purrbit", "weight": 1 }],
+    "clothing": [
+      { "id": "hoodie-h", "name": "Hyper Hoodie", "weight": 20 },
+      { "id": "hoodie", "name": "Hoodie", "weight": 20 },
+      { "id": "tee", "name": "Tee", "weight": 18 },
+      { "id": "puffer", "name": "Puffer", "weight": 14 },
+      { "id": "jersey", "name": "Jersey", "weight": 10 },
+      { "id": "suit", "name": "Suit", "weight": 8 },
+      { "id": "none", "name": "Bare", "weight": 6 }
+    ],
+    "mouth": [
+      { "id": "neutral", "name": "Neutral", "weight": 30 },
+      { "id": "smile", "name": "Smile", "weight": 22 },
+      { "id": "smirk", "name": "Smirk", "weight": 16 },
+      { "id": "frown", "name": "Frown", "weight": 10 },
+      { "id": "open", "name": "Open", "weight": 8 }
+    ],
+    "eyes": [
+      { "id": "round", "name": "Round", "weight": 28 },
+      { "id": "wide", "name": "Wide", "weight": 20 },
+      { "id": "squint", "name": "Squint", "weight": 16 },
+      { "id": "sleepy", "name": "Sleepy", "weight": 12 },
+      { "id": "wink", "name": "Wink", "weight": 8 },
+      { "id": "hyper", "name": "Hyper", "weight": 3 }
+    ],
+    "accessory": [
+      { "id": "none", "name": "None", "weight": 34 },
+      { "id": "shades-thug", "name": "Deal Shades", "weight": 20 },
+      { "id": "specs", "name": "Specs", "weight": 14 },
+      { "id": "visor", "name": "Visor", "weight": 8 },
+      { "id": "monocle", "name": "Monocle", "weight": 5 },
+      { "id": "eyepatch", "name": "Eyepatch", "weight": 4 }
+    ],
+    "headwear": [
+      { "id": "none", "name": "None", "weight": 26 },
+      { "id": "cap-h", "name": "Hyper Cap", "weight": 22 },
+      { "id": "beanie", "name": "Beanie", "weight": 18 },
+      { "id": "bucket", "name": "Bucket", "weight": 12 },
+      { "id": "headphones", "name": "Headphones", "weight": 10 },
+      { "id": "crown", "name": "Crown", "weight": 5 },
+      { "id": "halo", "name": "Halo", "weight": 3 }
+    ]
+  }
+}
