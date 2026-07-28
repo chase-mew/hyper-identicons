@@ -23,7 +23,7 @@ ANCHORS = "tools/anchors.json"
 # one column per row. Read off the reference, then pulled in a column with the
 # rest of the near side of the head.
 EAR_NEAR = {
-    6: (9, 10), 7: (8, 10), 8: (8, 11), 9: (8, 12), 10: (8, 13), 11: (8, 14),
+    6: (9, 9), 7: (8, 10), 8: (8, 11), 9: (8, 12), 10: (8, 13), 11: (8, 14),
     12: (8, 15), 13: (8, 16), 14: (8, 17), 15: (8, 18), 16: (8, 19),
 }
 
