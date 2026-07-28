@@ -1,5 +1,5 @@
 # Wraparound visor. Slots: o frame, g lens.
-@ 20 11
+@ 21 11
 ooooooooooooooooooooooooooooooo
 ogggggggggggggggggggggggggggggo
 ogggggggggggggggggggggggggggggo

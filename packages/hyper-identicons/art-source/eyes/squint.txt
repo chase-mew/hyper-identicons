@@ -1,4 +1,4 @@
 # A narrowed slit. Slots: k rim, i iris.
-@ 22 18
+@ 23 18
 kkkkk.........kkkkk
 kiiik.........kiiik

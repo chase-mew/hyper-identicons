@@ -1,5 +1,5 @@
 # Eyepatch and strap. Slots: o patch.
-@ 21 11
+@ 22 11
 ooooooooooooooooooooooooooooooo
 .....ooooooo...................
 .....ooooooo...................

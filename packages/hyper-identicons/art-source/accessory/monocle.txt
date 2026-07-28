@@ -1,5 +1,5 @@
 # Single lens on a chain. Slots: o rim, g lens, c chain.
-@ 20 29
+@ 21 29
 .oooooo.
 oggggggo
 oggggggo

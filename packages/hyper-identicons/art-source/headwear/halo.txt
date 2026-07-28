@@ -1,5 +1,5 @@
 # Floating halo. Slots: h ring.
-@ 2 18
+@ 3 18
 .hhhhhhhhh.
 hh.......hh
 .hhhhhhhhh.

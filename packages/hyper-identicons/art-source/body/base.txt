@@ -3,7 +3,7 @@
 # of centre. Crown, lower far ear and shoulders are reconstructed -- the
 # cap, sunglasses and hoodie hide them in the reference.
 # Slots: o outline, f fur, s whiskers, p inner ear.
-@ 6 5
+@ 7 5
 ....o..................................
 ...ofo..........................o......
 ...offo........................ofo.....
@@ -43,6 +43,5 @@
 .offfffffffffffffffffffffffffffffffffo.
 .offfffffffffffffffffffffffffffffffffo.
 offffffffffffffffffffffffffffffffffffo.
-offfffffffffffffffffffffffffffffffffffo
 offfffffffffffffffffffffffffffffffffffo
 offfffffffffffffffffffffffffffffffffffo

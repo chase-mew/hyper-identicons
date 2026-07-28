@@ -19,6 +19,12 @@ N = 48
 OUT = "packages/hyper-identicons/art-source/body/base.txt"
 ANCHORS = "tools/anchors.json"
 
+# Rows the cat sits below where it was traced. Everything except the background
+# moves together, so it is applied once, when the spans are rasterised, and the
+# tables below stay in the coordinates they were read off the reference in.
+# make-traits.py reads it back out of the anchors file and does the same.
+DROP = 1
+
 # Near ear: outer edge is a straight vertical, inner edge a staircase descending
 # one column per row. Read off the reference, then pulled in a column with the
 # rest of the near side of the head.
@@ -142,17 +148,17 @@ pink = paint(blank(), PINK)
 head_edge, chest_edge = outline_of(head), outline_of(chest)
 
 grid = [["." for _ in range(N)] for _ in range(N)]
-for y in range(N):
+for y in range(N - DROP):
     for x in range(N):
         # Chest first, head over it, so the chin breaks the shoulder line.
         if chest[y][x]:
-            grid[y][x] = "o" if chest_edge[y][x] else "f"
+            grid[y + DROP][x] = "o" if chest_edge[y][x] else "f"
         if head[y][x]:
-            grid[y][x] = "o" if head_edge[y][x] else ("p" if pink[y][x] else "f")
+            grid[y + DROP][x] = "o" if head_edge[y][x] else ("p" if pink[y][x] else "f")
 
 for y, x0, x1 in WHISKERS:
     for x in range(x0, x1 + 1):
-        grid[y][x] = "s"
+        grid[y + DROP][x] = "s"
 
 rows = ["".join(r) for r in grid]
 filled = [i for i, r in enumerate(rows) if set(r) != {"."}]
@@ -181,9 +187,10 @@ def extents(mask):
     return out
 
 
-# make-traits.py places features against these, so they cannot drift apart.
+# make-traits.py places features against these, so they cannot drift apart. Like
+# the tables above these are pre-DROP, which is why DROP travels with them.
 with open(ANCHORS, "w") as fh:
-    json.dump({"head": extents(head), "chest": extents(chest)}, fh, indent=1)
+    json.dump({"drop": DROP, "head": extents(head), "chest": extents(chest)}, fh, indent=1)
 
 print(f"{OUT}  {right - left + 1}x{bottom - top + 1} at {left},{top}")
 for i, r in enumerate(rows):

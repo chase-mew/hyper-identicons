@@ -24,6 +24,7 @@ with open("tools/anchors.json") as fh:
     ANCHORS = json.load(fh)
 HEAD = {int(k): tuple(v) for k, v in ANCHORS["head"].items()}
 CHEST = {int(k): tuple(v) for k, v in ANCHORS["chest"].items()}
+DROP = ANCHORS["drop"]  # rows the whole cat sits below where it was traced
 
 
 def mir(x):
@@ -65,9 +66,16 @@ def emit(path, spans, header, shift=0):
     `shift` slides a trait sideways after it has been mirrored. The skull is
     centred on AXIS but the cat is a three-quarter view, so anything that sits
     on the muzzle -- eyes, nose, mouth, lenses -- has to move with it.
+
+    DROP is applied here too, so callers can stay in the coordinates the cat was
+    traced in. A row pushed off the bottom by it is cropped rather than an error:
+    the torso already reaches the canvas edge, so that is what dropping means.
     """
     cells = {}
     for y, runs in spans.items():
+        y += DROP
+        if y >= N:
+            continue
         for x0, x1, ch in flatten(runs):
             x0, x1 = x0 + shift, x1 + shift
             for x in range(x0, x1 + 1):
