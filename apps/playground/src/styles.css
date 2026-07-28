@@ -294,3 +294,71 @@ table.traits td:last-child {
   max-width: 78ch;
   margin: 0 0 14px;
 }
+
+/* Three columns at most. The point of the lab is judging a treatment, and four
+   across shrinks each block below the size where a wash is distinguishable from
+   a slightly different wash. */
+.fx-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+@media (max-width: 1180px) {
+  .fx-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.fx-panel {
+  margin: 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #0a110f;
+}
+
+.fx-cats {
+  display: grid;
+  grid-template-columns: repeat(4, max-content);
+  gap: 3px;
+  justify-content: center;
+}
+
+/* Isolated so the overlays blend with the cat underneath and not with the page.
+   A CSS filter would create the stacking context on its own, but the untreated
+   and overlay-only panels have no filter and would otherwise punch through. */
+.fx-cat {
+  position: relative;
+  display: block;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: 3px;
+}
+
+.fx-cat img {
+  display: block;
+  image-rendering: pixelated;
+}
+
+.fx-ghost,
+.fx-ov {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.fx-panel figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 11px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.fx-panel figcaption strong {
+  color: #cfe3dd;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}

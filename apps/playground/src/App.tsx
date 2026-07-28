@@ -13,6 +13,7 @@ import {
 } from 'hyper-identicons';
 import { identiconUri as identiconUriMini } from 'hyper-identicons/mini';
 import type { DetailLevel, LayerChoice, LayerId, Tone } from 'hyper-identicons';
+import { FilterLab } from './FilterLab';
 
 const DEFAULT_ART: Record<LayerId, string> = {
   background: 'plain',
@@ -343,6 +344,11 @@ export function App() {
       <section>
         <h2>Legibility at list size</h2>
         <ContactSheet />
+      </section>
+
+      <section>
+        <h2>Filter lab</h2>
+        <FilterLab />
       </section>
 
       <section>
