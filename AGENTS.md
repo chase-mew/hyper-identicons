@@ -252,6 +252,47 @@ Around those, a small spread of warm and cool neighbours so a wallet does not
 always land on teal. Chroma is kept low on backgrounds — they are a field behind
 a character, not a subject — and allowed higher on fur.
 
+## The treatment, and why the palette alone was never going to be enough
+
+`src/core/treatment.ts`, specified in §5.1. Warm soft-light down from the top,
+cool soft-light up from the bottom, elliptical vignette centred slightly above
+the middle.
+
+Everything above this section is about making one cat legible. None of it makes
+forty cats look like they belong to each other, and they don't: the selector
+draws five colourways from five independent lists, so a grid is by construction a
+bag of unrelated hues. That is a different problem from contrast and it needs a
+different fix. Miniature painters hit it whenever a squad gets painted across
+several sittings, and they solve it with a wash — one translucent pass over
+everything finished, which drags every colour a little towards a common one
+without hiding any of them.
+
+That is what this is. It was chosen out of a bench of twenty-six candidates
+(plain washes, duotones, bleach, bloom, chromatic aberration, and combinations of
+those at partial strength); the bench has been deleted now that the choice is
+made, and it is in the history if another one is ever needed.
+
+Things worth keeping in mind:
+
+- **Soft-light, not normal.** A warm layer composited normally washes the picture
+  towards orange and kills the fur. Soft-light warms what is already there and
+  leaves white white — note the base cat's face is untouched at `#ffffff`.
+- **The vignette is zero across the face.** Deliberate. It ramps from 38% of the
+  ellipse outwards, and the muzzle, eyes and whiskers all sit inside that. So
+  every APCA number in the sections above still holds after the treatment, and
+  `audit-colors.ts` is right to measure the untreated palette.
+- **Vector and raster express it twice.** `treatmentSvg()` hands three rects to
+  the browser; `treatPixels()` computes it per pixel for the PNG scripts. That
+  duplication is deliberate, not an oversight waiting to be tidied: baking the
+  gradients into the pixel grid would break every horizontal run and take the
+  SVG from 23 KB to well over a hundred, which is the whole inline-data-URI
+  story. The two were checked against each other pixel by pixel and agree to
+  within 1/255; the constants they share are where drift would actually hurt.
+- **Comparing an untagged PNG against an SVG in one page will lie to you.** The
+  PNG comes out visibly more saturated because it dodges the display-profile
+  conversion the SVG gets. Both were identical numerically. Probe values through
+  a canvas rather than trusting a screenshot.
+
 ## What the audience already recognises
 
 Researched from the Foundation's own brand kit and sticker set rather than from

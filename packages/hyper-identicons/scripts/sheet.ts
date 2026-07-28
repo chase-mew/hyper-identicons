@@ -10,6 +10,7 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { identiconOf } from '../src/index.js';
 import { CANVAS } from '../src/core/slots.js';
+import { treatPixels } from '../src/core/treatment.js';
 import { encodePng, hex } from './png.js';
 
 const COLS = Number(process.argv[2] ?? 8);
@@ -40,7 +41,7 @@ for (let i = 0; i < COLS * ROWS; i++) {
   const address = `0x${[...Array(40)]
     .map(() => ((seed = Math.imul(seed ^ (seed >>> 15), 2246822519)) >>> 28).toString(16))
     .join('')}`;
-  const { pixels } = identiconOf(address);
+  const pixels = treatPixels(identiconOf(address).pixels);
   blit(pixels, SCALE, (i % COLS) * CELL + PAD, Math.floor(i / COLS) * CELL + PAD);
   if (i < COLS * SCALE) blit(pixels, 1, (i % (COLS * SCALE)) * STRIP + PAD, ROWS * CELL + PAD);
 }

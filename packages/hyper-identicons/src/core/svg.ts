@@ -1,4 +1,5 @@
 import { CANVAS } from './slots.js';
+import { treatmentSvg } from './treatment.js';
 
 export interface SvgOptions {
   /** Rendered width and height in CSS pixels. Omit for a scale-free SVG. */
@@ -24,18 +25,26 @@ export function toSvg(pixels: readonly string[], options: SvgOptions = {}): stri
     }
   }
 
+  const { defs, overlay } = treatmentSvg();
+
   const dimensions = size === undefined ? '' : ` width="${size}" height="${size}"`;
-  const clip =
-    radius === undefined || radius <= 0
-      ? ''
-      : `<defs><clipPath id="c"><rect width="${CANVAS}" height="${CANVAS}" rx="${radius}" ry="${radius}"/></clipPath></defs>`;
-  const open = clip ? '<g clip-path="url(#c)">' : '';
-  const close = clip ? '</g>' : '';
+  const rounded = radius !== undefined && radius > 0;
+  const clip = rounded
+    ? `<clipPath id="c"><rect width="${CANVAS}" height="${CANVAS}" rx="${radius}" ry="${radius}"/></clipPath>`
+    : '';
   const label = title ? `<title>${title}</title>` : '';
+
+  // The treatment's soft-light rects blend with whatever is behind them, so the group
+  // has to be its own stacking context. Without `isolation` an inline SVG blends with
+  // the page instead of with the cat, and the identicon changes colour depending on
+  // what it happens to be sitting on.
+  const group =
+    `<g style="isolation:isolate"${rounded ? ' clip-path="url(#c)"' : ''}>` +
+    `${rects.join('')}${overlay}</g>`;
 
   return (
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${CANVAS} ${CANVAS}"${dimensions} shape-rendering="crispEdges">` +
-    `${label}${clip}${open}${rects.join('')}${close}</svg>`
+    `${label}<defs>${clip}${defs}</defs>${group}</svg>`
   );
 }
 

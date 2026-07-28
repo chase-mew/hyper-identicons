@@ -45,6 +45,13 @@ from the band the cat did not take. No address can produce a cat that sinks into
 backdrop. `AGENTS.md` has the reasoning and the numbers; `scripts/audit-colors.ts`
 prints them and the test suite enforces them.
 
+**Every cat carries the same wash.** Five layers picking colourways independently makes
+each cat coherent and a list of them a jumble, so a warm-over-cool split tone and a soft
+vignette go over the finished art — the miniature painter's trick for making a squad
+painted across several sittings look like one squad. It is part of the render rather
+than a CSS filter, so it survives into whatever the caller does with the SVG, and it is
+zero across the face, so it costs none of the contrast above.
+
 ## Layout
 
 | Path | What it is |

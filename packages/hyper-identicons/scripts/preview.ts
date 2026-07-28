@@ -11,6 +11,7 @@ import { ART_DATA } from '../src/index.js';
 import { MINI_ART_DATA } from '../src/mini.js';
 import { generate } from '../src/core/index.js';
 import { CANVAS } from '../src/core/slots.js';
+import { treatPixels } from '../src/core/treatment.js';
 import type { DetailLevel } from '../src/core/types.js';
 import { encodePng, hex } from './png.js';
 
@@ -30,7 +31,7 @@ const rgb = new Uint8Array(width * height * 3).fill(0x18);
 // Deterministic sample addresses so the sheet is comparable between runs.
 for (let index = 0; index < count; index++) {
   const address = `0x${Buffer.from(keccak_256(`sample/${index}`)).toString('hex').slice(0, 40)}`;
-  const { pixels } = generate(address, MANIFEST, detail === 'mini' ? MINI_ART_DATA : ART_DATA, detail);
+  const pixels = treatPixels(generate(address, MANIFEST, detail === 'mini' ? MINI_ART_DATA : ART_DATA, detail).pixels);
   const originX = gap + (index % columns) * cell;
   const originY = gap + Math.floor(index / columns) * cell;
 

@@ -14,6 +14,7 @@ import { MANIFEST } from '../src/art/manifest.js';
 import { ART_DATA } from '../src/index.js';
 import { renderPixels } from '../src/core/render.js';
 import { CANVAS } from '../src/core/slots.js';
+import { treatPixels } from '../src/core/treatment.js';
 import type { LayerChoice, LayerId, Tone } from '../src/core/types.js';
 import { LAYER_ORDER } from '../src/core/types.js';
 import { encodePng, hex } from './png.js';
@@ -46,7 +47,7 @@ function scene(tone: Tone, layer: LayerId, artId: string): LayerChoice[] {
 }
 
 function draw(choices: LayerChoice[], scale: number, into: Uint8Array, width: number, ox: number, oy: number) {
-  const pixels = renderPixels(choices, ART_DATA);
+  const pixels = treatPixels(renderPixels(choices, ART_DATA));
   for (let y = 0; y < CANVAS * scale; y++) {
     for (let x = 0; x < CANVAS * scale; x++) {
       const color = pixels[Math.floor(y / scale) * CANVAS + Math.floor(x / scale)]!;

@@ -11,6 +11,7 @@ import { MANIFEST } from '../src/art/manifest.js';
 import { ART_DATA } from '../src/index.js';
 import { renderPixels } from '../src/core/render.js';
 import { CANVAS } from '../src/core/slots.js';
+import { treatPixels } from '../src/core/treatment.js';
 import type { LayerChoice, LayerId } from '../src/core/types.js';
 import { encodePng, hex } from './png.js';
 
@@ -36,7 +37,7 @@ const scale = Number(process.argv[2] ?? 20);
 // Resolved against the script, not the shell, so the file lands in the root either way.
 const out = process.argv[3] ?? fileURLToPath(new URL('../../../base-purrbit.png', import.meta.url));
 
-const pixels = renderPixels(choices, ART_DATA);
+const pixels = treatPixels(renderPixels(choices, ART_DATA));
 const size = CANVAS * scale;
 const rgb = new Uint8Array(size * size * 3);
 for (let y = 0; y < size; y++) {
