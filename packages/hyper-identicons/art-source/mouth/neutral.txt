@@ -1,5 +1,5 @@
 # Nose and a level mouth, as on the reference.
-@ 26 26
+@ 26 25
 .ooo.
 .ooo.
 ..o..

@@ -1,5 +1,5 @@
 # Inverted curve.
-@ 26 25
+@ 26 24
 ..ooo..
 ..ooo..
 ...o...

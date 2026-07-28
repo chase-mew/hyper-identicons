@@ -17,7 +17,7 @@ import os
 N = 48
 OUT = "packages/hyper-identicons/art-source"
 AXIS = 23  # the skull's centre column; mir() reflects through it
-MUZZLE = 5  # columns the three-quarter view pushes the muzzle right of the skull
+MUZZLE = 4  # columns the three-quarter view pushes the muzzle right of the skull
 EYEWEAR = 3  # lenses span the whole face, so they follow it less far than the eyes do
 
 with open("tools/anchors.json") as fh:

@@ -1,5 +1,5 @@
 # Open mouth. Slots: o line, k interior.
-@ 26 26
+@ 26 25
 .ooo.
 .ooo.
 ..o..

@@ -69,10 +69,10 @@ PINK = [
 # a line sweeping up and out. The far-side pair overhangs the jaw by a pixel,
 # exactly as in the reference.
 WHISKERS = [
-    (27, 12, 15), (28, 16, 17),
-    (29, 12, 15), (30, 16, 17),
-    (27, 40, 41), (28, 36, 39),
-    (29, 40, 41), (30, 36, 39),
+    (27, 11, 14), (28, 15, 16),
+    (29, 11, 14), (30, 15, 16),
+    (27, 39, 40), (28, 35, 38),
+    (29, 39, 40), (30, 35, 38),
 ]
 
 # Reconstructed: the hoodie hides the shoulders completely. Every row is a
