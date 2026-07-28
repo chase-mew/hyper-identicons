@@ -95,16 +95,27 @@ def emit(path, spans, header, shift=0):
 
 
 def garment(extra=None, fill="a"):
-    """The chest, with the jaw cut out so the chin stays in front of the collar."""
+    """The chest, with the jaw cut out so the chin stays in front of the collar.
+
+    Trims, collars and logos are clipped to the torso as well. Drawing a band as
+    a symmetric pair when the torso is not symmetric leaves a column hanging off
+    one edge, and a stray pixel out in the background is far worse than a band
+    that stops a column short of the seam.
+    """
     spans = {y: [(x0, x1, fill)] for y, (x0, x1) in sorted(CHEST.items())}
     for y, runs in (extra or {}).items():
         spans.setdefault(y, []).extend(flatten(runs))
 
     clipped = {}
     for y, runs in spans.items():
-        chin = HEAD.get(y)
+        torso, chin = CHEST.get(y), HEAD.get(y)
+        if not torso:
+            continue
         keep = []
         for x0, x1, ch in runs:
+            x0, x1 = max(x0, torso[0]), min(x1, torso[1])
+            if x0 > x1:
+                continue
             if not chin:
                 keep.append((x0, x1, ch))
                 continue

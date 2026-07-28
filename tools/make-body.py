@@ -75,12 +75,14 @@ WHISKERS = [
     (29, 40, 41), (30, 36, 39),
 ]
 
-# Reconstructed: the hoodie hides the shoulders completely.
+# Reconstructed: the hoodie hides the shoulders completely. Every row is a
+# column tighter on both sides than the shape it was drawn as, the torso having
+# read as too broad for the head at full width.
 SHOULDER = {
-    32: (19, 31), 33: (13, 34), 34: (12, 37), 35: (9, 39), 36: (7, 40),
-    37: (6, 41), 38: (5, 41), 39: (5, 42),
-    40: (4, 42), 41: (4, 42), 42: (4, 43), 43: (4, 43),
-    44: (3, 43), 45: (3, 44), 46: (3, 44), 47: (3, 44),
+    32: (20, 30), 33: (14, 33), 34: (13, 36), 35: (10, 38), 36: (8, 39),
+    37: (7, 40), 38: (6, 40), 39: (6, 41),
+    40: (5, 41), 41: (5, 41), 42: (5, 42), 43: (5, 42),
+    44: (4, 42), 45: (4, 43), 46: (4, 43), 47: (4, 43),
 }
 
 
