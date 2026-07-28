@@ -169,21 +169,37 @@ def merge(*parts):
     return out
 
 
-def hat(spans, ears=True):
-    """A hat, with the ears cut back out of it if they should sit in front.
+def hat(spans, ears=True, crown=None):
+    """Ink a hat, then cut the ears back out of it so they sit in front.
 
     The reference wears its cap between the ears rather than over them, and it is
     the right call for more than fidelity: the ear triangles are most of what makes
     the silhouette read as a cat at 24px, and a hat that swallows them turns the
     character into a blob in a hat. `ears=False` is for the few things that really
     do go over them, like headphone cups.
+
+    **The order is the whole trick.** Inking after the cut runs the hat's own
+    outline down the cut edge, so the crown ends in a hard vertical black line
+    exactly where it meets the ear -- which is what an object stopping behind
+    another object does not look like, and is why both the cap and the beanie read
+    as flat shapes parked behind the head. Inking first and cutting second leaves
+    the crown's edge unmarked and hidden under the ear, which is what occlusion
+    actually looks like.
+
+    `crown` limits the cut to a row range. A brim passes in *front* of the ear
+    bases even when the crown behind it does not, and clipping it takes a bite out
+    of each side and strands the tips in the background.
     """
+    out = inked(spans)
     if not ears:
-        return spans
+        return out
     return {
         y: kept
-        for y, runs in spans.items()
-        if (kept := subtract(flatten(runs), [e[y] for e in EARS if y in e]))
+        for y, runs in out.items()
+        if (kept := subtract(
+            flatten(runs),
+            [] if (crown is not None and y not in crown) else [e[y] for e in EARS if y in e],
+        ))
     }
 
 
@@ -302,28 +318,34 @@ mouth("mouth/open.txt", {
 
 # Lens accessories all cover rows 20-25 so they hide whichever eyes are drawn.
 print("accessories:")
-LENS = (25, 39)
+# Two columns narrower each side than the reference draws them. At full width the
+# lenses ran past the cheeks into the background and the cat looked like it was
+# wearing someone else's glasses; the brow bar still reaches the head's edge, which
+# is the part that carries the shape.
+LENS = (26, 38)
 emit("accessory/shades-thug.txt", {
-    20: [pair(7, 39, "o")],
-    21: [pair(25, 39, "g"), twin(33, 34, "w", LENS)],
-    22: [pair(25, 39, "g"), twin(32, 33, "w", LENS)],
-    23: [pair(26, 39, "g")],
-    24: [pair(28, 38, "g")],
-    25: [pair(30, 36, "g")],
+    20: [pair(9, 39, "o")],
+    21: [pair(26, 38, "g"), twin(33, 34, "w", LENS)],
+    22: [pair(26, 38, "g"), twin(32, 33, "w", LENS)],
+    23: [pair(27, 38, "g")],
+    24: [pair(29, 37, "g")],
+    25: [pair(31, 35, "g")],
 }, "# The reference sunglasses. Slots: o brow bar, g lens, w shine.", shift=EYEWEAR)
 
-# Not mirrored, because nothing else on this face is. The near lens is a row
-# taller and a column wider than the far one, which is what a pair of circles
-# does when the head is turned, and it also buys the near side the mass it needs:
-# at six by five with a one-pixel rim these came apart into loose pixels at 48px.
+# Both lenses are the same 7x6. Foreshortening the far one was the right instinct
+# and the wrong trait: a pair of spectacles is two identical rings and the eye
+# knows it, so a smaller far lens does not read as perspective, it reads as a
+# manufacturing fault. The near temple runs all the way out to the head's edge --
+# stopped short it left the frame hanging in the middle of the cheek.
 emit("accessory/specs.txt", {
-    19: [(14, 18, "o")],
-    20: [(13, 13, "o"), (14, 18, "g"), (19, 19, "o"), (29, 32, "o")],
-    21: [(12, 12, "o"), (13, 19, "g"), (20, 27, "o"), (28, 28, "o"), (29, 32, "g"), (33, 33, "o")],
-    22: [(8, 11, "o"), (12, 12, "o"), (13, 19, "g"), (20, 20, "o"),
-         (28, 28, "o"), (29, 32, "g"), (33, 33, "o"), (34, 37, "o")],
-    23: [(13, 13, "o"), (14, 18, "g"), (19, 19, "o"), (28, 28, "o"), (29, 32, "g"), (33, 33, "o")],
-    24: [(14, 18, "o"), (29, 32, "o")],
+    19: [(15, 19, "o"), (29, 33, "o")],
+    20: [(14, 14, "o"), (15, 19, "g"), (20, 20, "o"), (28, 28, "o"), (29, 33, "g"), (34, 34, "o")],
+    21: [(14, 14, "o"), (15, 19, "g"), (20, 20, "o"), (21, 27, "o"),
+         (28, 28, "o"), (29, 33, "g"), (34, 34, "o")],
+    22: [(5, 13, "o"), (14, 14, "o"), (15, 19, "g"), (20, 20, "o"),
+         (28, 28, "o"), (29, 33, "g"), (34, 34, "o"), (35, 36, "o")],
+    23: [(14, 14, "o"), (15, 19, "g"), (20, 20, "o"), (28, 28, "o"), (29, 33, "g"), (34, 34, "o")],
+    24: [(15, 19, "o"), (29, 33, "o")],
 }, "# Round spectacles. Slots: o frame, g lens.", shift=EYEWEAR)
 
 # Two rows of scan line, not one. The lit slit is the entire difference between a
@@ -336,23 +358,27 @@ emit("accessory/visor.txt", {
     24: [pair(10, 36, "o")],
 }, "# Wraparound visor with a lit scan line. Slots: o frame, g lens, h scan.", shift=EYEWEAR)
 
-# The patch has to be the biggest thing here. A two-row strap running the whole
-# width of the brow outweighed it and the trait read as a headband with a stray
-# square under it, so the strap is now a single diagonal climbing away over the
-# skull and it stops at the crown rather than crossing the far eye.
+# The strap has to leave the head on both sides. The previous one ran off the
+# patch as a single diagonal and stopped in mid-air beside the far eye, which
+# reads as a crack in the lens rather than a band round the skull -- there is no
+# object a strap can be if it has one end. So it now exits left at eye level and
+# climbs right across the brow to the far edge, and the head is understood to
+# join the two behind.
 #
 # It covers the near eye, not the far one. The near side is the one the muzzle is
 # shifted towards and the one with the room, and covering the smaller far eye
 # barely changes the face.
 emit("accessory/eyepatch.txt", {
-    18: [(14, 19, "o")],
-    19: [(13, 20, "o"), (21, 23, "c")],
-    20: [(13, 13, "o"), (14, 19, "g"), (20, 20, "o"), (23, 25, "c")],
-    21: [(12, 12, "o"), (13, 20, "g"), (21, 21, "o"), (25, 27, "c")],
-    22: [(12, 12, "o"), (13, 20, "g"), (21, 21, "o"), (27, 29, "c")],
+    16: [(34, 35, "c")],
+    17: [(31, 35, "c")],
+    18: [(14, 19, "o"), (28, 33, "c")],
+    19: [(13, 13, "o"), (14, 19, "g"), (20, 20, "o"), (25, 30, "c")],
+    20: [(6, 11, "c"), (12, 12, "o"), (13, 20, "g"), (21, 21, "o"), (22, 27, "c")],
+    21: [(6, 11, "c"), (12, 12, "o"), (13, 20, "g"), (21, 21, "o"), (22, 24, "c")],
+    22: [(12, 12, "o"), (13, 20, "g"), (21, 21, "o")],
     23: [(13, 13, "o"), (14, 19, "g"), (20, 20, "o")],
     24: [(14, 19, "o")],
-}, "# Eyepatch, strap swept back over the skull. Slots: o rim, g patch, c strap.",
+}, "# Eyepatch, strap running right round the head. Slots: o rim, g patch, c strap.",
      shift=EYEWEAR)
 
 print("headwear:")
@@ -364,29 +390,25 @@ print("headwear:")
 # what the reference does, and it is why the cap can be a single flat colour and
 # still read as a cap rather than a dome with a shelf attached.
 #
-# The shell is clipped against the ears and the peak is not, for the same reason
-# the cowboy hat's brim is not: the peak runs out past the far ear, so clipping it
-# took a bite out of the middle and left the tip stranded a pixel clear of the hat.
-emit("headwear/cap-h.txt", inked(merge(
-    hat({
-        5: [(19, 28, "a")],
-        6: [(17, 30, "a")],
-        7: [(16, 32, "a")],
-        8: [(15, 33, "a")],
-        9: [(14, 34, "a"), (21, 22, "h"), (26, 27, "h")],
-        10: [(14, 34, "a"), (15, 15, "c"), (21, 22, "h"), (26, 27, "h")],
-        11: [(13, 35, "a"), (14, 14, "c"), (21, 27, "h")],
-        12: [(13, 35, "a"), (14, 14, "c"), (21, 22, "h"), (26, 27, "h")],
-        13: [(13, 35, "a"), (21, 22, "h"), (26, 27, "h")],
-        14: [(13, 36, "a")],
-    }),
-    {
-        15: [(13, 40, "o")],
-        16: [(13, 41, "a")],
-        17: [(14, 41, "a")],
-        18: [(18, 40, "a")],
-    },
-)), "# The reference cap. Slots: a shell, c seam, h logo, o ink.")
+# Shell and peak are inked as one shape and only the shell rows are cut against
+# the ears, so the peak stays a single unbroken sweep and the shell's sides vanish
+# under the ear rather than stopping at a black line beside it.
+emit("headwear/cap-h.txt", hat({
+    5: [(19, 28, "a")],
+    6: [(17, 30, "a")],
+    7: [(16, 32, "a")],
+    8: [(15, 33, "a")],
+    9: [(14, 34, "a"), (21, 22, "h"), (26, 27, "h")],
+    10: [(14, 34, "a"), (15, 15, "c"), (21, 22, "h"), (26, 27, "h")],
+    11: [(13, 35, "a"), (14, 14, "c"), (21, 27, "h")],
+    12: [(13, 35, "a"), (14, 14, "c"), (21, 22, "h"), (26, 27, "h")],
+    13: [(13, 35, "a"), (21, 22, "h"), (26, 27, "h")],
+    14: [(13, 36, "a")],
+    15: [(13, 40, "o")],
+    16: [(13, 41, "a")],
+    17: [(14, 41, "a")],
+    18: [(18, 40, "a")],
+}, crown=range(0, 15)), "# The reference cap. Slots: a shell, c seam, h logo, o ink.")
 
 # No bobble. Every version with one read as a lidded pot: a small ball needs its
 # own ink ring to be a ball at all, and that ring plus the crown's meet in a dark
@@ -397,42 +419,51 @@ emit("headwear/cap-h.txt", inked(merge(
 # takes the tall narrow crown: it starts two rows above the ear tips and slims
 # rather than widens, so its silhouette is a dome where the bucket's is a mushroom
 # and the cap's is a shell with a peak swept off one side.
-emit("headwear/beanie.txt", inked(hat({
-    4: [(21, 27, "a")],
-    5: [(19, 29, "a")],
-    6: [(18, 30, "a")],
-    7: [(17, 31, "a")],
-    8: [(16, 32, "a")],
-    9: [(16, 32, "a")],
-    10: [(15, 33, "a")],
-    11: [(15, 33, "a")],
-    12: [(14, 34, "a")],
-    13: [(14, 34, "a")],
-    14: [(12, 35, "b")],
-    15: [(12, 35, "b")],
-    16: [(12, 35, "b")],
-    17: [(12, 35, "b")],
-})), "# Knit beanie, ears through the cuff. Slots: a crown, b cuff.")
+#
+# Only the crown is cut. The cuff is knit and pulled down over the ear bases, so
+# it passes in front of them and the tips come out through the crown above it,
+# which is what a beanie on a cat looks like and also gives the ears somewhere to
+# be other than sliced off at the hairline.
+emit("headwear/beanie.txt", hat({
+    2: [(20, 28, "a")],
+    3: [(18, 30, "a")],
+    4: [(17, 31, "a")],
+    5: [(16, 32, "a")],
+    6: [(16, 32, "a")],
+    7: [(15, 33, "a")],
+    8: [(15, 33, "a")],
+    9: [(14, 34, "a")],
+    10: [(14, 34, "a")],
+    11: [(14, 34, "a")],
+    12: [(13, 35, "a")],
+    13: [(13, 35, "a")],
+    # The cuff overhangs the crown by two columns a side and is five rows deep, so
+    # inked() leaves three of colour rather than one. Flush with the crown and two
+    # rows deep it was a hatband, and a dome plus a hatband is a bowler.
+    14: [(11, 37, "b")],
+    15: [(11, 37, "b")],
+    16: [(11, 37, "b")],
+    17: [(11, 37, "b")],
+    18: [(11, 37, "b")],
+}, crown=range(0, 14)), "# Knit beanie, ears through the cuff. Slots: a crown, b cuff.")
 
-emit("headwear/bucket.txt", inked({
-    **hat({
-        6: [(19, 28, "a")],
-        7: [(17, 30, "a")],
-        8: [(16, 31, "a")],
-        9: [(15, 32, "a")],
-        10: [(14, 33, "a")],
-        11: [(14, 34, "a")],
-        12: [(13, 34, "a")],
-        13: [(13, 35, "a")],
-        14: [(13, 35, "a")],
-    }),
+emit("headwear/bucket.txt", hat({
+    6: [(19, 28, "a")],
+    7: [(17, 30, "a")],
+    8: [(16, 31, "a")],
+    9: [(15, 32, "a")],
+    10: [(14, 33, "a")],
+    11: [(14, 34, "a")],
+    12: [(13, 34, "a")],
+    13: [(13, 35, "a")],
+    14: [(13, 35, "a")],
     # Widening all the way down rather than bulging in the middle. A brim that is
     # widest at its centre row is a flat disc, which is the cowboy hat's shape; the
     # bucket's whole silhouette is the downward flare.
     15: [(9, 39, "b")],
     16: [(7, 41, "b")],
     17: [(5, 43, "b")],
-}), "# Bucket hat. Slots: a crown, b brim.")
+}, crown=range(0, 15)), "# Bucket hat. Slots: a crown, b brim.")
 
 # An ellipse seen almost edge on, and every part of that matters. Ten wide by four
 # it was a rectangle with a slot in it; the ring only reads as a ring once the
@@ -443,12 +474,18 @@ emit("headwear/bucket.txt", inked({
 # on the background, where the ink slot is the one colour guaranteed not to show:
 # a two-pixel ring is all edge, so inking turned the whole halo the ink colour and
 # it disappeared against the field behind it. Drawn in 'a', which flips with tone.
+#
+# Sitting four rows lower than it was. Pinned to the top of the canvas it had no
+# relationship to the cat at all -- a halo belongs to the head it is over, and at
+# that distance it read as an unrelated mark in the sky. Its lowest row is level
+# with the ear tips, which is as close as it can come without the ears appearing
+# to pierce it.
 emit("headwear/halo.txt", {
-    0: [(19, 27, "a")],
-    1: [(17, 18, "a"), (28, 29, "a")],
-    2: [(15, 16, "a"), (30, 31, "a")],
-    3: [(17, 18, "a"), (28, 29, "a")],
     4: [(19, 27, "a")],
+    5: [(17, 18, "a"), (28, 29, "a")],
+    6: [(15, 16, "a"), (30, 31, "a")],
+    7: [(17, 18, "a"), (28, 29, "a")],
+    8: [(19, 27, "a")],
 }, "# Floating halo. Slots: a ring.")
 
 # The Foundation's own sticker set puts a cowboy hat, a mortarboard and a nightcap
@@ -457,22 +494,21 @@ emit("headwear/halo.txt", {
 # Only the crown is cut against the ears. A brim is the whole point of a wide hat
 # and it has to be one unbroken sweep: clipped, it lost a bite out of each side and
 # the tips came away as two dark stubs floating in the background.
-emit("headwear/cowboy.txt", inked(merge(
+emit("headwear/cowboy.txt", hat(merge(
     # A tall crown over a flat brim is a bowler. What separates the two at this
     # size is only the ratio -- crown short, brim very wide, tips turned up two
     # rows clear of the brim line.
-    hat({
+    {
         9: [(18, 29, "a")],
         10: [(17, 30, "a")],
         11: [(16, 31, "a")],
         12: [(16, 31, "a")],
         13: [(15, 32, "a")],
-    }),
+    },
     {
         # The tips curl four rows clear of the brim line, not two. A wide brim
         # whose ends only nudge upward is a sombrero, which is both the wrong hat
         # and a collection this one should stay well away from.
-        11: [(3, 6, "b"), (41, 44, "b")],
         12: [(3, 6, "b"), (41, 44, "b")],
         13: [(3, 7, "b"), (40, 44, "b")],
         14: [(3, 8, "b"), (14, 33, "a"), (39, 44, "b")],
@@ -480,27 +516,32 @@ emit("headwear/cowboy.txt", inked(merge(
         16: [(6, 41, "b")],
         17: [(11, 36, "b")],
     },
-)), "# Meowdy. Slots: a crown, b brim.")
+), crown=range(0, 14)), "# Meowdy. Slots: a crown, b brim.")
 
 # The board is flat and wide and does all the work. It has to clear the ear tips
 # outright rather than be clipped around them -- a board with two bites out of it
 # is not a board -- so it rides above row 6 and the crown drops into the gap
 # between the ears, where it needs almost no clipping at all. The tassel hangs
 # past column 38, the furthest the far ear reaches.
-emit("headwear/mortarboard.txt", inked(merge(
-    {y: [(9, 39, "a")] for y in range(3, 6)},
-    hat({y: [(16, 31, "a")] for y in range(6, 14)} | {6: [(17, 30, "a")]}),
+emit("headwear/mortarboard.txt", hat(merge(
+    # Four rows of board, not three. inked() takes the outer ring, so three rows
+    # leaves a single row of colour and the board comes out as a drawn line rather
+    # than a slab. It also reaches column 41 so the cord hangs off the board's own
+    # corner: at 39 the two were diagonal neighbours, inked() treated them as
+    # separate shapes, and the tassel floated free beside the hat.
+    {y: [(9, 41, "a")] for y in range(3, 7)},
+    {y: [(16, 31, "a")] for y in range(7, 15)},
     # The cord alone is invisible: two pixels wide, so every one of them is an
     # edge and inked() paints the lot the ink colour, right beside the far ear's
     # own ink line. It needs a terminal mass wide enough to keep an interior, and
     # it has to hang clear of column 38, which is as far as the ear reaches.
-    {y: [(40, 41, "c")] for y in range(6, 11)},
-    {y: [(39, 43, "c")] for y in range(11, 14)},
-)), "# Purrfessor. Slots: a board and crown, c tassel.")
+    {y: [(39, 41, "c")] for y in range(7, 12)},
+    {y: [(38, 42, "c")] for y in range(12, 16)},
+), crown=range(7, 15)), "# Purrfessor. Slots: a board and crown, c tassel.")
 
 # Drooping to the far side, which is where the asymmetry earns its keep: almost
 # everything else worn here is bilateral, and the cat is not.
-emit("headwear/nightcap.txt", inked(hat({
+emit("headwear/nightcap.txt", hat({
     3: [(32, 36, "c")],
     4: [(31, 37, "c")],
     5: [(31, 37, "c")],
@@ -516,29 +557,38 @@ emit("headwear/nightcap.txt", inked(hat({
     15: [(11, 37, "b")],
     16: [(11, 37, "b")],
     17: [(11, 37, "b")],
-})), "# Nightcap with a pom. Slots: a cone, b cuff, c pom.")
+}, crown=range(0, 14)), "# Nightcap with a pom. Slots: a cone, b cuff, c pom.")
 
-# The one thing that really does go over the ears, so it opts out of the clip.
-# Cups sit on the ears rather than the sides of the skull: a cat's ears are where
-# its hearing is, and cups tucked under them read as earmuffs instead.
+# A hoop that goes round the head, with the ears left in front of it.
 #
-# The band is three rows thick throughout. At two it had no interior left once
-# inked() had run, and the whole arc came out as a bare wire.
-emit("headwear/headphones.txt", inked(hat({
-    3: [(19, 28, "a")],
-    4: [(17, 30, "a")],
-    5: [(15, 31, "a")],
-    6: [(14, 18, "a"), (29, 33, "a")],
-    7: [(12, 16, "a"), (31, 35, "a")],
-    8: [(11, 15, "a"), (32, 36, "a")],
-    9: [(8, 16, "b"), (31, 39, "b")],
-    10: [(7, 16, "b"), (31, 40, "b")],
-    11: [(7, 16, "b"), (9, 14, "c"), (31, 40, "b"), (33, 38, "c")],
-    12: [(7, 16, "b"), (9, 14, "c"), (31, 40, "b"), (33, 38, "c")],
-    13: [(7, 16, "b"), (9, 14, "c"), (31, 40, "b"), (33, 38, "c")],
-    14: [(7, 16, "b"), (31, 40, "b")],
-    15: [(8, 15, "b"), (32, 39, "b")],
-}, ears=False)), "# Over-ear headphones. Slots: a band, b cups, c pads.")
+# Two earlier versions put the cups up at ear height. The first sat them on top of
+# the ears with the arms diving in from outside, which read as two speakers
+# clamped on pointing at the floor; the second made them big enough to enclose the
+# ears, which is what real over-ear cups do and which deleted the ears, and with
+# them most of what makes the silhouette a cat. There is no third position up
+# there: the tips sit at columns 9 and 37, the outside edge of the skull, which is
+# exactly the line an arm has to come down.
+#
+# So the cups drop to the sides of the head at cheek height, where a hoop would
+# actually rest on a round skull, and the band is clipped against the ears like
+# any other hat so it passes behind them. Anatomically it is on-ear rather than
+# over-ear. It reads instantly, which the correct version did not.
+emit("headwear/headphones.txt", hat({
+    3: [(18, 29, "a")],
+    4: [(15, 32, "a")],
+    5: [(12, 17, "a"), (30, 35, "a")],
+    6: [(10, 15, "a"), (32, 37, "a")],
+    7: [(8, 13, "a"), (34, 39, "a")],
+    8: [(6, 12, "a"), (35, 41, "a")],
+    9: [(5, 11, "a"), (36, 42, "a")],
+    **{y: [(4, 10, "a"), (37, 43, "a")] for y in range(10, 17)},
+    # The far cup starts at 37, not 36. At 36 it took a column off the far eye's
+    # rim, and a cup overlapping an eye is a blindfold.
+    17: [(3, 11, "a"), (37, 45, "a")],
+    **{y: [(3, 11, "a"), (5, 9, "c"), (37, 45, "a"), (39, 43, "c")] for y in range(18, 25)},
+    25: [(3, 11, "a"), (37, 45, "a")],
+    26: [(4, 10, "a"), (38, 44, "a")],
+}, crown=range(0, 17)), "# Headphones. Slots: a band and cups, c pads.")
 
 print("clothing:")
 # Only rows 32-46 of the torso ever reach the canvas, and the chin eats the middle
@@ -554,7 +604,17 @@ def chest(half, ch, y0, y1):
     return {y: [(CENTRE - half, CENTRE + half, ch)] for y in range(y0, y1 + 1)}
 
 
-emit("clothing/tee.txt", garment(), "# Plain tee. Slots: a fabric.")
+# A V-neck rather than a crew, because a crew neck on this cat is nothing at all:
+# the neckline lands where the chin is, garment() cuts the chin out, and what is
+# left is a flat colour field. The V starts at row 39, the first row clear of the
+# jaw, so the whole notch is visible.
+emit("clothing/tee.txt", garment({
+    **COLLAR,
+    39: [(20, 21, "b"), (27, 28, "b")],
+    40: [(21, 22, "b"), (26, 27, "b")],
+    41: [(22, 23, "b"), (25, 26, "b")],
+    42: [(23, 25, "b")],
+}), "# V-neck tee. Slots: a fabric, b neckline.")
 
 # Taller than it is wide, and only two columns per stem. At eleven wide with a
 # centre bar it read as a dumbbell rather than an H.
@@ -621,29 +681,32 @@ emit("clothing/puffer.txt", garment(merge(
     {y: [(22, 22, "o"), (23, 24, "b"), (25, 25, "o")] for y in range(39, 48)},
 )), "# Quilted puffer. Slots: a fabric, b collar and placket, o seams.")
 
-# The V starts at row 39, the first row the chin has cleared. Above that the jaw
-# cuts the collar in half and the shirt comes out as two floating chips.
+# What was missing was the lapels. A shirt V and a tie floating on a flat colour
+# field is a jumper with a bib on it; the thing that reads as tailoring is the two
+# diagonal bands running down from the shoulders to a point. They converge one row
+# per row while the shirt inside them narrows at the same rate, which is what keeps
+# the V straight instead of stepped.
+#
+# Everything starts at row 39, the first row the jaw has cleared. Above that
+# garment() cuts the chin out of the middle and a lapel comes back as a chip
+# stranded on the shoulder.
+#
+# The tie is drawn in the ink slot rather than the logo slot. A tie is black on
+# every suit there has ever been, and 'h' is the brand mint on a deep colourway,
+# which put a glowing wedge down the cat's chest.
+#
+# Each lapel carries an ink line down its inner edge. The colour band alone was
+# too close to the jacket on a deep colourway to register, and the notch is the
+# one line that says tailoring -- without it a V of slightly different blue is a
+# sweatshirt with a panel.
 emit("clothing/suit.txt", garment({
-    39: [(20, 22, "w"), (26, 28, "w")],
-    40: [(21, 23, "w"), (25, 27, "w")],
-    41: [(22, 26, "w")],
-    42: [(22, 26, "h")],
-    43: [(23, 25, "h")],
-    44: [(23, 25, "h")],
-    45: [(23, 25, "h")],
-    46: [(23, 25, "h")],
-}), "# Suit with shirt and tie. Slots: a jacket, w shirt, h tie.")
-
-# One thick band is a striped jumper. What says sport is the band being *trimmed*
-# top and bottom in a second colour, and a stripe running down each sleeve.
-emit("clothing/jersey.txt", garment({
-    39: [(19, 29, "b")],
-    40: [(20, 28, "b")],
-    41: [(0, 47, "b")],
-    42: [(0, 47, "h")],
-    43: [(0, 47, "h")],
-    44: [(0, 47, "b")],
-    45: [(7, 9, "b"), (38, 40, "b")],
-    46: [(7, 9, "b"), (38, 40, "b")],
-    47: [(7, 9, "b"), (38, 40, "b")],
-}), "# Banded jersey. Slots: a fabric, b neck, trim and sleeve stripes, h band.")
+    38: [(15, 19, "b"), (31, 35, "b")],
+    39: [(16, 20, "b"), (21, 21, "o"), (22, 26, "w"), (27, 27, "o"), (28, 32, "b")],
+    40: [(17, 21, "b"), (22, 22, "o"), (23, 25, "w"), (26, 26, "o"), (27, 31, "b")],
+    41: [(18, 22, "b"), (23, 25, "o"), (26, 30, "b")],
+    42: [(23, 25, "o")],
+    43: [(22, 26, "o")],
+    44: [(22, 26, "o")],
+    45: [(22, 26, "o")],
+    46: [(23, 25, "o")],
+}), "# Suit with lapels, shirt and tie. Slots: a jacket, b lapels, w shirt, o notch and tie.")

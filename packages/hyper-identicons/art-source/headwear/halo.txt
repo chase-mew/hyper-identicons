@@ -1,5 +1,5 @@
 # Floating halo. Slots: a ring.
-@ 1 15
+@ 5 15
 ....aaaaaaaaa....
 ..aa.........aa..
 aa.............aa

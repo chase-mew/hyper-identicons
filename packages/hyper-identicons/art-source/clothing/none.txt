@@ -1,3 +1,0 @@
-# Bare shoulders: intentionally empty.
-@ 0 0
-.

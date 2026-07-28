@@ -1,13 +1,15 @@
 # Purrfessor. Slots: a board and crown, c tassel.
 @ 4 9
-ooooooooooooooooooooooooooooooo....
-oaaaaaaaaaaaaaaaaaaaaaaaaaaaaao....
-ooooooooaaaaaaaaaaaaaaooooooooo....
-........oaaaaaaaaaaaao.........oo..
-.......oaaaaaaaaaaaaaao........oo..
-.......oaaaaaaaaaaaaaao........oo..
-.......oaaaaaaaaaaaaaao........oo..
-.......oaaaaaaaaaaaaaao........oo..
-.......oaaaaaaaaaaaaaao.......occoo
-.......oaaaaaaaaaaaaaao.......occco
-........oooooooooooooo........ooooo
+ooooooooooooooooooooooooooooooooo.
+oaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaao.
+oaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaao.
+oooooooaaaaaaaaaaaaaaaaoooooooaao.
+.......oaaaaaaaaaaaaaao.......oco.
+.......oaaaaaaaaaaaaaao.......oco.
+.......oaaaaaaaaaaaaaao.......oco.
+.......oaaaaaaaaaaaaaao.......oco.
+.......oaaaaaaaaaaaaaao.......oco.
+.......oaaaaaaaaaaaaaao.......ccco
+........aaaaaaaaaaaaaa........ccco
+.........ooooooooooooo........ccco
+.............................ooooo

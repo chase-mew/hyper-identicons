@@ -30,7 +30,7 @@ code,
 }
 
 .wrap {
-  max-width: 1080px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 48px 24px 96px;
 }
@@ -274,12 +274,12 @@ table.traits td:last-child {
 .explorer figure {
   margin: 0;
   text-align: center;
-  width: 76px;
+  width: 228px;
 }
 
 .explorer figcaption {
-  margin-top: 5px;
-  font-size: 11px;
+  margin-top: 7px;
+  font-size: 13px;
   color: var(--muted);
 }
 
@@ -291,5 +291,6 @@ table.traits td:last-child {
 .hint {
   color: var(--muted);
   font-size: 13px;
+  max-width: 78ch;
   margin: 0 0 14px;
 }

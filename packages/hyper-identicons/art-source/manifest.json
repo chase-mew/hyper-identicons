@@ -12,14 +12,12 @@
     ],
     "body": [{ "id": "base", "name": "Purrbit", "weight": 1 }],
     "clothing": [
-      { "id": "hoodie-blob", "name": "Blob Hoodie", "weight": 22 },
-      { "id": "hoodie-h", "name": "Hyper Hoodie", "weight": 18 },
-      { "id": "hoodie", "name": "Hoodie", "weight": 16 },
-      { "id": "tee", "name": "Tee", "weight": 16 },
-      { "id": "puffer", "name": "Puffer", "weight": 12 },
-      { "id": "jersey", "name": "Jersey", "weight": 9 },
-      { "id": "suit", "name": "Suit", "weight": 7 },
-      { "id": "none", "name": "Bare", "weight": 5 }
+      { "id": "hoodie-blob", "name": "Blob Hoodie", "weight": 24 },
+      { "id": "hoodie-h", "name": "Hyper Hoodie", "weight": 20 },
+      { "id": "hoodie", "name": "Hoodie", "weight": 18 },
+      { "id": "tee", "name": "Tee", "weight": 18 },
+      { "id": "puffer", "name": "Puffer", "weight": 13 },
+      { "id": "suit", "name": "Suit", "weight": 9 }
     ],
     "mouth": [
       { "id": "smile", "name": "Smile", "weight": 26 },

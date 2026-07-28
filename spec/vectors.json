@@ -8,15 +8,15 @@
       "traits": {
         "background": "glow/sky",
         "body": "base/void",
-        "clothing": "puffer/oxblood",
+        "clothing": "tee/oxblood",
         "mouth": "blep/chalk",
         "eyes": "wink/coal",
         "accessory": "shades-thug/aqua",
         "headwear": "cap-h/oxblood"
       },
       "svgSha256": {
-        "full": "e52771444b57759653532fda91ddeeb7495c9974ef25d630c32d3bc295d6ebb0",
-        "mini": "5c79b9f804ba7c219077a7d5fcde57665fa87b353012a7961a0bb61d91fb9090"
+        "full": "401094fbfef0e26885b01de4350a545e20ffcd52e42f7ea5e8dd2ad9953f289f",
+        "mini": "6ea5d8ed6201eeedba92d3437c0c088cc579a39a6ced8688d3685fe39b7f84a2"
       }
     },
     {
@@ -31,8 +31,8 @@
         "headwear": "cap-h/moss"
       },
       "svgSha256": {
-        "full": "cb2fc693af44a09843bcf6bea2a79588dbf6efefc445cbbe68c734f9e5deb61b",
-        "mini": "31bd015cb4c70bcbaae32825738d80e296b1438299cad71742937fc4ed77ef95"
+        "full": "e42e320b9f466e6c1ab6ccc9a478e99466f8d9c3f5adbb267656dff8f81d2861",
+        "mini": "996d4c8b6346341bcbd6152f23666fb68a0f1e50da48e32f501cce7f64feb199"
       }
     },
     {
@@ -40,15 +40,15 @@
       "traits": {
         "background": "grid/dolphin",
         "body": "base/void",
-        "clothing": "tee/ink",
+        "clothing": "hoodie/ink",
         "mouth": "smile/chalk",
         "eyes": "squint/coal",
         "accessory": "visor/chrome",
         "headwear": "headphones/ink"
       },
       "svgSha256": {
-        "full": "c309d3a0f89845b410c5d40ad8ef02994d9eac191c907a6b9dd889b71281ac1c",
-        "mini": "777fcd28f7d6bb0dc2401b93e2018dd69a91210c93b403669771969cfed807ad"
+        "full": "86f3dd1aad27361c579387f35971161242632878a6b78b02f9988241b76a2fef",
+        "mini": "85bd70d5447fefd09f75c6be8979d897bf2356795afbd16e58c61582fc18f342"
       }
     },
     {
@@ -63,8 +63,8 @@
         "headwear": "cap-h/moss"
       },
       "svgSha256": {
-        "full": "c7aa52d6d26fc9f6b47b017b2f703fc37be11af775df1bafc24da1225502b297",
-        "mini": "f8bb9cbd062cf2f8855153fa8a4c924652893d2a2d11ce8676f71d2b76cde41e"
+        "full": "175794c014832ac7705fa9b593afaaee76a59a2fa7e7d9f498f7c9a770720f50",
+        "mini": "8f72351445cf065f445d0abf7cd8fb4ca1dba9abcefffa5b48dcaadd94bd462a"
       }
     },
     {
@@ -79,8 +79,8 @@
         "headwear": "cap-h/gold"
       },
       "svgSha256": {
-        "full": "0987de7f0b8a559374183dfcccd5f08aace96522f9769aa22bc652327662adcd",
-        "mini": "f6172d13fd86832e464f821e844f68aa9ee991eea41be8f23f54667b7171d5de"
+        "full": "d0dcf24dc82cb3ff4e848e6c32fb44f3f6d8235175beb9778c38298b3091ded2",
+        "mini": "b9e45da533b4ed105bf74bea534675ec47683b2fcbea3cc91a53347d08af569c"
       }
     },
     {
@@ -88,15 +88,15 @@
       "traits": {
         "background": "plain/ember",
         "body": "base/frost",
-        "clothing": "jersey/violet",
+        "clothing": "puffer/violet",
         "mouth": "buddy/coal",
         "eyes": "round/coal",
         "accessory": "shades-thug/midnight",
         "headwear": "headphones/gold"
       },
       "svgSha256": {
-        "full": "c9b2b78b1677a9db5884abe349d0c3db3132c727d7ef2d47b6916502c777a897",
-        "mini": "9f9e84e75e56170af1c3251378ab3eca7216a5391ea916b2e41df54e8ef9bda1"
+        "full": "5c24bab4189391da98344a28cb268b72540ace7cb0624370738af0ef747b183f",
+        "mini": "cb418229f48b7e5c04619786d0578b27173a501b17cc9fdc7434e163668c3959"
       }
     },
     {
@@ -111,8 +111,8 @@
         "headwear": "cap-h/oxblood"
       },
       "svgSha256": {
-        "full": "9f8e94b1b1f6856f5596ece8e565d5f17d77a98be0c358cd5b83fa7e313802c9",
-        "mini": "ea309a5790fa035c04805e28cf30d223baaa53cf7073d614aa518d9a923a52e2"
+        "full": "be8b119e08c73381fe36fd95cb6aca1cf47d69bfc956b15906e567854ccb038e",
+        "mini": "f889b7544a769e00269b1dc4e07adf110b719ed5c0d501475bd48cf584b8c94c"
       }
     },
     {
@@ -120,15 +120,15 @@
       "traits": {
         "background": "frame/sky",
         "body": "base/cocoa",
-        "clothing": "jersey/aubergine",
+        "clothing": "puffer/aubergine",
         "mouth": "open/chalk",
         "eyes": "squint/coal",
         "accessory": "visor/chrome",
         "headwear": "cap-h/pine"
       },
       "svgSha256": {
-        "full": "42264bf3ce2d821cec49f30fdc6b6b1ffbe0014bd578b30d473be77e7b635146",
-        "mini": "89b5be66dabf04417e4266749d6118a0f570462ed51953f67d3793b677dc9be2"
+        "full": "39933e5773a8c3c1e11d02a33c5e91744ec7b23a8e1c53719644f4157a15b39a",
+        "mini": "23cec604b1f28311f623394c3433956d851e6f2fe8160ff12ce2181d7528111a"
       }
     },
     {
@@ -143,8 +143,8 @@
         "headwear": "cowboy/cobalt"
       },
       "svgSha256": {
-        "full": "be54299102b11acc084d5dd7bd7126e55a539df45c5a708f33ddfcaf94d1b076",
-        "mini": "0f91f0f78e34c5b19a05421337472b22d9eb341252f42972448d36ae4255daf9"
+        "full": "1fc8f270031ac6557614766dc086589f78043fc9f4e48423d4313a184f15c43c",
+        "mini": "18343428dc87be8de863e043721ce6794aee63bff5ecb71e20e707d062ecaf80"
       }
     },
     {
@@ -152,15 +152,15 @@
       "traits": {
         "background": "horizon/foam",
         "body": "base/indigo",
-        "clothing": "puffer/navy",
+        "clothing": "tee/navy",
         "mouth": "smile/chalk",
         "eyes": "squint/coal",
         "accessory": "none/gold",
         "headwear": "headphones/pine"
       },
       "svgSha256": {
-        "full": "a2da915b3cbc95775e2d24f278f67009c873d93c0eb7b27271cf5d0db78bcf98",
-        "mini": "8796bbeb1f73dfe87faa56ddee50a24f64b06e265678cf645df52042a01632a7"
+        "full": "c55031d9c443bad3efeed656eee3bd472ecac46b94a5152e4d8104de6594d573",
+        "mini": "4f8f17059c0b382ab91a0950282f024aa6a1c861274ed099fc24047bf7e98220"
       }
     },
     {
@@ -168,15 +168,15 @@
       "traits": {
         "background": "plain/abyss",
         "body": "base/sage",
-        "clothing": "tee/cobalt",
+        "clothing": "hoodie/cobalt",
         "mouth": "blep/coal",
         "eyes": "round/coal",
         "accessory": "shades-thug/noir",
         "headwear": "mortarboard/cobalt"
       },
       "svgSha256": {
-        "full": "d94396ba0e86208ac492faee912fb133373f066656a0f7ee23024deb886dbb4e",
-        "mini": "710c95cc81da2fe70b627211fe61de2af5436cd43abe3fc8baea8b323c45e1b5"
+        "full": "4f70aabae1dd2a251cb55fb4ee16e5a9c5376512c379fc8d56756a3e4f337aa4",
+        "mini": "47796dd4eac8f0aec3be0ddc3647a9d5d1604eb6239cbb9deccc6208cb0ae6ab"
       }
     },
     {
@@ -191,8 +191,8 @@
         "headwear": "cap-h/moss"
       },
       "svgSha256": {
-        "full": "5499e5a72886106b10563a539a288296ffd24753bd02a09bae7bd2de297aca86",
-        "mini": "59e02dc9dd06bf0b207d1c317e911fb2a2f02b7cef2f8c68d00c7e2673227a0c"
+        "full": "ffe3b62c50a93f5e3167cc114f18ed1299242fb5fcd6bdadf1f79e7da857f1d2",
+        "mini": "7a297d6bac1884639f85de237dfa40265448726bcf8ba2757f6b284a65d5fee1"
       }
     },
     {
@@ -207,8 +207,8 @@
         "headwear": "none/oxblood"
       },
       "svgSha256": {
-        "full": "84078f5043f2c1565cfa8ef10021d2760aeb00fae8bfc2b227f151f3731bd72f",
-        "mini": "3c31aee63073dcd124e47b0391b97f94f444e14e4d7cff02ded996a60f5367c9"
+        "full": "759f35fec234840899564ed59d748b38cd4ca421559dfb0dcf48e8973574a289",
+        "mini": "144c8fed2d473bda760ccc4f7dcaa5b5a5381483789dcc5dcbecc3a0c78c3e43"
       }
     },
     {
@@ -223,8 +223,8 @@
         "headwear": "cap-h/pine"
       },
       "svgSha256": {
-        "full": "f47a6b198f7e8e9679f2f024c88c7f1f04df8764a8c35ec66361e7a7d9e07fda",
-        "mini": "ecf2b8f8aecc563c6f35501674abfc2347d27f18cd209e43cdf34a2fed672b16"
+        "full": "a60dc3bd8aaaaf623287a586f1b5a86b6a6e99e4f43bbff09d5c5a76048d036f",
+        "mini": "3f70e1e14f5dc6ea35f9afdacb720379740f2d94bab6f1c5231e5eb88c3c1fd5"
       }
     },
     {
@@ -239,8 +239,8 @@
         "headwear": "cap-h/pine"
       },
       "svgSha256": {
-        "full": "eec03f692532874f4aecb0695b2c79632813fb6135c29a9a72c6526f2583d2f1",
-        "mini": "75f6b9df62a4309b23fc893149accab625836f27d01dbee2f5c8fec2793b8a91"
+        "full": "5545a676ea2c74537ab9c3bdd16de831bbd8c8a8e56f2b99b278323961c19243",
+        "mini": "98e566e07a63cd4b0732e100ec7c2595ebc466d01285e30b1e6a0f5a43f80f26"
       }
     },
     {
@@ -255,8 +255,8 @@
         "headwear": "headphones/crimson"
       },
       "svgSha256": {
-        "full": "e6e1d23d48bafce5113625ccb68101d08b852a16d3fa6de65245a4915c7d9417",
-        "mini": "014a4c4446536f71260db5fcb267295f76f502913433d64ecff6f1479e856e6a"
+        "full": "84a381ab577396c4f19f0c159903020deed18bc091c18ef577b2a3ff19c3c2e4",
+        "mini": "cc2348fa707628562526bb0730cef6044d259e242b62ee1e55ab1d8331ccd19b"
       }
     },
     {
@@ -271,8 +271,8 @@
         "headwear": "cap-h/cobalt"
       },
       "svgSha256": {
-        "full": "c98a0c08fbf3beeed22778423ac4a0becc41cb925ce6963c0e5e711048675b0f",
-        "mini": "efa512eec5e21741fb9c32c5d734293a3952a1744400d5868328b11c977f6786"
+        "full": "837921b9e272ee401570123bcb07c5947e0cb9a22717860cfd51c85f6108e621",
+        "mini": "660ff2c438045cbdd33d266c249d57a14639afaa1b2ef70c095722af8af104d3"
       }
     },
     {
@@ -287,8 +287,8 @@
         "headwear": "nightcap/abyss"
       },
       "svgSha256": {
-        "full": "e21b6939ea7e04c4d2d6272a9c246eb1f1ab9b40e0c611c368335439e9faf6c2",
-        "mini": "ea75dcd4a149e9dc82ce93e2b203f72e586f48fcb9f59645ccd4640ff8c92800"
+        "full": "0fcc9e79e15ee275a9289694f1b022bd25c322d94654c06ad559bd3ba71886ab",
+        "mini": "94e8841cff877bc134cdb010c70c15e1a8ffe9599b9f3ebfacd81213b7f5212d"
       }
     },
     {
@@ -303,8 +303,8 @@
         "headwear": "bucket/crimson"
       },
       "svgSha256": {
-        "full": "e8f971b5ec03d45df3d131153f4b6f07e7b42406d336dcfd7e1fa2f26dcce642",
-        "mini": "56c787ed47b6951b1c16562f02c1788dda26aaeba1efca055a3b5a8360ba621b"
+        "full": "e9c851dc9fce8cd52b83cacea15f7a675b4df18180f6d23d4dcdaf6a3e299646",
+        "mini": "26ce9162bcbec49f1432cc88b5054bf1ba279f6c4fc1d8992fa953ac9d809200"
       }
     },
     {
@@ -312,15 +312,15 @@
       "traits": {
         "background": "plain/ebony",
         "body": "base/frost",
-        "clothing": "jersey/cobalt",
+        "clothing": "puffer/cobalt",
         "mouth": "blep/coal",
         "eyes": "sleepy/coal",
         "accessory": "shades-thug/midnight",
         "headwear": "cap-h/moss"
       },
       "svgSha256": {
-        "full": "a69512e3aecc82832e07775f8cccbb8781c7cdb32875bbef590b73b876c8dcb8",
-        "mini": "85fbbf814436fcbbdbcea5450f0a5fea19a91bf8522cffb3382a9747e34611f3"
+        "full": "d6221a4eea9059e93c4d97387aae154a6994569d55b748d3fb4a87937a245871",
+        "mini": "792ac1e11de1c550b96e028ed97e53d1880c5bb663e10d10db4d131f20a952c6"
       }
     },
     {
@@ -328,15 +328,15 @@
       "traits": {
         "background": "ladder/abyss",
         "body": "base/ash",
-        "clothing": "suit/teal",
+        "clothing": "puffer/teal",
         "mouth": "buddy/coal",
         "eyes": "sleepy/coal",
         "accessory": "visor/midnight",
         "headwear": "none/cobalt"
       },
       "svgSha256": {
-        "full": "358fbd2a7eafa9eacf9ff9a2b92697c366646f7f91a431aaf4400fd3e8df4df6",
-        "mini": "217f94dc2fd7058de5898bdaefeff9e98a451e31982d2ab0d1726e4c677075af"
+        "full": "6d6f3634896a54adb08639566e2f815701f66678bbb66f4f6ce12e14562f2936",
+        "mini": "a8cf21f13842bbeeaaf35590d238f13435c643578e7aa4e8096c7b88252b05c3"
       }
     },
     {
@@ -344,15 +344,15 @@
       "traits": {
         "background": "grid/orchid",
         "body": "base/void",
-        "clothing": "hoodie/ink",
+        "clothing": "hoodie-h/ink",
         "mouth": "smile/chalk",
         "eyes": "round/coal",
         "accessory": "none/chrome",
         "headwear": "bucket/navy"
       },
       "svgSha256": {
-        "full": "19d2179c0a15a07c0e44a33853c2625d598bece8554beaf8d6173ac32f5d677e",
-        "mini": "b0e33cbff269f24292f044bdb56ddde73dadd9e06c471a9eac424fe24b993ce0"
+        "full": "bf21ea8d74fe76cb5318faeae0a3b3ed00843949d37693c19cbbb5eae096ec1d",
+        "mini": "2fb512da8656839448772678e707f5b8509968fc1065984539e60eb3c8979532"
       }
     },
     {
@@ -367,8 +367,8 @@
         "headwear": "beanie/oxblood"
       },
       "svgSha256": {
-        "full": "a735901f352b590a2e7670dc6032d703a0370a6f422540c74c9f38967cbfe03e",
-        "mini": "e8c21025c25f8825869c619cdedefc365b9dc2aef3252e91de22363678a7c568"
+        "full": "3471bf3b54c9d5bcfc349447c8381e5de8f423d9654bc27ce20e6f57a5f599f1",
+        "mini": "c6287c469fbe5d7c643d7c98bf2087a2ebbc72b1e22caf2f963aa9499e2cc3bf"
       }
     },
     {
@@ -376,15 +376,15 @@
       "traits": {
         "background": "horizon/ebony",
         "body": "base/frost",
-        "clothing": "jersey/crimson",
+        "clothing": "puffer/crimson",
         "mouth": "smile/coal",
         "eyes": "round/coal",
         "accessory": "shades-thug/noir",
         "headwear": "halo/cobalt"
       },
       "svgSha256": {
-        "full": "670e3809635af01d1d137b5d234a8d0cd9873d5becb70322f1901030a199970e",
-        "mini": "83bf9de4cfa903315bc4b6189f30ddcabb3773e3e818a1bb81ba4047785a6780"
+        "full": "6da6d2560a8fd79721d116d774985d7dad55ebb6646754122ecdbc164ac45081",
+        "mini": "a9f11a1828047ba2680f9c726edc43da502e6b69a28f7a58ef5cf3f3983d3873"
       }
     },
     {
@@ -392,15 +392,15 @@
       "traits": {
         "background": "horizon/ebony",
         "body": "base/ash",
-        "clothing": "tee/teal",
+        "clothing": "hoodie/teal",
         "mouth": "buddy/coal",
         "eyes": "wink/coal",
         "accessory": "visor/tortoise",
         "headwear": "nightcap/gold"
       },
       "svgSha256": {
-        "full": "c892859147bacff97c7aa7ecf20760e7cd35487f847266c984e4f0f37fb9a921",
-        "mini": "c03de38b9d994bb8ff85af081055a152d17775ee94e2558f0233176b9e7aeea1"
+        "full": "11df0c4d58a837c8020c97e9b6c8ddf5f3e50fe31672fa820ba8cc668cae8f66",
+        "mini": "bd76f90e24c4c57c1cb4bffbba4963bf784d5bc1b5cdd87218dc2af21a20761a"
       }
     },
     {
@@ -408,15 +408,15 @@
       "traits": {
         "background": "ladder/dolphin",
         "body": "base/void",
-        "clothing": "suit/ink",
+        "clothing": "puffer/ink",
         "mouth": "open/rose",
         "eyes": "sleepy/coal",
         "accessory": "none/chrome",
         "headwear": "none/abyss"
       },
       "svgSha256": {
-        "full": "aa3765526f05dda798dc99a3b262ea2922109ebca0b733ba9f5b1f0e5a14fe00",
-        "mini": "0684bf580aa9e94705ffb2ee02180984d05835745a5394624172224b18c9800e"
+        "full": "5f72e82dda576b29224dbf61ec3d72996adec3059ac7a46783d97064520ac2dc",
+        "mini": "8d6d2bbc7cbdd0ee4da34bc922189ef2807c84b1b56b0759ba5c68bb5e3a2942"
       }
     },
     {
@@ -424,15 +424,15 @@
       "traits": {
         "background": "plain/sky",
         "body": "base/cocoa",
-        "clothing": "tee/ink",
+        "clothing": "hoodie/ink",
         "mouth": "smile/rose",
         "eyes": "round/coal",
         "accessory": "visor/rose",
         "headwear": "beanie/navy"
       },
       "svgSha256": {
-        "full": "82dae836d99a6b1b0b7d08cd2db6d9642cf647e7aa5ebb8b8365bd20834b2b5d",
-        "mini": "9ef3763081266f5ef37d570b6e2ee8eb148797266dacbe1d61560064e8ce8259"
+        "full": "1615d93af7cb0435df78bde99194411958c6d565f7a71475845dc07db37a49e5",
+        "mini": "ecc038a48ca3fb0049913fa75160cb47a2c239f03f9b314954f93388467a17b8"
       }
     },
     {
@@ -447,8 +447,8 @@
         "headwear": "mortarboard/teal"
       },
       "svgSha256": {
-        "full": "1f16db3e677b2e5dfd7eec3df518138025f43720a4ae9310bc0ccc06f2e06467",
-        "mini": "f04eb7c75a9cc20a137b95134559041969da7123b0e976d3c30a36bf9bc13311"
+        "full": "25cc68557df1e2738d0444be7752934702c30ce07bd43467710ada49f9189981",
+        "mini": "898ba176b83912db8cb5c0304f757db9db343e2d2c8b7bc078ab8bca1efc8d01"
       }
     },
     {
@@ -463,8 +463,8 @@
         "headwear": "beanie/crimson"
       },
       "svgSha256": {
-        "full": "48818e04d39a5a5d2ab43d07109e111e502bc7f382b6b9a39922234cf40e2b54",
-        "mini": "a31bc95bf3ccb8970fb6130d5fbb15a05338861e4cf7783ed506faf1902b0c79"
+        "full": "813ddd35f304ee45124e6f6a2e560b55dcf717006a68be0bd7a6d6887ee47827",
+        "mini": "a10473823e15b46db62ad187b67d842296d5ca2da4da9207fa2668cfa2d8602b"
       }
     },
     {
@@ -472,15 +472,15 @@
       "traits": {
         "background": "ladder/plum",
         "body": "base/aqua",
-        "clothing": "tee/crimson",
+        "clothing": "hoodie/crimson",
         "mouth": "buddy/coal",
         "eyes": "round/coal",
         "accessory": "none/midnight",
         "headwear": "beanie/cobalt"
       },
       "svgSha256": {
-        "full": "ff11f137db45f21a18da1b4c6fee07380e4b47c7ed8bec9d837bcb7887f1fcd9",
-        "mini": "59ef0f499a9ae78376101f476404b87df787b5825bbf6b9268452659c5ffd56f"
+        "full": "817e830a2c94ea35d42abfef5977786a0b01bfeac858a0c9aba46f7d5d5259b3",
+        "mini": "0e588dbaf140c4d3d95c2a679e9aa478df8f36fc2eeaae587fb38f506bab3b66"
       }
     },
     {
@@ -495,8 +495,8 @@
         "headwear": "none/moss"
       },
       "svgSha256": {
-        "full": "9c123cf23fdfd4a43ba1eab1b552e3d115972fafc5a69ea76017b1546d6aeb85",
-        "mini": "c753522bb674ddbbf527c7390b2a5dfc2e6bc07e11ec0dae5d9feda14c7c28e7"
+        "full": "ff85db87111bd0dbbb7ecf85618b21e1c3a5b77331b3d14ff8ef9943df118f60",
+        "mini": "c2e6d50bc39a7aef5fc8823a29f7203c1039e15f146d864d81c65a4484039221"
       }
     },
     {
@@ -504,15 +504,15 @@
       "traits": {
         "background": "ladder/abyss",
         "body": "base/lilac",
-        "clothing": "hoodie/gold",
+        "clothing": "hoodie-h/gold",
         "mouth": "neutral/coal",
         "eyes": "sleepy/coal",
         "accessory": "none/noir",
         "headwear": "cowboy/crimson"
       },
       "svgSha256": {
-        "full": "febdb027eaaaa59c53b927a3475c4654ce6c5a948927f989538bc4cfb5808bee",
-        "mini": "a0c386df1199b3e18df5c0c51ea86c1d2e31b762c395696d9b54f9c95cf7f183"
+        "full": "a9277d9a8f07f40d1a21d2a9d7f59923212b75f9215f37727e96d794885fe07f",
+        "mini": "b60336547de7ae1672c68337ea8dcca7a7312d4765c2d37c45f86a346598f46c"
       }
     }
   ]

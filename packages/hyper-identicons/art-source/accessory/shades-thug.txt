@@ -1,8 +1,8 @@
 # The reference sunglasses. Slots: o brow bar, g lens, w shine.
 @ 21 10
 ooooooooooooooooooooooooooooooooo
-ggggggggwwggggg...ggggggggwwggggg
-gggggggwwgggggg...gggggggwwgggggg
-gggggggggggggg.....gggggggggggggg
-.ggggggggggg.........ggggggggggg.
-...ggggggg.............ggggggg...
+.gggggggwwgggg.....gggggggwwgggg.
+.ggggggwwggggg.....ggggggwwggggg.
+.gggggggggggg.......gggggggggggg.
+..ggggggggg...........ggggggggg..
+....ggggg...............ggggg....

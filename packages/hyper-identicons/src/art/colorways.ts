@@ -17,14 +17,21 @@ export const COLORWAYS: Record<LayerId, Colorway[]> = {
   // Deep and bright are never mixed in one identicon: whichever tone the cat is,
   // the background takes the other. Weights are relative within a tone, since the
   // cat has already decided which half of this list is in play.
+  //
+  // The deep half sits at L 0.30 rather than down at 0.14. Backgrounds that dark
+  // are not dramatic, they are grubby: near-black reads as an absence of light
+  // rather than as a colour, and seven of them in a row made the whole set look
+  // like it had been left out in the rain. Lifting them to a real shade and
+  // letting the chroma up to 0.05-0.08 costs nothing, because a deep field only
+  // ever appears behind a bright cat and bright fur starts at L 0.78.
   background: [
-    { id: 'ebony', name: 'Ebony', tone: 'deep', weight: 22, colors: { a: '#1A1E24', b: '#292E35' } },
-    { id: 'abyss', name: 'Abyss', tone: 'deep', weight: 20, colors: { a: '#031A16', b: '#082621' } },
-    { id: 'firefly', name: 'Firefly', tone: 'deep', weight: 16, colors: { a: '#052824', b: '#0C3630' } },
-    { id: 'slate', name: 'Slate', tone: 'deep', weight: 15, colors: { a: '#102031', b: '#1A2D40' } },
-    { id: 'indigo', name: 'Indigo', tone: 'deep', weight: 12, colors: { a: '#1C163F', b: '#272251' } },
-    { id: 'plum', name: 'Plum', tone: 'deep', weight: 8, colors: { a: '#2A0C2C', b: '#38173B' } },
-    { id: 'ember', name: 'Ember', tone: 'deep', weight: 7, colors: { a: '#341303', b: '#441E0B' } },
+    { id: 'ebony', name: 'Ebony', tone: 'deep', weight: 22, colors: { a: '#272E38', b: '#353E49' } },
+    { id: 'abyss', name: 'Abyss', tone: 'deep', weight: 20, colors: { a: '#003636', b: '#034747' } },
+    { id: 'firefly', name: 'Firefly', tone: 'deep', weight: 16, colors: { a: '#003A2D', b: '#004C3B' } },
+    { id: 'slate', name: 'Slate', tone: 'deep', weight: 15, colors: { a: '#19324B', b: '#26425E' } },
+    { id: 'indigo', name: 'Indigo', tone: 'deep', weight: 12, colors: { a: '#302951', b: '#3F3864' } },
+    { id: 'plum', name: 'Plum', tone: 'deep', weight: 8, colors: { a: '#47203F', b: '#592E50' } },
+    { id: 'ember', name: 'Ember', tone: 'deep', weight: 7, colors: { a: '#4E220B', b: '#623018' } },
     { id: 'foam', name: 'Foam', tone: 'bright', weight: 20, colors: { a: '#E4F6F4', b: '#CEE3E1' } },
     { id: 'dolphin', name: 'Dolphin', tone: 'bright', weight: 18, colors: { a: '#C3F3EC', b: '#AAE1D9' } },
     { id: 'sand', name: 'Sand', tone: 'bright', weight: 16, colors: { a: '#F1DFBC', b: '#DFCCA3' } },
@@ -60,11 +67,17 @@ export const COLORWAYS: Record<LayerId, Colorway[]> = {
     { id: 'aqua', name: 'Aqua', tone: 'bright', weight: 6, colors: { o: '#051B16', f: HYPER, s: '#70A598', p: '#0A2B24' } },
     { id: 'lilac', name: 'Lilac', tone: 'bright', weight: 5, colors: { o: '#0F0B1C', f: '#CEC0FF', s: '#8279A1', p: '#1D1530' } },
     { id: 'sage', name: 'Sage', tone: 'bright', weight: 3, colors: { o: '#0A1211', f: '#ABC8C3', s: '#657D79', p: '#141E1C' } },
-    { id: 'void', name: 'Void', tone: 'deep', weight: 14, colors: { o: '#000000', f: '#383838', s: '#959595', p: '#A9817D' } },
-    { id: 'firefly', name: 'Firefly', tone: 'deep', weight: 8, colors: { o: '#000100', f: '#13463F', s: '#87A19C', p: '#AF8682' } },
-    { id: 'slate', name: 'Slate', tone: 'deep', weight: 8, colors: { o: '#000001', f: '#354A5C', s: '#9BAAB7', p: '#BC938F' } },
-    { id: 'cocoa', name: 'Cocoa', tone: 'deep', weight: 6, colors: { o: '#010000', f: '#6A4225', s: '#BDA99C', p: '#C29995' } },
-    { id: 'indigo', name: 'Indigo', tone: 'deep', weight: 2, colors: { o: '#000003', f: '#3F3C68', s: '#9F9FB7', p: '#B68D89' } },
+    // Deep fur sits at L 0.47-0.52, well above the 0.34 the band used to bottom
+    // out at. A cat at 0.34 is not a dark cat, it is a cat in shadow: the hue is
+    // there in the hex and none of it survives to the eye. Bright fields start at
+    // L 0.87, so there is room for these to be actual colours -- a green cat, a
+    // blue cat, a copper cat -- and they only had to be murky while the deep
+    // backgrounds were murky enough to need the contrast.
+    { id: 'void', name: 'Void', tone: 'deep', weight: 14, colors: { o: '#06070A', f: '#585B5F', s: '#A2A5A8', p: '#E1A6A5' } },
+    { id: 'firefly', name: 'Firefly', tone: 'deep', weight: 8, colors: { o: '#000F0A', f: '#206C58', s: '#95B2A8', p: '#E5A6A5' } },
+    { id: 'slate', name: 'Slate', tone: 'deep', weight: 8, colors: { o: '#010E1E', f: '#43668A', s: '#9EB0C4', p: '#E7A8A7' } },
+    { id: 'cocoa', name: 'Cocoa', tone: 'deep', weight: 6, colors: { o: '#200700', f: '#905A33', s: '#C7AFA0', p: '#EAABAA' } },
+    { id: 'indigo', name: 'Indigo', tone: 'deep', weight: 2, colors: { o: '#100722', f: '#675891', s: '#AFA9C5', p: '#E7A8A7' } },
   ],
   // Garments take the cat's own tone, which is the background rule seen from the
   // other side: a hoodie reaches the canvas edge, so it has to clear the field as
@@ -76,19 +89,26 @@ export const COLORWAYS: Record<LayerId, Colorway[]> = {
   // with black seams, so on a bright field it read as one flat silhouette with no
   // detail in it at all. Deep fabric also stops at L 0.22 rather than 0.15 -- below
   // that there is not enough room above it to put a seam.
+  //
+  // Deep fabric sits at L 0.29 and its trim at 0.47, a step of 0.18. It used to be
+  // 0.15 to 0.55 with the trim's chroma up at 0.20, and that combination is what
+  // makes a garment look like it is lit from inside: a near-black field with one
+  // fully saturated line across it is a neon sign, not a seam. The fix is both
+  // ends at once -- lift the fabric until it is a colour, and pull the trim's
+  // chroma back to roughly half the fabric's lightness step above it.
   clothing: [
-    { id: 'ink', name: 'Ink', tone: 'deep', weight: 22, colors: { a: '#13161B', b: '#606A77', c: '#8A939F', h: HYPER, w: '#FFFFFF', o: '#000102' } },
-    { id: 'navy', name: 'Navy', tone: 'deep', weight: 18, colors: { a: '#03103E', b: '#2958E3', c: '#5B8BFF', h: HYPER, w: '#FFFFFF', o: '#000008' } },
-    { id: 'oxblood', name: 'Oxblood', tone: 'deep', weight: 16, colors: { a: '#300204', b: '#BA2B2E', c: '#DF6862', h: HYPER, w: '#FFFFFF', o: '#030000' } },
-    { id: 'pine', name: 'Pine', tone: 'deep', weight: 14, colors: { a: '#001D06', b: '#117E34', c: '#5AA667', h: HYPER, w: '#FFFFFF', o: '#000100' } },
-    { id: 'aubergine', name: 'Aubergine', tone: 'deep', weight: 12, colors: { a: '#1F0634', b: '#853BC4', c: '#AB73E4', h: HYPER, w: '#FFFFFF', o: '#010004' } },
-    { id: 'abyss', name: 'Abyss', tone: 'deep', weight: 8, colors: { a: '#001B17', b: '#007A6B', c: '#4AA494', h: HYPER, w: '#FFFFFF', o: '#000101' } },
-    { id: 'cobalt', name: 'Cobalt', tone: 'bright', weight: 20, colors: { a: '#427FD8', b: '#003981', c: '#ABCDFF', h: '#000C26', w: '#FFFFFF', o: '#000C26' } },
-    { id: 'crimson', name: 'Crimson', tone: 'bright', weight: 18, colors: { a: '#D04F4B', b: '#78000E', c: '#FFB5AE', h: '#230001', w: '#FFFFFF', o: '#230001' } },
-    { id: 'moss', name: 'Moss', tone: 'bright', weight: 16, colors: { a: '#2E9848', b: '#004B19', c: '#A3DBAA', h: '#001203', w: '#FFFFFF', o: '#001203' } },
-    { id: 'gold', name: 'Gold', tone: 'bright', weight: 14, colors: { a: '#A77600', b: '#513800', c: '#E6C690', h: '#150B00', w: '#FFFFFF', o: '#150B00' } },
-    { id: 'violet', name: 'Violet', tone: 'bright', weight: 12, colors: { a: '#8967D7', b: '#462281', c: '#CEC0FF', h: '#12012C', w: '#FFFFFF', o: '#12012C' } },
-    { id: 'teal', name: 'Teal', tone: 'bright', weight: 10, colors: { a: '#009583', b: '#00483E', c: '#98DACC', h: '#00110E', w: '#FFFFFF', o: '#00110E' } },
+    { id: 'ink', name: 'Ink', tone: 'deep', weight: 22, colors: { a: '#26292D', b: '#575B60', c: '#858A8F', h: HYPER, w: '#FFFFFF', o: '#040608' } },
+    { id: 'navy', name: 'Navy', tone: 'deep', weight: 18, colors: { a: '#17284F', b: '#395995', c: '#6C8CBB', h: HYPER, w: '#FFFFFF', o: '#01051A' } },
+    { id: 'oxblood', name: 'Oxblood', tone: 'deep', weight: 16, colors: { a: '#4F1313', b: '#963A32', c: '#BE786D', h: HYPER, w: '#FFFFFF', o: '#170001' } },
+    { id: 'pine', name: 'Pine', tone: 'deep', weight: 14, colors: { a: '#063519', b: '#2B6C3D', c: '#6C9B72', h: HYPER, w: '#FFFFFF', o: '#000B03' } },
+    { id: 'aubergine', name: 'Aubergine', tone: 'deep', weight: 12, colors: { a: '#3C1B46', b: '#72478A', c: '#9C80B6', h: HYPER, w: '#FFFFFF', o: '#100115' } },
+    { id: 'abyss', name: 'Abyss', tone: 'deep', weight: 8, colors: { a: '#00322F', b: '#006963', c: '#509A91', h: HYPER, w: '#FFFFFF', o: '#000908' } },
+    { id: 'cobalt', name: 'Cobalt', tone: 'bright', weight: 20, colors: { a: '#638FDF', b: '#385B9E', c: '#BCD2F9', h: '#020B24', w: '#FFFFFF', o: '#020B24' } },
+    { id: 'crimson', name: 'Crimson', tone: 'bright', weight: 18, colors: { a: '#D66C62', b: '#993A33', c: '#F8C4BE', h: '#210101', w: '#FFFFFF', o: '#210101' } },
+    { id: 'moss', name: 'Moss', tone: 'bright', weight: 16, colors: { a: '#51A561', b: '#296E38', c: '#B7DFBB', h: '#001203', w: '#FFFFFF', o: '#001203' } },
+    { id: 'gold', name: 'Gold', tone: 'bright', weight: 14, colors: { a: '#B98615', b: '#865901', c: '#F0D39F', h: '#190C00', w: '#FFFFFF', o: '#190C00' } },
+    { id: 'violet', name: 'Violet', tone: 'bright', weight: 12, colors: { a: '#9D7CD3', b: '#694A99', c: '#D9CAF8', h: '#120522', w: '#FFFFFF', o: '#120522' } },
+    { id: 'teal', name: 'Teal', tone: 'bright', weight: 10, colors: { a: '#01A699', b: '#007067', c: '#A5E4DB', h: '#00110F', w: '#FFFFFF', o: '#00110F' } },
   ],
   // The mouth is a line drawn straight onto the fur with nothing else to carry it,
   // so it takes the tone opposite the cat's: dark on a bright cat, light on a deep
@@ -101,8 +121,8 @@ export const COLORWAYS: Record<LayerId, Colorway[]> = {
     // `k` is warm rather than grey. An open mouth on a near-black cat has to be
     // light to be seen at all, and a light *neutral* one stopped reading as a
     // cavity and started reading as a block of teeth.
-    { id: 'chalk', name: 'Chalk', tone: 'bright', weight: 26, colors: { o: '#A8ABB1', k: '#B0656F', p: '#E39AA6' } },
-    { id: 'rose', name: 'Rose', tone: 'bright', weight: 14, colors: { o: '#CD9392', k: '#B35D5E', p: '#E8A7A6' } },
+    { id: 'chalk', name: 'Chalk', tone: 'bright', weight: 26, colors: { o: '#B9BEC4', k: '#CD9396', p: '#F0C4C9' } },
+    { id: 'rose', name: 'Rose', tone: 'bright', weight: 14, colors: { o: '#E2B3B5', k: '#D59397', p: '#F0C9CC' } },
   ],
   // One colourway on purpose. A tinted iris is three or four pixels across and the
   // eye reads from its shape, so a coloured one mostly just muddied the face.
@@ -113,9 +133,13 @@ export const COLORWAYS: Record<LayerId, Colorway[]> = {
   // it is 'o' that flips and 'g' that stays put. The frame is the outline of the
   // thing anyway, which is the part a silhouette is read from.
   accessory: [
-    { id: 'noir', name: 'Noir', tone: 'deep', weight: 24, colors: { o: '#030304', g: '#191B1D', w: '#FFFFFF', h: HYPER, c: '#2C2E30' } },
-    { id: 'tortoise', name: 'Tortoise', tone: 'deep', weight: 10, colors: { o: '#080200', g: '#2D1200', w: '#FFFFFF', h: HYPER, c: '#3F2717' } },
-    { id: 'midnight', name: 'Midnight', tone: 'deep', weight: 8, colors: { o: '#000116', g: '#071640', w: '#FFFFFF', h: HYPER, c: '#202D49' } },
+    // Deep frames are charcoal, oxide and midnight rather than three shades of
+    // black, and their scan line is a muted version of the brand mint instead of
+    // the brand mint itself. Aquamarine at L 0.92 laid directly on a lens at
+    // L 0.14 is the single most neon thing the palette can produce.
+    { id: 'noir', name: 'Noir', tone: 'deep', weight: 24, colors: { o: '#181A1C', g: '#07080B', w: '#FFFFFF', h: '#7FA8A2', c: '#2E3134' } },
+    { id: 'tortoise', name: 'Tortoise', tone: 'deep', weight: 10, colors: { o: '#351904', g: '#1B0500', w: '#FFFFFF', h: '#B89C7C', c: '#51321D' } },
+    { id: 'midnight', name: 'Midnight', tone: 'deep', weight: 8, colors: { o: '#101E39', g: '#030A1E', w: '#FFFFFF', h: '#7BAAAC', c: '#283958' } },
     { id: 'chrome', name: 'Chrome', tone: 'bright', weight: 22, colors: { o: '#C1C4C9', g: '#0C1014', w: '#FFFFFF', h: HYPER, c: '#A7ABB0' } },
     { id: 'gold', name: 'Gold', tone: 'bright', weight: 12, colors: { o: '#E3BF72', g: '#160E00', w: '#FFFFFF', h: HYPER, c: '#C9A658' } },
     { id: 'aqua', name: 'Aqua', tone: 'bright', weight: 8, colors: { o: '#82D8C1', g: '#00140F', w: '#FFFFFF', h: HYPER, c: '#68BEA8' } },
@@ -124,15 +148,15 @@ export const COLORWAYS: Record<LayerId, Colorway[]> = {
   // Same bands as clothing. A hat sits against the background on three sides, so
   // it is the garment least able to get away with matching the field.
   headwear: [
-    { id: 'ink', name: 'Ink', tone: 'deep', weight: 24, colors: { a: '#13161B', b: '#606A77', o: '#000102', h: HYPER, c: '#8A939F' } },
-    { id: 'navy', name: 'Navy', tone: 'deep', weight: 20, colors: { a: '#03103E', b: '#2958E3', o: '#000008', h: HYPER, c: '#5B8BFF' } },
-    { id: 'oxblood', name: 'Oxblood', tone: 'deep', weight: 16, colors: { a: '#300204', b: '#BA2B2E', o: '#030000', h: HYPER, c: '#DF6862' } },
-    { id: 'pine', name: 'Pine', tone: 'deep', weight: 14, colors: { a: '#001D06', b: '#117E34', o: '#000100', h: HYPER, c: '#5AA667' } },
-    { id: 'abyss', name: 'Abyss', tone: 'deep', weight: 8, colors: { a: '#001B17', b: '#007A6B', o: '#000101', h: HYPER, c: '#4AA494' } },
-    { id: 'cobalt', name: 'Cobalt', tone: 'bright', weight: 22, colors: { a: '#427FD8', b: '#003981', o: '#000C26', h: '#000C26', c: '#ABCDFF' } },
-    { id: 'crimson', name: 'Crimson', tone: 'bright', weight: 20, colors: { a: '#D04F4B', b: '#78000E', o: '#230001', h: '#230001', c: '#FFB5AE' } },
-    { id: 'moss', name: 'Moss', tone: 'bright', weight: 16, colors: { a: '#2E9848', b: '#004B19', o: '#001203', h: '#001203', c: '#A3DBAA' } },
-    { id: 'gold', name: 'Gold', tone: 'bright', weight: 14, colors: { a: '#A77600', b: '#513800', o: '#150B00', h: '#150B00', c: '#E6C690' } },
-    { id: 'teal', name: 'Teal', tone: 'bright', weight: 10, colors: { a: '#009583', b: '#00483E', o: '#00110E', h: '#00110E', c: '#98DACC' } },
+    { id: 'ink', name: 'Ink', tone: 'deep', weight: 24, colors: { a: '#26292D', b: '#575B60', o: '#040608', h: HYPER, c: '#858A8F' } },
+    { id: 'navy', name: 'Navy', tone: 'deep', weight: 20, colors: { a: '#17284F', b: '#395995', o: '#01051A', h: HYPER, c: '#6C8CBB' } },
+    { id: 'oxblood', name: 'Oxblood', tone: 'deep', weight: 16, colors: { a: '#4F1313', b: '#963A32', o: '#170001', h: HYPER, c: '#BE786D' } },
+    { id: 'pine', name: 'Pine', tone: 'deep', weight: 14, colors: { a: '#063519', b: '#2B6C3D', o: '#000B03', h: HYPER, c: '#6C9B72' } },
+    { id: 'abyss', name: 'Abyss', tone: 'deep', weight: 8, colors: { a: '#00322F', b: '#006963', o: '#000908', h: HYPER, c: '#509A91' } },
+    { id: 'cobalt', name: 'Cobalt', tone: 'bright', weight: 22, colors: { a: '#638FDF', b: '#385B9E', o: '#020B24', h: '#020B24', c: '#BCD2F9' } },
+    { id: 'crimson', name: 'Crimson', tone: 'bright', weight: 20, colors: { a: '#D66C62', b: '#993A33', o: '#210101', h: '#210101', c: '#F8C4BE' } },
+    { id: 'moss', name: 'Moss', tone: 'bright', weight: 16, colors: { a: '#51A561', b: '#296E38', o: '#001203', h: '#001203', c: '#B7DFBB' } },
+    { id: 'gold', name: 'Gold', tone: 'bright', weight: 14, colors: { a: '#B98615', b: '#865901', o: '#190C00', h: '#190C00', c: '#F0D39F' } },
+    { id: 'teal', name: 'Teal', tone: 'bright', weight: 10, colors: { a: '#01A699', b: '#007067', o: '#00110F', h: '#00110F', c: '#A5E4DB' } },
   ],
 };

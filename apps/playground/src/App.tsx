@@ -226,7 +226,7 @@ function Inspector() {
 }
 
 function ContactSheet() {
-  const [size, setSize] = useState(24);
+  const [size, setSize] = useState(72);
   const [detail, setDetail] = useState<DetailLevel>('full');
   const [seed, setSeed] = useState(0);
 
@@ -240,9 +240,9 @@ function ContactSheet() {
   return (
     <div className="panel">
       <p className="hint">
-        The test that decides whether the trait system works: if you cannot tell these apart at 24px, the art is
-        wrong, not the algorithm. Background, fur and headwear are drawn from the highest-entropy bits for exactly
-        this reason.
+        The test that decides whether the trait system works: drag this down to list size, and if you cannot tell
+        these apart, the art is wrong rather than the algorithm. Background, fur and headwear are drawn from the
+        highest-entropy bits for exactly this reason.
       </p>
       <div className="row" style={{ marginTop: 0, marginBottom: 16 }}>
         <label htmlFor="size">Size {size}px</label>
@@ -250,7 +250,7 @@ function ContactSheet() {
           id="size"
           type="range"
           min={16}
-          max={64}
+          max={192}
           value={size}
           onChange={(event) => setSize(Number(event.target.value))}
         />
@@ -290,18 +290,18 @@ function Explorer() {
           <div className="items">
             {MANIFEST[layer].art.map((art) => (
               <figure key={art.id}>
-                <img src={previewUri(layer, art.id, COLORWAYS[layer][0]!.id)} width={72} height={72} alt="" />
+                <img src={previewUri(layer, art.id, COLORWAYS[layer][0]!.id)} width={216} height={216} alt="" />
                 <figcaption>{art.name}</figcaption>
               </figure>
             ))}
           </div>
           <div className="items" style={{ marginTop: 10 }}>
             {COLORWAYS[layer].map((colorway) => (
-              <figure key={colorway.id} style={{ width: 52 }}>
+              <figure key={colorway.id} style={{ width: 156 }}>
                 <img
                   src={previewUri(layer, DEFAULT_ART[layer] === 'none' ? (MANIFEST[layer].art[1]?.id ?? 'none') : DEFAULT_ART[layer], colorway.id)}
-                  width={48}
-                  height={48}
+                  width={144}
+                  height={144}
                   alt=""
                 />
                 <figcaption>{colorway.name}</figcaption>

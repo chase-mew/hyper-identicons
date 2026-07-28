@@ -28,7 +28,7 @@ function scene(tone: Tone, layer: LayerId, artId: string): LayerChoice[] {
   const picks: Partial<Record<LayerId, [string, string]>> = {
     background: ['plain', tone === 'deep' ? 'foam' : 'ebony'],
     body: ['base', tone === 'deep' ? 'void' : 'cream'],
-    clothing: ['none', garment],
+    clothing: ['tee', garment],
     mouth: ['neutral', tone === 'deep' ? 'chalk' : 'coal'],
     eyes: ['round', 'coal'],
     accessory: ['none', tone === 'deep' ? 'chrome' : 'noir'],

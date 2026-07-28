@@ -124,33 +124,43 @@ Bands, in OKLab lightness:
 
 | Role | Tone | L range |
 |---|---|---|
-| background | deep | 0.14 – 0.25 |
+| background | deep | 0.30 – 0.31 |
 | background | bright | 0.87 – 0.96 |
-| fur | deep | 0.34 – 0.42 |
-| fur | bright | 0.78 – 0.97 |
-| garment | deep | 0.15 |
-| garment | bright | 0.60 |
+| fur | deep | 0.47 – 0.52 |
+| fur | bright | 0.78 – 1.00 |
+| garment | deep | 0.28 – 0.29 |
+| garment | bright | 0.65 |
 | mouth line | deep | 0.19 – 0.35 |
-| mouth line | bright | 0.72 – 0.74 |
+| mouth line | bright | 0.80 – 0.81 |
 
 The gap between what a cat can be and what it can stand on is never smaller than
-0.45 in lightness, roughly 5.7:1 by WCAG. Comfortably past the 3:1 floor for
-graphical objects, and it shows: the identicons have a consistent tonal drama
-rather than a lucky-dip of clashes.
+0.35 in lightness, 3.8:1 by WCAG. Past the 3:1 floor for graphical objects, and
+it shows: the identicons have a consistent tonal drama rather than a lucky-dip of
+clashes.
 
-Two consequences worth knowing before you move anything:
+Three consequences worth knowing before you move anything:
 
-- **Deep fur stops at L 0.34** and does not go to true black. Below that there is
-  no room underneath it for an ink line and the cat loses its own face. This is
-  the answer to "the black cat is too dark": a charcoal cat with a black outline,
-  not a black cat with a lighter outline, because a light outline stops reading
-  as ink.
+- **The deep half is not the dark half.** Deep backgrounds sit at L 0.30 and deep
+  fur at 0.47-0.52, both far above where they started. The first version put them
+  at 0.14 and 0.34, on the reasoning that more separation is always better, and
+  the result was a set that looked grubby: near-black is not read as a dark colour,
+  it is read as an absence of light, and a hue at L 0.14 has no chroma left to
+  carry it. Deep and bright never share an identicon, so the only thing the deep
+  band has to clear is the bright band opposite it, and there is a great deal of
+  room between 0.31 and 0.78. Spend it.
 - **Garments are pinned from both sides** — above the background, below the fur —
-  so they sit at a single lightness per tone rather than a range. That is also
-  why bright garments are saturated mid-tones rather than pastels, and why the
-  deep background ceiling is 0.25 rather than 0.29: lowering it is what buys the
-  bright garments enough room to be colours instead of greys. Chroma is pushed to
-  near the sRGB gamut cusp at those lightnesses to compensate.
+  so they sit at a single lightness per tone rather than a range. Bright fabric is
+  at L 0.653 because the lowest bright fur is Ginger at 0.781 and the soft floor
+  against fur is 0.12; that one number is what fixes the whole bright row. Chroma
+  is pushed to near the sRGB gamut cusp at those lightnesses.
+- **Trim is where garments go neon.** A deep fabric at L 0.15 with a seam at
+  L 0.55 and chroma 0.20 does not read as a lit seam, it reads as a lit sign: the
+  jump is too big and the saturation has nothing to sit against. Deep fabric now
+  runs at 0.29 with trim at 0.47 and chroma near 0.11, roughly half the step and
+  half the chroma, and the garments look like fabric. The same applies to the
+  brand mint: aquamarine at L 0.92 laid straight onto a lens at 0.14 was the most
+  neon thing the palette could produce, so deep eyewear gets a muted version and
+  only the logo keeps the real one.
 
 ## Measuring
 
@@ -293,9 +303,20 @@ them shows immediately:
   it reads as a sticker rather than clothing. It leaves interior pixels alone, so
   an explicitly placed `o` survives and can be used as a seam — which is how the
   cap's peak is told apart from its shell.
-- **`hat()`** cuts the ears back out, so they sit in front. This is what the
-  reference does, and the ear triangles are most of what makes the silhouette read
-  as a cat at 24px. Pass `ears=False` only for things that genuinely go over them.
+- **`hat()`** inks the shape and *then* cuts the ears back out, so they sit in
+  front. This is what the reference does, and the ear triangles are most of what
+  makes the silhouette read as a cat at 24px. `crown=` limits the cut to a row
+  range, for hats whose brim or cuff passes in front of the ear bases even though
+  the crown behind it does not.
+
+  **The order is the entire trick, and getting it backwards is invisible in the
+  code and obvious on the screen.** Ink after the cut and the hat's own outline
+  runs down the cut edge, so the crown ends in a hard vertical black line exactly
+  where it meets the ear. Nothing in the world stops behind something else like
+  that, and both the cap and the beanie read for weeks as flat shapes parked
+  behind the head rather than hats being worn. Ink first, cut second, and the
+  crown's edge is simply not drawn where the ear covers it — which is what
+  occlusion is.
 - **`garment()`** cuts the jaw out and clips everything to the torso.
 - **`merge()`** unions rows. Spreading two dicts that share a row silently drops
   one of them, which is how the mortarboard lost its whole crown to its tassel.
@@ -349,6 +370,24 @@ Two rules of thumb learned the hard way:
   both the cowboy hat and the bucket hat. Merge the brim in unclipped afterwards,
   or clear the ears entirely: the mortarboard's board rides above row 6 so the
   crown can drop into the gap between the ears and barely needs clipping at all.
+- **A strap, a temple or a cord has to leave the head on both sides.** There is no
+  object with one end. The eyepatch's strap used to run off the patch as a single
+  diagonal and stop in mid-air by the far eye, which reads as a crack rather than
+  a band; the spectacles' near temple stopped halfway across the cheek and the
+  frame looked unattached. Both now reach the outline and the head is understood
+  to join them behind.
+- **Two identical things must stay identical.** Foreshortening the far lens of a
+  pair of spectacles is correct perspective and wrong art: the eye knows a pair of
+  glasses is two matching rings, so a smaller far one does not read as a turned
+  head, it reads as a defect. The rule the three-quarter view earns elsewhere —
+  near ear big, far ear small — does not extend to manufactured objects.
+- **Headphone cups cannot go over a cat's ears.** The tips sit at columns 9 and
+  37, the outer edge of the skull, which is exactly the line the band's arm has to
+  come down. Cups big enough to enclose the ears delete them and with them the
+  silhouette; cups small enough to spare them sit on top pointing at the floor.
+  The way out is to stop insisting on over-ear: the cups drop to cheek height
+  where a hoop would actually rest, the band is clipped like any other hat so it
+  passes behind the ears, and the cat keeps its ears.
 - **The torso is only rows 32-46, and the chin covers the middle of the first six.**
   Collars go at 36-38, where there is width either side of the jaw; anything centred
   goes at 40 or lower. Detail below 46 is cropped, which is how the chest logo once

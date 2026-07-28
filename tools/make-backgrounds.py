@@ -79,9 +79,10 @@ def ladder(x, y):
 write("background/ladder.txt", build(lambda x, y: "b" if ladder(x, y) else "a"),
       "# Order book depth down both margins. Slots: a field, b bar.")
 
+# No empty clothing. A bare cat is not a variant of a dressed one, it is the base
+# drawing showing through, and next to six garments it read as a rendering fault.
 print("empty traits:")
 for path, label in (
-    ("clothing/none.txt", "Bare shoulders"),
     ("accessory/none.txt", "No accessory"),
     ("headwear/none.txt", "No headwear"),
 ):
