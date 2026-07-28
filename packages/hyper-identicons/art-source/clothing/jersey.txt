@@ -1,4 +1,4 @@
-# Banded jersey. Slots: a fabric, b neck, h band.
+# Banded jersey. Slots: a fabric, b neck, trim and sleeve stripes, h band.
 @ 36 5
 ......ooooo...................oooo.....
 ....ooaaaaaooo...............oaaaao....
@@ -6,9 +6,9 @@
 ..oaaaaaaaaaaaaaooo.......ooaaaaaaao...
 ..oaaaaaaaaaaabbbbboooooooaaaaaaaaaao..
 .oaaaaaaaaaaaaabbbbbbbbbaaaaaaaaaaaao..
-.ohhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhho..
+.obbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbo..
 .ohhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhho.
 .ohhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhho.
-oaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaao.
-oaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaao
-oaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaao
+obbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbo.
+oabbbaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbaao
+oabbbaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbaao

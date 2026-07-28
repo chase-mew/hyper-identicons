@@ -4,5 +4,5 @@
 ..ooo..
 ...o...
 ...o...
-.....oo
-oooooo.
+....ooo
+ooooo..

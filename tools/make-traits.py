@@ -280,7 +280,7 @@ mouth("mouth/smile.txt", {30: [pair(20, 20, "o"), mid(0, "o")], 31: [pair(21, 22
 # The community's own gesture: a level mouth with one corner a single row up.
 # Fond rather than sneering, which is the whole point of it, and the entire trait
 # is that one pixel of asymmetry.
-mouth("mouth/buddy.txt", {30: [(25, 26, "o")], 31: [(20, 25, "o")]},
+mouth("mouth/buddy.txt", {30: [(24, 26, "o")], 31: [(20, 24, "o")]},
       "# Unimpressed but friendly.")
 
 mouth("mouth/blep.txt", {
@@ -469,11 +469,16 @@ emit("headwear/cowboy.txt", inked(merge(
         13: [(15, 32, "a")],
     }),
     {
-        13: [(4, 7, "b"), (40, 43, "b")],
-        14: [(4, 8, "b"), (14, 33, "a"), (39, 43, "b")],
-        15: [(4, 43, "b")],
+        # The tips curl four rows clear of the brim line, not two. A wide brim
+        # whose ends only nudge upward is a sombrero, which is both the wrong hat
+        # and a collection this one should stay well away from.
+        11: [(3, 6, "b"), (41, 44, "b")],
+        12: [(3, 6, "b"), (41, 44, "b")],
+        13: [(3, 7, "b"), (40, 44, "b")],
+        14: [(3, 8, "b"), (14, 33, "a"), (39, 44, "b")],
+        15: [(3, 44, "b")],
         16: [(6, 41, "b")],
-        17: [(10, 37, "b")],
+        17: [(11, 36, "b")],
     },
 )), "# Meowdy. Slots: a crown, b brim.")
 
@@ -485,8 +490,12 @@ emit("headwear/cowboy.txt", inked(merge(
 emit("headwear/mortarboard.txt", inked(merge(
     {y: [(9, 39, "a")] for y in range(3, 6)},
     hat({y: [(16, 31, "a")] for y in range(6, 14)} | {6: [(17, 30, "a")]}),
-    {y: [(39, 40, "c")] for y in range(6, 11)},
-    {11: [(38, 41, "c")], 12: [(38, 41, "c")]},
+    # The cord alone is invisible: two pixels wide, so every one of them is an
+    # edge and inked() paints the lot the ink colour, right beside the far ear's
+    # own ink line. It needs a terminal mass wide enough to keep an interior, and
+    # it has to hang clear of column 38, which is as far as the ear reaches.
+    {y: [(40, 41, "c")] for y in range(6, 11)},
+    {y: [(39, 43, "c")] for y in range(11, 14)},
 )), "# Purrfessor. Slots: a board and crown, c tassel.")
 
 # Drooping to the far side, which is where the asymmetry earns its keep: almost
@@ -601,10 +610,15 @@ emit("clothing/hoodie.txt", garment({
 # Horizontal seams alone are still a rugby shirt, though: a jumper has them too.
 # What makes it a coat is the zip placket running down the middle, breaking every
 # band in the same place and turning three stripes into six quilted panels.
+#
+# Four columns of placket, not six. At six it stopped being a zip and became a
+# panel down the front, and the coat read as body armour. The short vertical ticks
+# between the horizontal seams are what turn two long stripes into chambers.
 emit("clothing/puffer.txt", garment(merge(
     COLLAR,
     {41: [(0, 47, "o")], 44: [(0, 47, "o")], 47: [(0, 47, "o")]},
-    {y: [(21, 21, "o"), (22, 25, "b"), (26, 26, "o")] for y in range(39, 48)},
+    {y: [(14, 14, "o"), (33, 33, "o")] for y in (42, 43, 45, 46)},
+    {y: [(22, 22, "o"), (23, 24, "b"), (25, 25, "o")] for y in range(39, 48)},
 )), "# Quilted puffer. Slots: a fabric, b collar and placket, o seams.")
 
 # The V starts at row 39, the first row the chin has cleared. Above that the jaw
@@ -620,10 +634,16 @@ emit("clothing/suit.txt", garment({
     46: [(23, 25, "h")],
 }), "# Suit with shirt and tie. Slots: a jacket, w shirt, h tie.")
 
+# One thick band is a striped jumper. What says sport is the band being *trimmed*
+# top and bottom in a second colour, and a stripe running down each sleeve.
 emit("clothing/jersey.txt", garment({
     39: [(19, 29, "b")],
     40: [(20, 28, "b")],
-    41: [(0, 47, "h")],
+    41: [(0, 47, "b")],
     42: [(0, 47, "h")],
     43: [(0, 47, "h")],
-}), "# Banded jersey. Slots: a fabric, b neck, h band.")
+    44: [(0, 47, "b")],
+    45: [(7, 9, "b"), (38, 40, "b")],
+    46: [(7, 9, "b"), (38, 40, "b")],
+    47: [(7, 9, "b"), (38, 40, "b")],
+}), "# Banded jersey. Slots: a fabric, b neck, trim and sleeve stripes, h band.")

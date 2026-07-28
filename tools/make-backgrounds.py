@@ -30,7 +30,10 @@ print("backgrounds:")
 write("background/plain.txt", build(lambda x, y: "a"),
       "# Flat fill. Slots: a primary.")
 
-write("background/horizon.txt", build(lambda x, y: "b" if y >= 30 else "a"),
+# Row 20, not row 30. At 30 the split ran along the whiskers and the cat looked
+# like it was standing behind a counter; up here it passes behind the head and
+# reads as distance.
+write("background/horizon.txt", build(lambda x, y: "b" if y >= 20 else "a"),
       "# Ground plane behind the bust. Slots: a sky, b ground.")
 
 # Disc behind the head, sized so the cat's silhouette breaks its edge.
@@ -50,33 +53,31 @@ write("background/grid.txt",
       build(lambda x, y: "b" if x % 6 == 3 and y % 6 == 3 else "a"),
       "# Sparse dot grid. Slots: a field, b dot.")
 
-# The Hyperliquid mark as a corner watermark, in the one part of the canvas the
-# cat leaves empty.
+# Depth on both sides of the book: bar length varies, bars stack, and the eye
+# reads a ladder. This is the one piece of trading furniture that is specifically
+# Hyperliquid rather than generically crypto -- the fully on-chain order book is
+# the thing they are proudest of -- and it happens to be the only motif that fits
+# where a background is actually visible. The cat owns the middle of the canvas;
+# what is left is two margins about eight columns wide.
 #
-# Drawn full size first, filling the field with the cat sitting on top, which is
-# what a background motif is supposed to be. It did not work: the waist is the
-# entire shape, the waist is at mid height, and mid height is exactly where the
-# head is. All that showed was a bump either side of the ears. The corner is the
-# only place it can be read whole, and at 13x9 it fits above the far ear without
-# touching it.
-#
-# It replaced a thin ring, which sat close enough to the head to read as a
-# selection outline and fought the halo trait for the same piece of canvas.
-MARK = {
-    1: [(42, 43)],
-    2: [(41, 44)],
-    3: [(33, 35), (40, 45)],
-    4: [(33, 36), (40, 45)],
-    5: [(33, 45)],
-    6: [(33, 45)],
-    7: [(33, 36), (40, 45)],
-    8: [(34, 35), (41, 44)],
-    9: [(42, 43)],
-}
-MARK_CELLS = {(x, y) for y, runs in MARK.items() for x0, x1 in runs for x in range(x0, x1 + 1)}
+# It replaced two attempts at putting the Hyperliquid mark back here. Full size
+# the cat hid the waist, which is the whole shape. Shrunk to a 13x9 corner
+# watermark it survived being drawn but not being seen: backgrounds hold their two
+# tones close together on purpose, and at that separation a shape with a
+# three-column gap in the middle is a smudge at 48px where a dot grid is not.
+# The mark earns its place on the hoodie, drawn in a garment palette, not here.
+DEPTH = [7, 4, 9, 3, 6, 10, 5, 8, 4, 7, 3, 9, 6, 4, 8, 5]
 
-write("background/blob.txt", build(lambda x, y: "b" if (x, y) in MARK_CELLS else "a"),
-      "# The Hyperliquid mark, tucked into the corner. Slots: a field, b mark.")
+
+def ladder(x, y):
+    if y % 3:
+        return False
+    step = y // 3
+    return x < DEPTH[step % len(DEPTH)] or x >= N - DEPTH[(step + 5) % len(DEPTH)]
+
+
+write("background/ladder.txt", build(lambda x, y: "b" if ladder(x, y) else "a"),
+      "# Order book depth down both margins. Slots: a field, b bar.")
 
 print("empty traits:")
 for path, label in (

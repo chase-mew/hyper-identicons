@@ -7,7 +7,7 @@ export const MANIFEST: Manifest = {
     id: 'background',
     art: [
       { id: "plain", name: "Plain", weight: 32 },
-      { id: "blob", name: "Blob", weight: 16 },
+      { id: "ladder", name: "Depth", weight: 16 },
       { id: "horizon", name: "Horizon", weight: 12 },
       { id: "glow", name: "Glow", weight: 11 },
       { id: "frame", name: "Frame", weight: 10 },

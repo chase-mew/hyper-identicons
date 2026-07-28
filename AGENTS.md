@@ -320,17 +320,29 @@ Two rules of thumb learned the hard way:
 - **Do not ink anything two pixels thick.** Every pixel is an edge, so the whole
   shape comes out the ink colour. That is fine on fur and fatal on the halo, which
   is the one worn thing sitting entirely on the background — the slot it needs is
-  `a`, which flips with tone.
+  `a`, which flips with tone. It also cost the mortarboard its tassel: a two-pixel
+  cord came out solid ink right beside the far ear's own ink line. Anything that
+  dangles needs a terminal mass wide enough to keep an interior.
+- **Read a hat's outline as if it were solid black.** That is all you get at 48px.
+  A wide brim whose ends nudge up two rows is a sombrero; the cowboy hat only
+  became a cowboy hat once the tips curled four rows clear of the brim line. By
+  the same logic one thick horizontal band is a striped jumper whatever colour it
+  is — the jersey needed trim above and below the band before it read as sport.
 - **Hats are distinguished by silhouette, not by detail.** Beanie, bucket and cap
   were three versions of one shallow dome plus a horizontal bar. They now differ
   in outline alone: a rounded dome with a snug cuff, a dome over a brim that
   widens all the way down, and a shell with a peak swept off one side. A brim that
   is widest at its middle row is a flat disc, which is the cowboy hat.
-- **A background cannot be a single figure.** The cat owns the middle of the
-  canvas, and the Hyperliquid mark's waist — the entire shape — sits at exactly
-  head height, so drawn full size all that showed was a bump either side of the
-  ears. Backgrounds have to be texture, or tucked into the corner the far ear
-  leaves free at rows 1-9, columns 33-45.
+- **A background cannot be a single figure, and it cannot be intricate either.**
+  The cat owns the middle of the canvas; what is left is two margins about eight
+  columns wide and a band across the top. The Hyperliquid mark failed here twice
+  over: drawn full size its waist — the entire shape — sat at exactly head height,
+  so all that showed was a bump either side of the ears, and shrunk to a corner
+  watermark it survived being drawn but not being seen. Backgrounds hold their two
+  tones deliberately close together, and at that separation a shape with a
+  three-column gap in the middle is a smudge at 48px where a dot grid is not.
+  Anything here has to be edge-anchored and simple, which is why the order book
+  ladder works: bars of varying length running in from both margins.
 - **Only clip the crown of a hat, never its brim.** The ears occupy rows 6-16,
   columns 8-17 and 31-38. A brim run through `hat()` comes back with a bite out of
   each side and its tips detached, floating in the background — which happened to
