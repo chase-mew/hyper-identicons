@@ -41,7 +41,7 @@ EAR_FAR = {
 # Reconstructed: the cap covers the skull between the ears entirely. This is the
 # top of the skull, not a separate shape -- it has to widen fast enough to meet
 # both ears within two rows or it reads as a third lump between them.
-CROWN = {13: (21, 26), 14: (18, 29), 15: (15, 32), 16: (11, 34)}
+CROWN = {13: (21, 26), 14: (18, 30), 15: (15, 32), 16: (11, 34)}
 
 # The face. Rows 21-27 sit behind the sunglasses in the reference, so their
 # edges are interpolated between the brow at row 20 and the cheek at row 26.
