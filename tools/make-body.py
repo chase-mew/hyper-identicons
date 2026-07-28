@@ -71,8 +71,8 @@ PINK = [
 WHISKERS = [
     (27, 11, 14), (28, 15, 16),
     (29, 11, 14), (30, 15, 16),
-    (27, 39, 40), (28, 35, 38),
-    (29, 39, 40), (30, 35, 38),
+    (27, 39, 41), (28, 35, 38),
+    (29, 39, 41), (30, 35, 38),
 ]
 
 # Reconstructed: the hoodie hides the shoulders completely. Every row is a
