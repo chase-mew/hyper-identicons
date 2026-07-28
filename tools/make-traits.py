@@ -332,6 +332,16 @@ emit("accessory/shades-thug.txt", {
     25: [pair(31, 35, "g")],
 }, "# The reference sunglasses. Slots: o brow bar, g lens, w shine.", shift=EYEWEAR)
 
+# Empty rims. Every other lens accessory here fills 'g', and on a deep colourway
+# 'g' and 'o' are both near-black, so filled spectacles came out as two solid
+# squares -- the cat looked like it had been redacted rather than bespectacled.
+# Clear glass is also just what spectacles are; shades are the ones you cannot
+# see through, and they already own that read.
+#
+# Leaving the lens open costs nothing because the eyes layer is painted first, so
+# whichever eyes were drawn show through the rims, which is the entire charm of
+# the trait and the thing a filled lens was throwing away.
+#
 # Both lenses are the same 7x6. Foreshortening the far one was the right instinct
 # and the wrong trait: a pair of spectacles is two identical rings and the eye
 # knows it, so a smaller far lens does not read as perspective, it reads as a
@@ -339,14 +349,13 @@ emit("accessory/shades-thug.txt", {
 # stopped short it left the frame hanging in the middle of the cheek.
 emit("accessory/specs.txt", {
     19: [(15, 19, "o"), (29, 33, "o")],
-    20: [(14, 14, "o"), (15, 19, "g"), (20, 20, "o"), (28, 28, "o"), (29, 33, "g"), (34, 34, "o")],
-    21: [(14, 14, "o"), (15, 19, "g"), (20, 20, "o"), (21, 27, "o"),
-         (28, 28, "o"), (29, 33, "g"), (34, 34, "o")],
-    22: [(5, 13, "o"), (14, 14, "o"), (15, 19, "g"), (20, 20, "o"),
-         (28, 28, "o"), (29, 33, "g"), (34, 34, "o"), (35, 36, "o")],
-    23: [(14, 14, "o"), (15, 19, "g"), (20, 20, "o"), (28, 28, "o"), (29, 33, "g"), (34, 34, "o")],
+    20: [(14, 14, "o"), (20, 20, "o"), (28, 28, "o"), (34, 34, "o")],
+    21: [(14, 14, "o"), (20, 20, "o"), (21, 27, "o"), (28, 28, "o"), (34, 34, "o")],
+    22: [(5, 13, "o"), (14, 14, "o"), (20, 20, "o"),
+         (28, 28, "o"), (34, 34, "o"), (35, 36, "o")],
+    23: [(14, 14, "o"), (20, 20, "o"), (28, 28, "o"), (34, 34, "o")],
     24: [(15, 19, "o"), (29, 33, "o")],
-}, "# Round spectacles. Slots: o frame, g lens.", shift=EYEWEAR)
+}, "# Round spectacles, clear lenses. Slots: o frame.", shift=EYEWEAR)
 
 # Two rows of scan line, not one. The lit slit is the entire difference between a
 # visor and a blindfold, and at 48px a single row of it is gone.
@@ -447,22 +456,25 @@ emit("headwear/beanie.txt", hat({
     18: [(11, 37, "b")],
 }, crown=range(0, 14)), "# Knit beanie, ears through the cuff. Slots: a crown, b cuff.")
 
+# A flat-topped truncated cone, which is what a bucket hat actually is and what
+# finally tells it apart from the beanie. Both were rounded domes over a
+# horizontal band, and no amount of adjusting the band fixed that -- the
+# difference has to be in the crown, because at 48px the crown is most of what
+# there is. The beanie keeps the dome; this one goes flat on top and widens all
+# the way down into a short brim.
 emit("headwear/bucket.txt", hat({
     6: [(19, 28, "a")],
-    7: [(17, 30, "a")],
-    8: [(16, 31, "a")],
-    9: [(15, 32, "a")],
-    10: [(14, 33, "a")],
-    11: [(14, 34, "a")],
-    12: [(13, 34, "a")],
-    13: [(13, 35, "a")],
-    14: [(13, 35, "a")],
-    # Widening all the way down rather than bulging in the middle. A brim that is
-    # widest at its centre row is a flat disc, which is the cowboy hat's shape; the
-    # bucket's whole silhouette is the downward flare.
-    15: [(9, 39, "b")],
+    7: [(18, 29, "a")],
+    8: [(18, 29, "a")],
+    9: [(17, 30, "a")],
+    10: [(17, 30, "a")],
+    11: [(16, 31, "a")],
+    12: [(15, 32, "a")],
+    13: [(15, 32, "a")],
+    14: [(14, 33, "a")],
+    15: [(10, 38, "b")],
     16: [(7, 41, "b")],
-    17: [(5, 43, "b")],
+    17: [(6, 42, "b")],
 }, crown=range(0, 15)), "# Bucket hat. Slots: a crown, b brim.")
 
 # An ellipse seen almost edge on, and every part of that matters. Ten wide by four
@@ -494,29 +506,36 @@ emit("headwear/halo.txt", {
 # Only the crown is cut against the ears. A brim is the whole point of a wide hat
 # and it has to be one unbroken sweep: clipped, it lost a bite out of each side and
 # the tips came away as two dark stubs floating in the background.
+# The curled tips had to go. Curling them four rows clear of the brim line does
+# make a cowboy hat rather than a sombrero -- on a head with no ears. On this one
+# the ears occupy exactly the rows the tips rise through, so the silhouette came
+# out as a bar with two blocks floating either side of it: a headband with
+# antennae, which is the worst read anything in this set has had.
+#
+# So the hat is told by its crown instead. A cowboy hat's real signature is a tall
+# crown with a crease pinched down the top of it, and rows 5-6 draw that as two
+# humps with a notch between. The brim stays one unbroken sweep below the ears,
+# lifting a single row at each end where it is still attached to itself.
 emit("headwear/cowboy.txt", hat(merge(
-    # A tall crown over a flat brim is a bowler. What separates the two at this
-    # size is only the ratio -- crown short, brim very wide, tips turned up two
-    # rows clear of the brim line.
     {
-        9: [(18, 29, "a")],
-        10: [(17, 30, "a")],
-        11: [(16, 31, "a")],
-        12: [(16, 31, "a")],
-        13: [(15, 32, "a")],
+        5: [(18, 21, "a"), (26, 29, "a")],
+        6: [(17, 30, "a")],
+        7: [(16, 31, "a")],
+        8: [(16, 31, "a")],
+        9: [(15, 32, "a")],
+        10: [(15, 32, "a")],
+        11: [(15, 32, "a")],
+        12: [(14, 33, "a")],
+        13: [(14, 33, "a")],
     },
     {
-        # The tips curl four rows clear of the brim line, not two. A wide brim
-        # whose ends only nudge upward is a sombrero, which is both the wrong hat
-        # and a collection this one should stay well away from.
-        12: [(3, 6, "b"), (41, 44, "b")],
-        13: [(3, 7, "b"), (40, 44, "b")],
-        14: [(3, 8, "b"), (14, 33, "a"), (39, 44, "b")],
+        14: [(4, 9, "b"), (14, 33, "a"), (38, 43, "b")],
         15: [(3, 44, "b")],
-        16: [(6, 41, "b")],
-        17: [(11, 36, "b")],
+        16: [(3, 44, "b")],
+        17: [(6, 41, "b")],
+        18: [(11, 36, "b")],
     },
-), crown=range(0, 14)), "# Meowdy. Slots: a crown, b brim.")
+), crown=range(0, 14)), "# Meowdy. Slots: a creased crown, b brim.")
 
 # The board is flat and wide and does all the work. It has to clear the ear tips
 # outright rather than be clipped around them -- a board with two bites out of it
@@ -529,15 +548,20 @@ emit("headwear/mortarboard.txt", hat(merge(
     # than a slab. It also reaches column 41 so the cord hangs off the board's own
     # corner: at 39 the two were diagonal neighbours, inked() treated them as
     # separate shapes, and the tassel floated free beside the hat.
-    {y: [(9, 41, "a")] for y in range(3, 7)},
-    {y: [(16, 31, "a")] for y in range(7, 15)},
+    #
+    # Riding one row lower and pulled in at the ends. High and very wide, board
+    # and ears together made a squared arch with the crown lost inside it -- the
+    # frame read as the object. Closing the gap and widening the crown puts the
+    # mass back under the board, which is the whole shape of a mortarboard.
+    {y: [(11, 41, "a")] for y in range(4, 8)},
+    {y: [(15, 32, "a")] for y in range(8, 16)},
     # The cord alone is invisible: two pixels wide, so every one of them is an
     # edge and inked() paints the lot the ink colour, right beside the far ear's
     # own ink line. It needs a terminal mass wide enough to keep an interior, and
     # it has to hang clear of column 38, which is as far as the ear reaches.
-    {y: [(39, 41, "c")] for y in range(7, 12)},
-    {y: [(38, 42, "c")] for y in range(12, 16)},
-), crown=range(7, 15)), "# Purrfessor. Slots: a board and crown, c tassel.")
+    {y: [(40, 42, "c")] for y in range(8, 13)},
+    {y: [(39, 43, "c")] for y in range(13, 17)},
+), crown=range(8, 16)), "# Purrfessor. Slots: a board and crown, c tassel.")
 
 # Drooping to the far side, which is where the asymmetry earns its keep: almost
 # everything else worn here is bilateral, and the cat is not.
@@ -606,14 +630,19 @@ def chest(half, ch, y0, y1):
 
 # A V-neck rather than a crew, because a crew neck on this cat is nothing at all:
 # the neckline lands where the chin is, garment() cuts the chin out, and what is
-# left is a flat colour field. The V starts at row 39, the first row clear of the
-# jaw, so the whole notch is visible.
+# left is a flat colour field.
+#
+# Three pixels of band and five rows deep. The first version was two pixels and
+# four rows, which is legible at 8x and gone at 48px -- and a tee that is not
+# telling you it is a tee is the bare chest this set just deleted. Everything
+# starts at row 39, the first row clear of the jaw.
 emit("clothing/tee.txt", garment({
     **COLLAR,
-    39: [(20, 21, "b"), (27, 28, "b")],
-    40: [(21, 22, "b"), (26, 27, "b")],
-    41: [(22, 23, "b"), (25, 26, "b")],
-    42: [(23, 25, "b")],
+    39: [(18, 20, "b"), (28, 30, "b")],
+    40: [(19, 21, "b"), (27, 29, "b")],
+    41: [(20, 22, "b"), (26, 28, "b")],
+    42: [(21, 23, "b"), (25, 27, "b")],
+    43: [(22, 26, "b")],
 }), "# V-neck tee. Slots: a fabric, b neckline.")
 
 # Taller than it is wide, and only two columns per stem. At eleven wide with a
@@ -628,32 +657,41 @@ emit("clothing/hoodie-h.txt", garment({
     45: [(21, 22, "h"), (26, 27, "h")],
 }), "# The reference hoodie. Slots: a body, b collar, h logo.")
 
-# Hyperliquid's actual mark, which is not an H: two rounded lobes joined by a thin
-# waist, the right one taller, both contours pinching inward through the middle.
-# The reference draws an H, but the H is that artist's shorthand -- this is the
-# thing the brand kit ships, and it is the one an owner will recognise.
+# No blob hoodie. The real Hyperliquid mark is two rounded lobes joined at a waist,
+# and I drew it faithfully -- box-filtered off the official path at 13x9, correct
+# waist depth, correct four-column clearance between the lobes. It is a bow tie. It
+# is a bow tie centred on the chest and it is still a bow tie moved onto the near
+# shoulder, because at this size any pinched horizontal shape with two round ends
+# is a bow tie, and accuracy does not outvote that. Redrawing it as an H just made
+# a second copy of the hoodie above, so the blob variant is gone and the reference
+# artist's H -- which the cap also wears -- is the one Hyperliquid mark in the set.
+
+# A scarf, to replace some of what the suit and the jersey took with them when they
+# went. Overalls were the first attempt and failed the way the suit did: braces have
+# to cross the shoulders, the shoulders are rows 36 to 40, and the chin occupies
+# almost all of that, so the straps were clipped away and what shipped was a bib
+# floating on a plain shirt.
 #
-# Box-filtered straight off the official path at 13x9, which is the smallest size
-# where it still reads. Two things carry it and both were wrong when I drew it by
-# eye: the waist is two full-width rows, not a one-pixel bar, and the lobes clear
-# each other by four columns above and below. Narrow the waist or close that gap
-# and it turns into a bow tie.
-# It goes on the left chest, where Hypurr wears it, and that placement is load
-# bearing rather than decorative: a pinched horizontal shape centred under the
-# throat is a bow tie no matter how accurately it is drawn.
-BLOB = {
-    39: [(21, 22, "h")],
-    40: [(20, 23, "h")],
-    41: [(12, 14, "h"), (19, 24, "h")],
-    42: [(12, 15, "h"), (19, 24, "h")],
-    43: [(12, 24, "h")],
-    44: [(12, 24, "h")],
-    45: [(12, 15, "h"), (19, 24, "h")],
-    46: [(13, 14, "h"), (20, 23, "h")],
-    47: [(21, 22, "h")],
-}
-emit("clothing/hoodie-blob.txt", garment({**COLLAR, **BLOB}),
-     "# Hoodie with the Hyperliquid mark. Slots: a body, b collar, h mark.")
+# The lesson is that the only usable chest is rows 39 to 47, and a garment has to
+# put its whole story inside that band. A scarf does: a wrap across the neck, an ink
+# line closing it off, and a tail dropping out of that line down the near side.
+#
+# The wrap stops well short of the shoulder seams. Run edge to edge it was just a
+# horizontal stripe across the torso and the cat was wearing a rugby shirt -- the
+# thing that makes it a scarf is seeing the garment underneath continue past it on
+# both sides. The fringe takes the bright slot so the tail terminates in something
+# rather than running off the bottom of the canvas.
+#
+# The wool is the bright slot rather than the trim slot. Trim sits close enough to
+# the base fabric on a bright colourway that the scarf disappeared and left only
+# its own ink outline behind, which read as a bracket drawn on the cat's chest.
+# The bright slot is the only one guaranteed to part company with both.
+emit("clothing/scarf.txt", garment({
+    **{y: [(11, 11, "o"), (12, 36, "c"), (37, 37, "o")] for y in range(39, 43)},
+    43: [(11, 16, "o"), (17, 22, "c"), (23, 37, "o")],
+    **{y: [(16, 16, "o"), (17, 22, "c"), (23, 23, "o")] for y in range(44, 47)},
+    47: [(16, 16, "o"), (17, 22, "b"), (23, 23, "o")],
+}), "# Scarf. Slots: a top, c wool, b fringe, o edges.")
 
 emit("clothing/hoodie.txt", garment({
     **COLLAR,
@@ -694,19 +732,10 @@ emit("clothing/puffer.txt", garment(merge(
 # The tie is drawn in the ink slot rather than the logo slot. A tie is black on
 # every suit there has ever been, and 'h' is the brand mint on a deep colourway,
 # which put a glowing wedge down the cat's chest.
-#
-# Each lapel carries an ink line down its inner edge. The colour band alone was
-# too close to the jacket on a deep colourway to register, and the notch is the
-# one line that says tailoring -- without it a V of slightly different blue is a
-# sweatshirt with a panel.
-emit("clothing/suit.txt", garment({
-    38: [(15, 19, "b"), (31, 35, "b")],
-    39: [(16, 20, "b"), (21, 21, "o"), (22, 26, "w"), (27, 27, "o"), (28, 32, "b")],
-    40: [(17, 21, "b"), (22, 22, "o"), (23, 25, "w"), (26, 26, "o"), (27, 31, "b")],
-    41: [(18, 22, "b"), (23, 25, "o"), (26, 30, "b")],
-    42: [(23, 25, "o")],
-    43: [(22, 26, "o")],
-    44: [(22, 26, "o")],
-    45: [(22, 26, "o")],
-    46: [(23, 25, "o")],
-}), "# Suit with lapels, shirt and tie. Slots: a jacket, b lapels, w shirt, o notch and tie.")
+# No suit. It went through three rebuilds -- shirt V and tie, then lapels, then
+# lapels with an ink notch -- and never survived the trip down to 48px, where the
+# shirt is one white fleck and the tie is a dark spike that reads as a zip. The
+# chin eats the middle of the torso down to row 38, which leaves eight rows for a
+# collar, a shirt and a tie, and tailoring is the one garment that is nothing but
+# collar, shirt and tie. It is below the detail budget of this sprite. The puffer
+# and the hoodies work here because their whole structure is silhouette-scale.

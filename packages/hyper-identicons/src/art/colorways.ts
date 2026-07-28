@@ -121,8 +121,15 @@ export const COLORWAYS: Record<LayerId, Colorway[]> = {
     // `k` is warm rather than grey. An open mouth on a near-black cat has to be
     // light to be seen at all, and a light *neutral* one stopped reading as a
     // cavity and started reading as a block of teeth.
-    { id: 'chalk', name: 'Chalk', tone: 'bright', weight: 26, colors: { o: '#B9BEC4', k: '#CD9396', p: '#F0C4C9' } },
-    { id: 'rose', name: 'Rose', tone: 'bright', weight: 14, colors: { o: '#E2B3B5', k: '#D59397', p: '#F0C9CC' } },
+    //
+    // It also has to sit between the two things it touches rather than beside
+    // one of them. On a deep cat the mouth line is light, so the interior has to
+    // be darker than the line and lighter than the fur: L 0.66 splits the gap
+    // between fur at 0.50 and line at 0.80. A step behind the line and the open
+    // mouth flattened into a light patch with a pink centre, which reads as a
+    // sticking plaster.
+    { id: 'chalk', name: 'Chalk', tone: 'bright', weight: 26, colors: { o: '#B9BEC4', k: '#BE7E82', p: '#F0C4C9' } },
+    { id: 'rose', name: 'Rose', tone: 'bright', weight: 14, colors: { o: '#E2B3B5', k: '#C67E83', p: '#F0C9CC' } },
   ],
   // One colourway on purpose. A tinted iris is three or four pixels across and the
   // eye reads from its shape, so a coloured one mostly just muddied the face.

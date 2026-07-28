@@ -257,15 +257,16 @@ a character, not a subject — and allowed higher on fur.
 Researched from the Foundation's own brand kit and sticker set rather than from
 secondhand write-ups. The things worth remembering:
 
-- **The Hyperliquid mark is not an H.** It is a "blob": two rounded lobes joined
-  by a pinched waist, the right one taller and wider. The reference art draws an
-  H, but that is the reference artist's shorthand. `BLOB` in `make-traits.py` is
-  box-filtered straight off the official path at 13x9, the smallest size where it
-  survives; below about 6x4 it collapses to a bar. Two details carry it and both
-  were wrong when drawn by eye: the waist is *two full-width rows*, not a
-  one-pixel bar, and the lobes clear each other by four columns. It also has to
-  go on the left chest — a pinched horizontal shape centred under the throat is a
-  bow tie however accurately it is drawn.
+- **The Hyperliquid mark is not an H, and we ship an H anyway.** The real mark is
+  a "blob": two rounded lobes joined by a pinched waist, the right one taller.
+  It was drawn faithfully — box-filtered off the official path at 13x9, waist two
+  full rows deep, four columns of clearance between the lobes — and it read as a
+  bow tie. Centred on the chest, and still a bow tie moved onto the near shoulder,
+  because at this size *any* pinched horizontal shape with two round ends is a bow
+  tie and accuracy does not outvote that. Don't try it a fourth time. The `h` logo
+  on `hoodie-h` and `cap-h` is the reference artist's shorthand and it is the one
+  Hyperliquid mark in the set. It needs to be taller than it is wide with two-column
+  stems; at eleven wide with a centre bar it reads as a dumbbell.
 - **Hypurr is the ecosystem's cat and he already has a costume**: white fur shaded
   in pale *blue* rather than grey, a near-black hoodie, a mint blob on the chest.
   The `hypurr` fur colourway quotes his palette. His shading is `#88D5F0`, which
@@ -345,15 +346,23 @@ Two rules of thumb learned the hard way:
   cord came out solid ink right beside the far ear's own ink line. Anything that
   dangles needs a terminal mass wide enough to keep an interior.
 - **Read a hat's outline as if it were solid black.** That is all you get at 48px.
-  A wide brim whose ends nudge up two rows is a sombrero; the cowboy hat only
-  became a cowboy hat once the tips curled four rows clear of the brim line. By
-  the same logic one thick horizontal band is a striped jumper whatever colour it
+  By that logic one thick horizontal band is a striped jumper whatever colour it
   is — the jersey needed trim above and below the band before it read as sport.
+- **The cowboy hat is told by its crown, not its brim.** A wide brim whose ends
+  nudge up two rows is a sombrero, so the tips were curled four rows clear of the
+  brim line — which is right for a cowboy hat and wrong for this head. The rows
+  the tips rise through are exactly the rows the ears occupy, so the silhouette
+  came out as a bar with two blocks floating either side of it: a headband with
+  antennae, the worst read anything in this set has had. The brim is now one
+  unbroken sweep below the ears, lifting a single row at each end where it is
+  still attached to itself, and the hat is carried by a tall crown with a crease
+  pinched down the top of it, which is the real signature anyway.
 - **Hats are distinguished by silhouette, not by detail.** Beanie, bucket and cap
-  were three versions of one shallow dome plus a horizontal bar. They now differ
-  in outline alone: a rounded dome with a snug cuff, a dome over a brim that
-  widens all the way down, and a shell with a peak swept off one side. A brim that
-  is widest at its middle row is a flat disc, which is the cowboy hat.
+  were three versions of one shallow dome plus a horizontal bar, and no amount of
+  adjusting the bar fixed it — the difference has to be in the *crown*, because at
+  48px the crown is most of what there is. The bucket is now a flat-topped
+  truncated cone, which is what a bucket hat actually is; the beanie keeps the
+  rounded dome; the cap is a shell with a peak swept off one side.
 - **A background cannot be a single figure, and it cannot be intricate either.**
   The cat owns the middle of the canvas; what is left is two margins about eight
   columns wide and a band across the top. The Hyperliquid mark failed here twice
@@ -368,8 +377,13 @@ Two rules of thumb learned the hard way:
   columns 8-17 and 31-38. A brim run through `hat()` comes back with a bite out of
   each side and its tips detached, floating in the background — which happened to
   both the cowboy hat and the bucket hat. Merge the brim in unclipped afterwards,
-  or clear the ears entirely: the mortarboard's board rides above row 6 so the
-  crown can drop into the gap between the ears and barely needs clipping at all.
+  or clear the ears entirely, as the mortarboard's board does so its crown can drop
+  into the gap between the ears.
+
+  Clearing the ears has its own trap, though: hold the board *too* high and too
+  wide and the board and the ears together frame the crown, so what reads is the
+  frame — a squared arch with a hat lost inside it. Bring it down until the gap
+  closes and widen the crown until the mass is back underneath the board.
 - **A strap, a temple or a cord has to leave the head on both sides.** There is no
   object with one end. The eyepatch's strap used to run off the patch as a single
   diagonal and stop in mid-air by the far eye, which reads as a crack rather than
@@ -381,6 +395,13 @@ Two rules of thumb learned the hard way:
   glasses is two matching rings, so a smaller far one does not read as a turned
   head, it reads as a defect. The rule the three-quarter view earns elsewhere —
   near ear big, far ear small — does not extend to manufactured objects.
+- **Spectacles have no lens.** Filling `g` is right for shades and visors and
+  fatal here: on a deep colourway `g` and `o` are both near-black, so the specs
+  came out as two solid squares and the cat looked redacted rather than
+  bespectacled. Leaving the rims empty costs nothing — eyes are painted before
+  accessories, so whichever eyes the wallet drew show through the glass, which is
+  the whole charm of the trait. Clear lenses are also just what spectacles *are*;
+  shades already own the you-cannot-see-through-them read.
 - **Headphone cups cannot go over a cat's ears.** The tips sit at columns 9 and
   37, the outer edge of the skull, which is exactly the line the band's arm has to
   come down. Cups big enough to enclose the ears delete them and with them the
@@ -392,6 +413,25 @@ Two rules of thumb learned the hard way:
   Collars go at 36-38, where there is width either side of the jaw; anything centred
   goes at 40 or lower. Detail below 46 is cropped, which is how the chest logo once
   ended up as a bar along the bottom edge.
+- **A garment has to tell its whole story inside rows 39-47, or it is not a garment
+  this sprite can wear.** That is nine rows, and it killed three of them. The suit
+  went through three rebuilds — shirt V and tie, then lapels, then lapels with an
+  ink notch — and never survived, because tailoring is nothing *but* collar, shirt
+  and tie and there is no room for all three. Overalls died the same way: braces
+  cross the shoulders, the shoulders are rows 36-40, and the chin eats almost all
+  of that, so the straps were clipped away and what shipped was a bib floating on a
+  plain shirt. The ones that work are silhouette-scale — a big logo, horizontal
+  quilting broken by a placket, a V-neck three pixels thick and five rows deep, a
+  scarf whose wrap and tail both fit in the band. **If a garment idea needs the
+  shoulders or needs three stacked details, drop it rather than shrink it.**
+- **A garment's trim slot is not far enough from its fabric to carry a shape.**
+  It is sized to edge a collar, not to be read as an object across the chest: the
+  scarf drawn in trim vanished and left only its own ink outline, which read as a
+  bracket drawn on the cat. Anything that has to be seen as a separate garment
+  layer takes the bright slot.
+- **Hang a tail from the middle of the thing it hangs off.** The scarf's tail
+  dropped from the wrap's outer edge and the two together made one continuous
+  L-bracket. Inset it and the same two shapes read as a scarf.
 
 ## Known gaps
 - **A two-tone keyline was considered and not taken.** Wrapping the cat in an ink

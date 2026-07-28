@@ -1,0 +1,14 @@
+# Scarf. Slots: a top, c wool, b fringe, o edges.
+@ 36 5
+......ooooo...................oooo.....
+....ooaaaaaooo...............oaaaao....
+...oaaaaaaaaaaoo............oaaaaaao...
+..oaaaaaaaaaaaaaooo.......ooaaaaaaao...
+..oaaaoccccccccccccoooooooccccccoaaao..
+.oaaaaocccccccccccccccccccccccccoaaao..
+.oaaaaocccccccccccccccccccccccccoaaao..
+.oaaaaocccccccccccccccccccccccccoaaaao.
+.oaaaaooooooccccccoooooooooooooooaaaao.
+oaaaaaaaaaaoccccccoaaaaaaaaaaaaaaaaaao.
+oaaaaaaaaaaoccccccoaaaaaaaaaaaaaaaaaaao
+oaaaaaaaaaaoccccccoaaaaaaaaaaaaaaaaaaao

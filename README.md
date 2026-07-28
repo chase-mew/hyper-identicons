@@ -103,6 +103,6 @@ Foundation. It is not derived from Hypurr, whose artwork is not CC0: the Foundat
 retains the underlying IP and individual holders hold enforceable licences to their
 specific character. Keep new traits clearly distinct from that collection.
 
-Two traits quote Hyperliquid deliberately and should be understood as fan work: the
-`hoodie-blob` garment carries the Hyperliquid mark, and the `frost` fur uses the pale
+A few traits quote Hyperliquid deliberately and should be understood as fan work: the
+`hoodie-h` garment and `cap-h` headwear carry an H, and the `frost` fur uses the pale
 blue the ecosystem shades its cat with. Neither is a licensed use.

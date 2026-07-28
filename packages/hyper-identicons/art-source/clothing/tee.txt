@@ -4,11 +4,11 @@
 ....oobbbbbooo...............obbbbo....
 ...obbbbbbbbbboo............obbbbbbo...
 ..obbbbbbbbbbbbbooo.......oobbbbbbbo...
-..oaaaaaaaaaaaabbaaoooooooaaaaaaaaaao..
-.oaaaaaaaaaaaaaabbaaabbaaaaaaaaaaaaao..
-.oaaaaaaaaaaaaaaabbabbaaaaaaaaaaaaaao..
-.oaaaaaaaaaaaaaaaabbbaaaaaaaaaaaaaaaao.
-.oaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaao.
+..oaaaaaaaaaabbbaaaoooooooaaaaaaaaaao..
+.oaaaaaaaaaaaabbbaaaaabbbaaaaaaaaaaao..
+.oaaaaaaaaaaaaabbbaaabbbaaaaaaaaaaaao..
+.oaaaaaaaaaaaaaabbbabbbaaaaaaaaaaaaaao.
+.oaaaaaaaaaaaaaaabbbbbaaaaaaaaaaaaaaao.
 oaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaao.
 oaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaao
 oaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaao
