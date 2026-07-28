@@ -1,0 +1,11 @@
+# Tongue out. Slots: o line, p tongue.
+@ 27 24
+..ooo..
+..ooo..
+...o...
+...o...
+o..o..o
+.oo.oo.
+.opppo.
+.opppo.
+..ooo..

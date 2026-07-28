@@ -229,7 +229,9 @@ Anchored on Hyperliquid, whose entire identity sits on OKLab hue ~180:
 | Dolphin | `#DBFBF6` | 0.96 | |
 | Teal | `#539B8C` | 0.64 | |
 | Firefly | `#0F3933` | 0.31 | |
-| Deep | `#072723` | 0.25 | |
+| Deep teal | `#3D8879` | 0.58 | |
+| HL800 | `#072723` | 0.25 | the dark on the HyperCore / HyperEVM badges |
+| Logo dark | `#011916` | 0.20 | the dark the logo itself is drawn in |
 | Ebony | `#04060C` | 0.12 | |
 
 Bounce contributes the violet axis at hue ~285–300: `#6753F1`, `#9E88F8`,
@@ -239,6 +241,46 @@ Bounce contributes the violet axis at hue ~285–300: `#6753F1`, `#9E88F8`,
 Around those, a small spread of warm and cool neighbours so a wallet does not
 always land on teal. Chroma is kept low on backgrounds — they are a field behind
 a character, not a subject — and allowed higher on fur.
+
+## What the audience already recognises
+
+Researched from the Foundation's own brand kit and sticker set rather than from
+secondhand write-ups. The things worth remembering:
+
+- **The Hyperliquid mark is not an H.** It is a "blob": two rounded lobes joined
+  by a pinched waist, the right one taller and wider. The reference art draws an
+  H, but that is the reference artist's shorthand. `BLOB` in `make-traits.py` is
+  box-filtered straight off the official path at 13x9, the smallest size where it
+  survives; below about 6x4 it collapses to a bar. Two details carry it and both
+  were wrong when drawn by eye: the waist is *two full-width rows*, not a
+  one-pixel bar, and the lobes clear each other by four columns. It also has to
+  go on the left chest — a pinched horizontal shape centred under the throat is a
+  bow tie however accurately it is drawn.
+- **Hypurr is the ecosystem's cat and he already has a costume**: white fur shaded
+  in pale *blue* rather than grey, a near-black hoodie, a mint blob on the chest.
+  The `hypurr` fur colourway quotes his palette. His shading is `#88D5F0`, which
+  scores Lc 28 against white — the only detail in the palette below the floor —
+  so ours is one step deeper at `#7AC6E4`.
+- **The Foundation's 41-sticker set is a pre-approved trait list.** Anything it
+  puts on this cat is on-brand by definition: cowboy hat, kabuto, deerstalker,
+  mortarboard, beanie, nightcap, ski goggles, round spectacles. Still unbuilt from
+  that list: kabuto, deerstalker (needs simplifying — a 2px check is noise at this
+  size), ski goggles, ice block, fire halo.
+- **"Alright buddy" is the community's defining gesture** and has no fixed image,
+  so the `buddy` mouth defines rather than copies it: a level line with one corner
+  a single row up. Fond, not sneering — that distinction is the whole trait.
+
+Things to stay away from, and why:
+
+- **The JELLY incident is not a joke to them.** No jellyfish, no JELLY reference.
+- **No real people.** Not Jeff Yan, who is private and has had security problems;
+  not James Wynn, who has live allegations against him.
+- **No third-party marks.** Super Saiyan hair, the Iron Throne, console silhouettes.
+- **TinyHyperCats is already a pixel-art cat collection on Hyperliquid.** Avoid
+  their hats specifically: sombrero, Santa, Nyan rainbow.
+- **Bias clean over grimy.** The Hypurr art direction explicitly rejected Web3's
+  "dark palette and neon fatigue", and this audience's self-image is competent
+  rather than degen.
 
 ## Drawing a trait
 
@@ -255,12 +297,20 @@ them shows immediately:
   reference does, and the ear triangles are most of what makes the silhouette read
   as a cat at 24px. Pass `ears=False` only for things that genuinely go over them.
 - **`garment()`** cuts the jaw out and clips everything to the torso.
+- **`merge()`** unions rows. Spreading two dicts that share a row silently drops
+  one of them, which is how the mortarboard lost its whole crown to its tassel.
 
 Two rules of thumb learned the hard way:
 
 - **Nothing thinner than three rows survives `inked()`.** At two, every pixel is an
   edge and the shape comes out as a bare wire. The headphone band had to be
   thickened for this reason.
+- **Only clip the crown of a hat, never its brim.** The ears occupy rows 6-16,
+  columns 8-17 and 31-38. A brim run through `hat()` comes back with a bite out of
+  each side and its tips detached, floating in the background — which happened to
+  both the cowboy hat and the bucket hat. Merge the brim in unclipped afterwards,
+  or clear the ears entirely: the mortarboard's board rides above row 6 so the
+  crown can drop into the gap between the ears and barely needs clipping at all.
 - **The torso is only rows 32-46, and the chin covers the middle of the first six.**
   Collars go at 36-38, where there is width either side of the jaw; anything centred
   goes at 40 or lower. Detail below 46 is cropped, which is how the chest logo once

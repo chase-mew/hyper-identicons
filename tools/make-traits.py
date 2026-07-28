@@ -160,6 +160,15 @@ def subtract(runs, holes):
     return out
 
 
+def merge(*parts):
+    """Row-wise union. Spreading dicts silently drops a row that appears twice."""
+    out = {}
+    for part in parts:
+        for y, runs in part.items():
+            out.setdefault(y, []).extend(flatten(runs))
+    return out
+
+
 def hat(spans, ears=True):
     """A hat, with the ears cut back out of it if they should sit in front.
 
@@ -262,6 +271,20 @@ mouth("mouth/neutral.txt", {30: [mid(1, "o")], 31: [pair(21, 21, "o")]},
       "# Nose and a level mouth, as on the reference.")
 mouth("mouth/smile.txt", {30: [pair(20, 20, "o"), mid(0, "o")], 31: [pair(21, 22, "o")]},
       "# The classic cat curve.")
+# The community's own gesture: a level mouth with one corner a single row up.
+# Fond rather than sneering, which is the whole point of it, and the entire trait
+# is that one pixel of asymmetry.
+mouth("mouth/buddy.txt", {30: [(25, 26, "o")], 31: [(20, 25, "o")]},
+      "# Unimpressed but friendly.")
+
+mouth("mouth/blep.txt", {
+    30: [pair(20, 20, "o"), mid(0, "o")],
+    31: [pair(21, 22, "o")],
+    32: [(21, 21, "o"), (22, 24, "p"), (25, 25, "o")],
+    33: [(21, 21, "o"), (22, 24, "p"), (25, 25, "o")],
+    34: [(22, 24, "o")],
+}, "# Tongue out. Slots: o line, p tongue.")
+
 mouth("mouth/open.txt", {
     30: [mid(2, "o")],
     31: [pair(21, 21, "o"), mid(1, "k")],
@@ -358,20 +381,22 @@ emit("headwear/beanie.txt", inked(hat({
     17: [(11, 37, "b")],
 })), "# Knit beanie, ears through the cuff. Slots: a crown, b cuff.")
 
-emit("headwear/bucket.txt", inked(hat({
-    6: [(19, 28, "a")],
-    7: [(17, 30, "a")],
-    8: [(16, 31, "a")],
-    9: [(15, 32, "a")],
-    10: [(14, 33, "a")],
-    11: [(14, 34, "a")],
-    12: [(13, 34, "a")],
-    13: [(13, 35, "a")],
-    14: [(13, 35, "a")],
+emit("headwear/bucket.txt", inked({
+    **hat({
+        6: [(19, 28, "a")],
+        7: [(17, 30, "a")],
+        8: [(16, 31, "a")],
+        9: [(15, 32, "a")],
+        10: [(14, 33, "a")],
+        11: [(14, 34, "a")],
+        12: [(13, 34, "a")],
+        13: [(13, 35, "a")],
+        14: [(13, 35, "a")],
+    }),
     15: [(9, 39, "b")],
     16: [(8, 40, "b")],
     17: [(10, 38, "b")],
-})), "# Bucket hat. Slots: a crown, b brim.")
+}), "# Bucket hat. Slots: a crown, b brim.")
 
 # Two rows of hole, not one. At one row the ring closed up under its own outline
 # and the halo read as a pair of stacked dashes.
@@ -385,6 +410,64 @@ emit("headwear/halo.txt", inked({
     2: [(18, 19, "a"), (28, 29, "a")],
     3: [(20, 27, "a")],
 }), "# Floating halo. Slots: a ring.")
+
+# The Foundation's own sticker set puts a cowboy hat, a mortarboard and a nightcap
+# on this cat, so all three are on-brand by definition rather than by guesswork.
+#
+# Only the crown is cut against the ears. A brim is the whole point of a wide hat
+# and it has to be one unbroken sweep: clipped, it lost a bite out of each side and
+# the tips came away as two dark stubs floating in the background.
+emit("headwear/cowboy.txt", inked(merge(
+    # A tall crown over a flat brim is a bowler. What separates the two at this
+    # size is only the ratio -- crown short, brim very wide, tips turned up two
+    # rows clear of the brim line.
+    hat({
+        9: [(18, 29, "a")],
+        10: [(17, 30, "a")],
+        11: [(16, 31, "a")],
+        12: [(16, 31, "a")],
+        13: [(15, 32, "a")],
+    }),
+    {
+        13: [(4, 7, "b"), (40, 43, "b")],
+        14: [(4, 8, "b"), (14, 33, "a"), (39, 43, "b")],
+        15: [(4, 43, "b")],
+        16: [(6, 41, "b")],
+        17: [(10, 37, "b")],
+    },
+)), "# Meowdy. Slots: a crown, b brim.")
+
+# The board is flat and wide and does all the work. It has to clear the ear tips
+# outright rather than be clipped around them -- a board with two bites out of it
+# is not a board -- so it rides above row 6 and the crown drops into the gap
+# between the ears, where it needs almost no clipping at all. The tassel hangs
+# past column 38, the furthest the far ear reaches.
+emit("headwear/mortarboard.txt", inked(merge(
+    {y: [(9, 39, "a")] for y in range(3, 6)},
+    hat({y: [(16, 31, "a")] for y in range(6, 14)} | {6: [(17, 30, "a")]}),
+    {y: [(39, 40, "c")] for y in range(6, 11)},
+    {11: [(38, 41, "c")], 12: [(38, 41, "c")]},
+)), "# Purrfessor. Slots: a board and crown, c tassel.")
+
+# Drooping to the far side, which is where the asymmetry earns its keep: almost
+# everything else worn here is bilateral, and the cat is not.
+emit("headwear/nightcap.txt", inked(hat({
+    3: [(32, 36, "c")],
+    4: [(31, 37, "c")],
+    5: [(31, 37, "c")],
+    6: [(28, 36, "a")],
+    7: [(25, 33, "a")],
+    8: [(22, 32, "a")],
+    9: [(19, 31, "a")],
+    10: [(17, 31, "a")],
+    11: [(15, 31, "a")],
+    12: [(13, 32, "a")],
+    13: [(12, 33, "a")],
+    14: [(12, 36, "b")],
+    15: [(11, 37, "b")],
+    16: [(11, 37, "b")],
+    17: [(11, 37, "b")],
+})), "# Nightcap with a pom. Slots: a cone, b cuff, c pom.")
 
 # The one thing that really does go over the ears, so it opts out of the clip.
 # Cups sit on the ears rather than the sides of the skull: a cat's ears are where
@@ -435,6 +518,33 @@ emit("clothing/hoodie-h.txt", garment({
     44: [(21, 22, "h"), (26, 27, "h")],
     45: [(21, 22, "h"), (26, 27, "h")],
 }), "# The reference hoodie. Slots: a body, b collar, h logo.")
+
+# Hyperliquid's actual mark, which is not an H: two rounded lobes joined by a thin
+# waist, the right one taller, both contours pinching inward through the middle.
+# The reference draws an H, but the H is that artist's shorthand -- this is the
+# thing the brand kit ships, and it is the one an owner will recognise.
+#
+# Box-filtered straight off the official path at 13x9, which is the smallest size
+# where it still reads. Two things carry it and both were wrong when I drew it by
+# eye: the waist is two full-width rows, not a one-pixel bar, and the lobes clear
+# each other by four columns above and below. Narrow the waist or close that gap
+# and it turns into a bow tie.
+# It goes on the left chest, where Hypurr wears it, and that placement is load
+# bearing rather than decorative: a pinched horizontal shape centred under the
+# throat is a bow tie no matter how accurately it is drawn.
+BLOB = {
+    39: [(21, 22, "h")],
+    40: [(20, 23, "h")],
+    41: [(12, 14, "h"), (19, 24, "h")],
+    42: [(12, 15, "h"), (19, 24, "h")],
+    43: [(12, 24, "h")],
+    44: [(12, 24, "h")],
+    45: [(12, 15, "h"), (19, 24, "h")],
+    46: [(13, 14, "h"), (20, 23, "h")],
+    47: [(21, 22, "h")],
+}
+emit("clothing/hoodie-blob.txt", garment({**COLLAR, **BLOB}),
+     "# Hoodie with the Hyperliquid mark. Slots: a body, b collar, h mark.")
 
 emit("clothing/hoodie.txt", garment({
     **COLLAR,

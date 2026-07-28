@@ -48,6 +48,11 @@ export const COLORWAYS: Record<LayerId, Colorway[]> = {
   // Deep fur stops at L 0.34 rather than going to true black, which is what leaves
   // the whiskers and the ear anywhere to go.
   body: [
+    // White shaded in pale *blue* rather than grey, which is how the ecosystem's own
+    // cat is drawn and the thing every imitation of it gets wrong. One step deeper
+    // than the #88D5F0 it is quoting, which scores Lc 28 against white and would
+    // otherwise be the only detail in the palette below the floor.
+    { id: 'frost', name: 'Frost', tone: 'bright', weight: 14, colors: { o: '#02231E', f: '#FFFFFF', s: '#7AC6E4', p: '#F8B1CC' } },
     { id: 'snow', name: 'Snow', tone: 'bright', weight: 16, colors: { o: '#222222', f: '#F5F5F5', s: '#A8A8A8', p: '#303030' } },
     { id: 'ginger', name: 'Ginger', tone: 'bright', weight: 12, colors: { o: '#1B0B02', f: '#F7A062', s: '#8A664D', p: '#2B1305' } },
     { id: 'cream', name: 'Cream', tone: 'bright', weight: 10, colors: { o: '#1A1304', f: '#EFE0C0', s: '#A19479', p: '#2A2009' } },
@@ -92,9 +97,9 @@ export const COLORWAYS: Record<LayerId, Colorway[]> = {
   // and on a bright cat the outline reads where the sclera cannot. The mouth has no
   // such second chance, which is why a dark mouth on a dark cat simply vanished.
   mouth: [
-    { id: 'coal', name: 'Coal', tone: 'deep', weight: 30, colors: { o: '#141414', k: '#3A2126' } },
-    { id: 'chalk', name: 'Chalk', tone: 'bright', weight: 26, colors: { o: '#A8ABB1', k: '#7B808A' } },
-    { id: 'rose', name: 'Rose', tone: 'bright', weight: 14, colors: { o: '#CD9392', k: '#B35D5E' } },
+    { id: 'coal', name: 'Coal', tone: 'deep', weight: 30, colors: { o: '#141414', k: '#3A2126', p: '#C4626F' } },
+    { id: 'chalk', name: 'Chalk', tone: 'bright', weight: 26, colors: { o: '#A8ABB1', k: '#7B808A', p: '#E39AA6' } },
+    { id: 'rose', name: 'Rose', tone: 'bright', weight: 14, colors: { o: '#CD9392', k: '#B35D5E', p: '#E8A7A6' } },
   ],
   // One colourway on purpose. A tinted iris is three or four pixels across and the
   // eye reads from its shape, so a coloured one mostly just muddied the face.

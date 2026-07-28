@@ -98,6 +98,11 @@ magenta pixel, and by then the output is frozen.
 
 Code MIT. Art CC0 — copy it, fork it, ship it, no attribution required.
 
-The art is original. It is not derived from Hypurr, whose artwork is not CC0: the Hyper
-Foundation retains the underlying IP and individual holders hold enforceable licences
-to their specific character. Keep new traits clearly distinct from that collection.
+The art is original and this project is unofficial and unaffiliated with the Hyper
+Foundation. It is not derived from Hypurr, whose artwork is not CC0: the Foundation
+retains the underlying IP and individual holders hold enforceable licences to their
+specific character. Keep new traits clearly distinct from that collection.
+
+Two traits quote Hyperliquid deliberately and should be understood as fan work: the
+`hoodie-blob` garment carries the Hyperliquid mark, and the `frost` fur uses the pale
+blue the ecosystem shades its cat with. Neither is a licensed use.

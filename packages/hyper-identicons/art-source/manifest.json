@@ -12,18 +12,21 @@
     ],
     "body": [{ "id": "base", "name": "Purrbit", "weight": 1 }],
     "clothing": [
-      { "id": "hoodie-h", "name": "Hyper Hoodie", "weight": 20 },
-      { "id": "hoodie", "name": "Hoodie", "weight": 20 },
-      { "id": "tee", "name": "Tee", "weight": 18 },
-      { "id": "puffer", "name": "Puffer", "weight": 14 },
-      { "id": "jersey", "name": "Jersey", "weight": 10 },
-      { "id": "suit", "name": "Suit", "weight": 8 },
-      { "id": "none", "name": "Bare", "weight": 6 }
+      { "id": "hoodie-blob", "name": "Blob Hoodie", "weight": 22 },
+      { "id": "hoodie-h", "name": "Hyper Hoodie", "weight": 18 },
+      { "id": "hoodie", "name": "Hoodie", "weight": 16 },
+      { "id": "tee", "name": "Tee", "weight": 16 },
+      { "id": "puffer", "name": "Puffer", "weight": 12 },
+      { "id": "jersey", "name": "Jersey", "weight": 9 },
+      { "id": "suit", "name": "Suit", "weight": 7 },
+      { "id": "none", "name": "Bare", "weight": 5 }
     ],
     "mouth": [
-      { "id": "neutral", "name": "Neutral", "weight": 30 },
       { "id": "smile", "name": "Smile", "weight": 26 },
-      { "id": "open", "name": "Open", "weight": 12 }
+      { "id": "neutral", "name": "Neutral", "weight": 24 },
+      { "id": "buddy", "name": "Alright Buddy", "weight": 16 },
+      { "id": "blep", "name": "Blep", "weight": 12 },
+      { "id": "open", "name": "Open", "weight": 10 }
     ],
     "eyes": [
       { "id": "round", "name": "Round", "weight": 34 },
@@ -44,6 +47,9 @@
       { "id": "beanie", "name": "Beanie", "weight": 18 },
       { "id": "bucket", "name": "Bucket", "weight": 12 },
       { "id": "headphones", "name": "Headphones", "weight": 10 },
+      { "id": "cowboy", "name": "Meowdy", "weight": 9 },
+      { "id": "mortarboard", "name": "Purrfessor", "weight": 7 },
+      { "id": "nightcap", "name": "Nightcap", "weight": 5 },
       { "id": "halo", "name": "Halo", "weight": 3 }
     ]
   }
