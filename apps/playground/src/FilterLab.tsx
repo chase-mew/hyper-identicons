@@ -21,207 +21,192 @@ type Overlay = {
   /** Any CSS background — flat colour, gradient, or a repeating one for texture. */
   background: string;
   blend: CSSProperties['mixBlendMode'];
-  opacity?: number;
+  opacity: number;
 };
-
-type Treatment = {
-  id: string;
-  name: string;
-  note: string;
-  /** A CSS filter string, or a url(#id) pointing at one of the SVG filters below. */
-  filter?: string;
-  overlays?: Overlay[];
-  /**
-   * A second copy of the same identicon laid over the first under its own filter.
-   * The only way to get a partial version of a filter that has no strength dial:
-   * a duotone is all or nothing, but a duotone at 55% opacity over the untouched
-   * cat keeps some of the original hue underneath it.
-   */
-  ghost?: { filter: string; opacity: number };
-};
-
-const MINT = '#8AF0D2';
-const DEEP = '#0B1F2A';
-
-const SCANLINE = 'repeating-linear-gradient(0deg, rgba(0,0,0,.42) 0 1px, transparent 1px 3px)';
-const VIGNETTE = 'radial-gradient(ellipse at 50% 45%, transparent 38%, rgba(0,0,0,.55) 100%)';
 
 /**
- * Ordered roughly gentlest first, so scanning down the page goes from "you have to
- * look twice" to "obviously a treatment". Names are arbitrary handles for talking
- * about them; the numbers are what matter.
+ * One effect at some strength. Kept as a list of filter functions rather than a
+ * finished string so two effects can be concatenated without either knowing about
+ * the other.
+ */
+type Effect = { filters?: string[]; overlays?: Overlay[] };
+
+const MINT = '#8AF0D2';
+const VIGNETTE = 'radial-gradient(ellipse at 50% 45%, transparent 38%, rgba(0,0,0,.55) 100%)';
+
+const round = (value: number) => Number(value.toFixed(3));
+
+/**
+ * The building blocks, each written so that `k = 1` reproduces exactly what was on
+ * screen when these were picked, and `k = 0` is a no-op. Everything interpolates
+ * from the identity value rather than from zero — half of `saturate(0.6)` is 0.8,
+ * not 0.3 — which is the only reading of "half strength" that composes.
+ *
+ * Bloom and chromatic aberration are the exceptions: they are SVG filters and have
+ * no numeric dial from CSS, so each ships a second, gentler definition and the
+ * dial picks between them.
+ *
+ * Deliberately not annotated `Record<string, ...>`: that widens the keys and the
+ * strict index checks then treat every `FX.mint` as possibly undefined.
+ */
+const FX = {
+  mint: (k = 1): Effect => ({ overlays: [{ background: MINT, blend: 'soft-light', opacity: round(0.55 * k) }] }),
+
+  muted: (k = 1): Effect => ({ filters: [`saturate(${round(1 - 0.4 * k)})`] }),
+
+  faded: (k = 1): Effect => ({
+    filters: [`contrast(${round(1 - 0.18 * k)}) brightness(${round(1 + 0.1 * k)}) saturate(${round(1 - 0.22 * k)})`],
+    overlays: [{ background: '#FFCC99', blend: 'soft-light', opacity: round(0.35 * k) }],
+  }),
+
+  cold: (k = 1): Effect => ({
+    filters: [`saturate(${round(1 - 0.45 * k)}) hue-rotate(${round(-12 * k)}deg) brightness(${round(1 - 0.02 * k)})`],
+    overlays: [{ background: '#4E7FA8', blend: 'soft-light', opacity: round(0.5 * k) }],
+  }),
+
+  sunset: (k = 1): Effect => ({
+    overlays: [
+      { background: 'linear-gradient(180deg, #FF9E5E 0%, transparent 55%)', blend: 'soft-light', opacity: round(0.75 * k) },
+      { background: 'linear-gradient(0deg, #4B4FA8 0%, transparent 55%)', blend: 'soft-light', opacity: round(0.7 * k) },
+    ],
+  }),
+
+  vignette: (k = 1): Effect => ({ overlays: [{ background: VIGNETTE, blend: 'multiply', opacity: round(k) }] }),
+
+  bleach: (k = 1): Effect => ({
+    filters: [`contrast(${round(1 + 0.3 * k)}) saturate(${round(1 - 0.3 * k)}) brightness(${round(1 + 0.06 * k)})`],
+    overlays: [{ background: '#F2F7F5', blend: 'soft-light', opacity: round(0.5 * k) }],
+  }),
+
+  bloom: (k = 1): Effect => ({ filters: [k > 0.7 ? 'url(#fx-bloom)' : 'url(#fx-bloom-soft)'] }),
+
+  chroma: (k = 1): Effect => ({ filters: [k > 0.7 ? 'url(#fx-chroma)' : 'url(#fx-chroma-soft)'] }),
+};
+
+function combine(...effects: Effect[]): Effect {
+  return {
+    filters: effects.flatMap((effect) => effect.filters ?? []),
+    overlays: effects.flatMap((effect) => effect.overlays ?? []),
+  };
+}
+
+type Treatment = { id: string; name: string; note: string; effect: Effect };
+
+/**
+ * The ten that survived the first pass, keeping their original numbers so they can
+ * still be named in conversation, followed by combinations.
  */
 const TREATMENTS: Treatment[] = [
-  { id: 'F01', name: 'Untouched', note: 'baseline, no treatment' },
+  { id: 'F01', name: 'Untouched', note: 'baseline, no treatment', effect: {} },
+  { id: 'F02', name: 'Mint Wash', note: 'brand teal, soft-light — the miniature painter’s wash', effect: FX.mint() },
+  { id: 'F04', name: 'Muted', note: 'desaturate only, no colour added', effect: FX.muted() },
+  { id: 'F06', name: 'Faded Film', note: 'lifted blacks, low contrast, warm cast', effect: FX.faded() },
+  { id: 'F08', name: 'Cold Steel', note: 'desaturated and pushed blue', effect: FX.cold() },
+  { id: 'F09', name: 'Sunset', note: 'warm top, cool bottom — a split tone', effect: FX.sunset() },
+  { id: 'F12', name: 'Vignette', note: 'no colour shift, just darkened corners', effect: FX.vignette() },
+  { id: 'F16', name: 'Chromatic Soft', note: 'channels split a pixel apart, then bloomed together', effect: combine(FX.chroma(), FX.bloom()) },
+  { id: 'F17', name: 'Bloom', note: 'light bleeds out of the bright areas', effect: FX.bloom() },
+  { id: 'F25', name: 'Bleach', note: 'desaturated highlights, colour kept in the darks', effect: FX.bleach() },
 
+  // Combinations. The pattern that works is one colour treatment plus one optical
+  // one: they act on different things, so neither has to be dialled back much and
+  // the result still reads as a single pass. Two colour treatments stacked at full
+  // strength just fight, so those are the ones run at half.
   {
-    id: 'F02',
-    name: 'Mint Wash',
-    note: 'brand teal, soft-light — the miniature painter’s wash',
-    overlays: [{ background: MINT, blend: 'soft-light', opacity: 0.55 }],
+    id: 'C01',
+    name: 'Mint + Vignette',
+    note: 'the wash, plus corners pulled down to frame each cat',
+    effect: combine(FX.mint(), FX.vignette(0.7)),
   },
   {
-    id: 'F03',
-    name: 'Deep Wash',
-    note: 'navy multiply, pulls everything down and together',
-    overlays: [{ background: DEEP, blend: 'multiply', opacity: 0.3 }],
+    id: 'C02',
+    name: 'Mint + Bloom',
+    note: 'wash and glow — softens the hard pixel edges',
+    effect: combine(FX.mint(), FX.bloom()),
   },
   {
-    id: 'F04',
-    name: 'Muted',
-    note: 'desaturate only, no colour added',
-    filter: 'saturate(0.6)',
+    id: 'C03',
+    name: 'Muted + Mint',
+    note: 'half of each: drop the saturation first, then tint what is left',
+    effect: combine(FX.muted(0.5), FX.mint(0.5)),
   },
   {
-    id: 'F05',
-    name: 'Rich',
-    note: 'the opposite — push saturation and contrast up',
-    filter: 'saturate(1.55) contrast(1.08)',
+    id: 'C04',
+    name: 'Muted + Vignette',
+    note: 'no hue shift at all, just less colour and darker edges',
+    effect: combine(FX.muted(), FX.vignette(0.7)),
   },
   {
-    id: 'F06',
-    name: 'Faded Film',
-    note: 'lifted blacks, low contrast, warm cast',
-    filter: 'contrast(0.82) brightness(1.1) saturate(0.78)',
-    overlays: [{ background: '#FFCC99', blend: 'soft-light', opacity: 0.35 }],
+    id: 'C05',
+    name: 'Faded + Vignette',
+    note: 'the warm low-contrast pass with its corners brought back down',
+    effect: combine(FX.faded(), FX.vignette(0.65)),
   },
   {
-    id: 'F07',
-    name: 'Sepia',
-    note: 'the blunt instrument, for reference',
-    filter: 'sepia(0.6) saturate(1.2)',
+    id: 'C06',
+    name: 'Cold + Bloom',
+    note: 'blue cast with the highlights blown out',
+    effect: combine(FX.cold(), FX.bloom()),
   },
   {
-    id: 'F08',
-    name: 'Cold Steel',
-    note: 'desaturated and pushed blue',
-    filter: 'saturate(0.55) hue-rotate(-12deg) brightness(0.98)',
-    overlays: [{ background: '#4E7FA8', blend: 'soft-light', opacity: 0.5 }],
+    id: 'C07',
+    name: 'Sunset + Vignette',
+    note: 'the split tone, contained',
+    effect: combine(FX.sunset(), FX.vignette(0.7)),
   },
   {
-    id: 'F09',
-    name: 'Sunset',
-    note: 'warm top, cool bottom — a split tone',
-    overlays: [
-      { background: 'linear-gradient(180deg, #FF9E5E 0%, transparent 55%)', blend: 'soft-light', opacity: 0.75 },
-      { background: 'linear-gradient(0deg, #4B4FA8 0%, transparent 55%)', blend: 'soft-light', opacity: 0.7 },
-    ],
+    id: 'C08',
+    name: 'Bleach + Chromatic',
+    note: 'high contrast with the channels just off register',
+    effect: combine(FX.bleach(), FX.chroma(0.5)),
   },
   {
-    id: 'F10',
-    name: 'Night',
-    note: 'heavy indigo multiply with the contrast held up',
-    filter: 'contrast(1.15)',
-    overlays: [{ background: '#1B1B4A', blend: 'multiply', opacity: 0.42 }],
+    id: 'C09',
+    name: 'Mint + Chromatic + Bloom',
+    note: 'all three at part strength — F16 with the wash underneath',
+    effect: combine(FX.mint(0.6), FX.chroma(0.5), FX.bloom(0.5)),
   },
   {
-    id: 'F11',
-    name: 'Frost',
-    note: 'pale blue screen — lifts rather than darkens',
-    overlays: [{ background: '#9FD8F0', blend: 'screen', opacity: 0.22 }],
+    id: 'C10',
+    name: 'Muted + Faded',
+    note: 'half of two tone curves, no optical effect at all',
+    effect: combine(FX.muted(0.5), FX.faded(0.5)),
   },
   {
-    id: 'F12',
-    name: 'Vignette',
-    note: 'no colour shift, just darkened corners',
-    overlays: [{ background: VIGNETTE, blend: 'multiply', opacity: 1 }],
+    id: 'C11',
+    name: 'Cold + Mint',
+    note: 'half of each — two washes pulling the same direction',
+    effect: combine(FX.cold(0.5), FX.mint(0.5)),
   },
   {
-    id: 'F13',
-    name: 'Scanlines',
-    note: 'one dark row in three',
-    overlays: [{ background: SCANLINE, blend: 'multiply', opacity: 0.7 }],
+    id: 'C12',
+    name: 'Sunset + Bloom',
+    note: 'gradient tone with the glow on top',
+    effect: combine(FX.sunset(), FX.bloom()),
   },
   {
-    id: 'F14',
-    name: 'CRT',
-    note: 'scanlines, bloom and a vignette together',
-    filter: 'url(#fx-bloom) saturate(1.2)',
-    overlays: [
-      { background: SCANLINE, blend: 'multiply', opacity: 0.6 },
-      { background: VIGNETTE, blend: 'multiply', opacity: 0.8 },
-    ],
+    id: 'C13',
+    name: 'Bleach + Mint',
+    note: 'half of each: bleach the hues out, put one back',
+    effect: combine(FX.bleach(0.5), FX.mint(0.5)),
   },
   {
-    id: 'F15',
-    name: 'Chromatic',
-    note: 'red and blue channels split a pixel apart',
-    filter: 'url(#fx-chroma)',
+    id: 'C14',
+    name: 'Muted + Chromatic + Vignette',
+    note: 'thirds of three — the closest to a screen this gets',
+    effect: combine(FX.muted(0.5), FX.chroma(0.5), FX.vignette(0.5)),
   },
   {
-    id: 'F16',
-    name: 'Chromatic Soft',
-    note: 'the same split, plus bloom to melt it together',
-    filter: 'url(#fx-chroma) url(#fx-bloom)',
+    id: 'C15',
+    name: 'Faded + Bloom',
+    note: 'the warm pass with light spilling out of it',
+    effect: combine(FX.faded(), FX.bloom()),
   },
   {
-    id: 'F17',
-    name: 'Bloom',
-    note: 'light bleeds out of the bright areas',
-    filter: 'url(#fx-bloom)',
-  },
-  {
-    id: 'F18',
-    name: 'Grain',
-    note: 'film noise laid over the flat colour',
-    filter: 'url(#fx-grain)',
-  },
-  {
-    id: 'F19',
-    name: 'Posterize',
-    note: 'every channel crushed to four steps',
-    filter: 'url(#fx-posterize)',
-  },
-  {
-    id: 'F20',
-    name: 'Duotone Mint',
-    note: 'the strongest unifier: two colours, nothing else',
-    filter: 'url(#fx-duotone-mint)',
-  },
-  {
-    id: 'F21',
-    name: 'Duotone Warm',
-    note: 'same idea, plum to amber',
-    filter: 'url(#fx-duotone-warm)',
-  },
-  {
-    id: 'F22',
-    name: 'Tritone',
-    note: 'three stops instead of two, so midtones survive',
-    filter: 'url(#fx-tritone)',
-  },
-  {
-    id: 'F23',
-    name: 'Half Duotone',
-    note: 'duotone at 55% over the untouched cat, so some hue survives',
-    ghost: { filter: 'url(#fx-duotone-mint)', opacity: 0.55 },
-  },
-  {
-    id: 'F24',
-    name: 'Half Tritone',
-    note: 'the same compromise over the three-stop map',
-    ghost: { filter: 'url(#fx-tritone)', opacity: 0.6 },
-  },
-  {
-    id: 'F25',
-    name: 'Bleach',
-    note: 'desaturated highlights, colour kept in the darks',
-    filter: 'contrast(1.3) saturate(0.7) brightness(1.06)',
-    overlays: [{ background: '#F2F7F5', blend: 'soft-light', opacity: 0.5 }],
-  },
-  {
-    id: 'F26',
-    name: 'Mint Wash Heavy',
-    note: 'F02 pushed as far as it goes before the hues stop reading',
-    filter: 'saturate(0.75)',
-    overlays: [{ background: MINT, blend: 'soft-light', opacity: 1 }],
-  },
-  {
-    id: 'F27',
-    name: 'Ink Wash',
-    note: 'grey first, then a single teal tint over the top',
-    filter: 'grayscale(1) contrast(1.05)',
-    overlays: [{ background: '#2FA98C', blend: 'multiply', opacity: 0.72 }],
+    id: 'C16',
+    name: 'Everything Quiet',
+    note: 'a little of five: mute, warm, wash, glow, vignette',
+    effect: combine(FX.muted(0.35), FX.faded(0.35), FX.mint(0.35), FX.bloom(0.5), FX.vignette(0.4)),
   },
 ];
 
@@ -236,7 +221,7 @@ function randomAddress(): string {
  * `color-interpolation-filters="sRGB"` on every one of them is not optional. SVG
  * filters work in linear RGB by default, which is correct for light and wrong for
  * anything trying to match a designer's expectation of a colour ramp — left alone
- * the duotones come out washed and the posterize steps land in the wrong places.
+ * the bloom blows out and the channel split comes back the wrong brightness.
  */
 function FilterDefs() {
   return (
@@ -246,24 +231,19 @@ function FilterDefs() {
         <filter id="fx-chroma" x="-10%" y="-10%" width="120%" height="120%" colorInterpolationFilters="sRGB">
           <feOffset in="SourceGraphic" dx="-1.5" dy="0" result="ro" />
           <feOffset in="SourceGraphic" dx="1.5" dy="0" result="bo" />
-          <feColorMatrix
-            in="ro"
-            type="matrix"
-            values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0"
-            result="rc"
-          />
-          <feColorMatrix
-            in="SourceGraphic"
-            type="matrix"
-            values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0"
-            result="gc"
-          />
-          <feColorMatrix
-            in="bo"
-            type="matrix"
-            values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0"
-            result="bc"
-          />
+          <feColorMatrix in="ro" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="rc" />
+          <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="gc" />
+          <feColorMatrix in="bo" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="bc" />
+          <feBlend in="rc" in2="gc" mode="screen" result="rg" />
+          <feBlend in="rg" in2="bc" mode="screen" />
+        </filter>
+
+        <filter id="fx-chroma-soft" x="-10%" y="-10%" width="120%" height="120%" colorInterpolationFilters="sRGB">
+          <feOffset in="SourceGraphic" dx="-0.7" dy="0" result="ro" />
+          <feOffset in="SourceGraphic" dx="0.7" dy="0" result="bo" />
+          <feColorMatrix in="ro" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="rc" />
+          <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="gc" />
+          <feColorMatrix in="bo" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="bc" />
           <feBlend in="rc" in2="gc" mode="screen" result="rg" />
           <feBlend in="rg" in2="bc" mode="screen" />
         </filter>
@@ -273,61 +253,9 @@ function FilterDefs() {
           <feBlend in="SourceGraphic" in2="blur" mode="screen" />
         </filter>
 
-        {/* Turbulence desaturated to grey, then added onto the source. */}
-        <filter id="fx-grain" colorInterpolationFilters="sRGB">
-          <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" seed="7" result="noise" />
-          <feColorMatrix in="noise" type="saturate" values="0" result="mono" />
-          <feComponentTransfer in="mono" result="soft">
-            <feFuncA type="linear" slope="0.55" intercept="0" />
-          </feComponentTransfer>
-          <feComposite in="soft" in2="SourceGraphic" operator="in" result="clipped" />
-          <feBlend in="SourceGraphic" in2="clipped" mode="overlay" />
-        </filter>
-
-        <filter id="fx-posterize" colorInterpolationFilters="sRGB">
-          <feComponentTransfer>
-            <feFuncR type="discrete" tableValues="0 0.33 0.66 1" />
-            <feFuncG type="discrete" tableValues="0 0.33 0.66 1" />
-            <feFuncB type="discrete" tableValues="0 0.33 0.66 1" />
-          </feComponentTransfer>
-        </filter>
-
-        {/* Grey first, then remap the ramp onto two endpoints. */}
-        <filter id="fx-duotone-mint" colorInterpolationFilters="sRGB">
-          <feColorMatrix
-            type="matrix"
-            values=".33 .34 .33 0 0  .33 .34 .33 0 0  .33 .34 .33 0 0  0 0 0 1 0"
-          />
-          <feComponentTransfer>
-            <feFuncR type="table" tableValues="0.04 0.54" />
-            <feFuncG type="table" tableValues="0.12 0.94" />
-            <feFuncB type="table" tableValues="0.16 0.82" />
-          </feComponentTransfer>
-        </filter>
-
-        <filter id="fx-duotone-warm" colorInterpolationFilters="sRGB">
-          <feColorMatrix
-            type="matrix"
-            values=".33 .34 .33 0 0  .33 .34 .33 0 0  .33 .34 .33 0 0  0 0 0 1 0"
-          />
-          <feComponentTransfer>
-            <feFuncR type="table" tableValues="0.16 1.0" />
-            <feFuncG type="table" tableValues="0.06 0.78" />
-            <feFuncB type="table" tableValues="0.22 0.42" />
-          </feComponentTransfer>
-        </filter>
-
-        {/* Three stops, so the middle of the ramp keeps a hue of its own. */}
-        <filter id="fx-tritone" colorInterpolationFilters="sRGB">
-          <feColorMatrix
-            type="matrix"
-            values=".33 .34 .33 0 0  .33 .34 .33 0 0  .33 .34 .33 0 0  0 0 0 1 0"
-          />
-          <feComponentTransfer>
-            <feFuncR type="table" tableValues="0.06 0.36 0.98" />
-            <feFuncG type="table" tableValues="0.10 0.62 0.96" />
-            <feFuncB type="table" tableValues="0.22 0.62 0.80" />
-          </feComponentTransfer>
+        <filter id="fx-bloom-soft" x="-15%" y="-15%" width="130%" height="130%" colorInterpolationFilters="sRGB">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="1.1" result="blur" />
+          <feBlend in="SourceGraphic" in2="blur" mode="screen" />
         </filter>
       </defs>
     </svg>
@@ -336,21 +264,12 @@ function FilterDefs() {
 
 const CELL = 76;
 
-function Cat({ uri, treatment }: { uri: string; treatment: Treatment }) {
+function Cat({ uri, effect }: { uri: string; effect: Effect }) {
+  const filter = effect.filters?.length ? effect.filters.join(' ') : undefined;
   return (
-    <span className="fx-cat" style={{ filter: treatment.filter, width: CELL, height: CELL }}>
+    <span className="fx-cat" style={{ filter, width: CELL, height: CELL }}>
       <img src={uri} width={CELL} height={CELL} alt="" />
-      {treatment.ghost && (
-        <img
-          className="fx-ghost"
-          src={uri}
-          width={CELL}
-          height={CELL}
-          alt=""
-          style={{ filter: treatment.ghost.filter, opacity: treatment.ghost.opacity }}
-        />
-      )}
-      {(treatment.overlays ?? []).map((overlay, index) => (
+      {(effect.overlays ?? []).map((overlay, index) => (
         <span
           key={index}
           className="fx-ov"
@@ -377,7 +296,7 @@ export function FilterLab() {
       <p className="hint">
         The same sixteen cats under every treatment, so the only thing changing between panels is the pass laid
         over the top. Each is applied per identicon rather than across the block, which is how it would actually
-        ship. Call them by number.
+        ship. The F numbers are the survivors of the first pass and have not moved; the C numbers combine them.
       </p>
 
       <div className="row" style={{ marginTop: 0, marginBottom: 18 }}>
@@ -390,7 +309,7 @@ export function FilterLab() {
           <figure className="fx-panel" key={treatment.id}>
             <div className="fx-cats">
               {uris.map((uri, index) => (
-                <Cat key={index} uri={uri} treatment={treatment} />
+                <Cat key={index} uri={uri} effect={treatment.effect} />
               ))}
             </div>
             <figcaption>

@@ -341,7 +341,6 @@ table.traits td:last-child {
   image-rendering: pixelated;
 }
 
-.fx-ghost,
 .fx-ov {
   position: absolute;
   inset: 0;
