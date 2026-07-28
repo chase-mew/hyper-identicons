@@ -98,7 +98,10 @@ export const COLORWAYS: Record<LayerId, Colorway[]> = {
   // such second chance, which is why a dark mouth on a dark cat simply vanished.
   mouth: [
     { id: 'coal', name: 'Coal', tone: 'deep', weight: 30, colors: { o: '#141414', k: '#3A2126', p: '#C4626F' } },
-    { id: 'chalk', name: 'Chalk', tone: 'bright', weight: 26, colors: { o: '#A8ABB1', k: '#7B808A', p: '#E39AA6' } },
+    // `k` is warm rather than grey. An open mouth on a near-black cat has to be
+    // light to be seen at all, and a light *neutral* one stopped reading as a
+    // cavity and started reading as a block of teeth.
+    { id: 'chalk', name: 'Chalk', tone: 'bright', weight: 26, colors: { o: '#A8ABB1', k: '#B0656F', p: '#E39AA6' } },
     { id: 'rose', name: 'Rose', tone: 'bright', weight: 14, colors: { o: '#CD9392', k: '#B35D5E', p: '#E8A7A6' } },
   ],
   // One colourway on purpose. A tinted iris is three or four pixels across and the

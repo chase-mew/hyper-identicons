@@ -305,6 +305,32 @@ Two rules of thumb learned the hard way:
 - **Nothing thinner than three rows survives `inked()`.** At two, every pixel is an
   edge and the shape comes out as a bare wire. The headphone band had to be
   thickened for this reason.
+- **Judge everything at 48px, not at 8x.** Nearly every trait that has had to be
+  rebuilt looked fine in the preview. `trait-shots.ts` puts a native-size copy
+  beside each blow-up for exactly this reason, and `sheet.ts` renders a wall of
+  whole identicons, which is the only way to see whether forty of them read as one
+  family and still tell each other apart.
+- **A dark line on the face needs a light row under it.** Shut and narrowed eyes
+  were the only traits that could leave a face completely blank: on a near-black
+  cat a one-pixel dark lid is nothing at all. Every closed lid now carries a glint
+  or crease row, so whichever way the fur goes, one of the two rows contrasts.
+  Same reasoning applies to an open mouth, whose interior has to be *warm* light
+  on a deep cat — a light neutral one stops reading as a cavity and starts
+  reading as a block of teeth.
+- **Do not ink anything two pixels thick.** Every pixel is an edge, so the whole
+  shape comes out the ink colour. That is fine on fur and fatal on the halo, which
+  is the one worn thing sitting entirely on the background — the slot it needs is
+  `a`, which flips with tone.
+- **Hats are distinguished by silhouette, not by detail.** Beanie, bucket and cap
+  were three versions of one shallow dome plus a horizontal bar. They now differ
+  in outline alone: a rounded dome with a snug cuff, a dome over a brim that
+  widens all the way down, and a shell with a peak swept off one side. A brim that
+  is widest at its middle row is a flat disc, which is the cowboy hat.
+- **A background cannot be a single figure.** The cat owns the middle of the
+  canvas, and the Hyperliquid mark's waist — the entire shape — sits at exactly
+  head height, so drawn full size all that showed was a bump either side of the
+  ears. Backgrounds have to be texture, or tucked into the corner the far ear
+  leaves free at rows 1-9, columns 33-45.
 - **Only clip the crown of a hat, never its brim.** The ears occupy rows 6-16,
   columns 8-17 and 31-38. A brim run through `hat()` comes back with a bite out of
   each side and its tips detached, floating in the background — which happened to

@@ -1,6 +1,7 @@
 # Floating halo. Slots: a ring.
-@ 1 18
-..oooooooo..
-oo........oo
-oo........oo
-..oooooooo..
+@ 1 15
+....aaaaaaaaa....
+..aa.........aa..
+aa.............aa
+..aa.........aa..
+....aaaaaaaaa....
