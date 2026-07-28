@@ -64,7 +64,7 @@ function bareUri(
 }
 
 const BODY: Partial<Record<LayerId, string>> = { background: 'plain', body: 'base' };
-const BODY_WITH_FACE: Partial<Record<LayerId, string>> = { ...BODY, mouth: 'neutral', eyes: 'round' };
+const BODY_WITH_FACE: Partial<Record<LayerId, string>> = { ...BODY, mouth: 'smile', eyes: 'round' };
 
 /** 48 canvas pixels at 9x, so the render is exact and nothing is resampled. */
 const HERO = 48 * 9;
