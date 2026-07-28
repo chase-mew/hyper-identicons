@@ -40,14 +40,11 @@
     ],
     "headwear": [
       { "id": "none", "name": "None", "weight": 26 },
-      { "id": "cap-h", "name": "Hyper Cap", "weight": 22 },
-      { "id": "beanie", "name": "Beanie", "weight": 18 },
-      { "id": "bucket", "name": "Bucket", "weight": 12 },
-      { "id": "headphones", "name": "Headphones", "weight": 10 },
-      { "id": "cowboy", "name": "Meowdy", "weight": 9 },
-      { "id": "mortarboard", "name": "Purrfessor", "weight": 7 },
-      { "id": "nightcap", "name": "Nightcap", "weight": 5 },
-      { "id": "halo", "name": "Halo", "weight": 3 }
+      { "id": "cap-h", "name": "Hyper Cap", "weight": 24 },
+      { "id": "bucket", "name": "Bucket", "weight": 18 },
+      { "id": "cowboy", "name": "Meowdy", "weight": 14 },
+      { "id": "nightcap", "name": "Nightcap", "weight": 10 },
+      { "id": "halo", "name": "Halo", "weight": 6 }
     ]
   }
 }

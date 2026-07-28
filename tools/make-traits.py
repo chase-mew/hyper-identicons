@@ -419,52 +419,15 @@ emit("headwear/cap-h.txt", hat({
     18: [(18, 40, "a")],
 }, crown=range(0, 15)), "# The reference cap. Slots: a shell, c seam, h logo, o ink.")
 
-# No bobble. Every version with one read as a lidded pot: a small ball needs its
-# own ink ring to be a ball at all, and that ring plus the crown's meet in a dark
-# neck that the eye takes for a handle. The pom lives on its own trait instead,
-# where it can sit clear of the crown.
-# Beanie, bucket and cap were three versions of the same shallow dome plus a
-# horizontal bar, and at 48px they were not telling each other apart. The beanie
-# is the one that hugs the skull: it goes wide almost immediately and then runs
-# straight down, so the top is a curve. The bucket is the straight-sided cone with
-# the flat top and the cap is a shell with a peak swept off one side.
-#
-# Low and wide, not tall and narrow. Twelve rows of crown starting at row 2 and
-# widening the whole way is a cone, which is both the bucket's shape and, perched
-# above a cuff, a bowler -- it read as a small hard hat sitting on the cat rather
-# than knitwear pulled onto it. A beanie has no crown to speak of; it is the shape
-# of the head underneath.
-#
-# Only the crown is cut. The cuff is knit and pulled down over the ear bases, so
-# it passes in front of them and the tips come out through the crown above it,
-# which is what a beanie on a cat looks like and also gives the ears somewhere to
-# be other than sliced off at the hairline.
-emit("headwear/beanie.txt", hat({
-    5: [(18, 30, "a")],
-    6: [(16, 32, "a")],
-    7: [(15, 33, "a")],
-    8: [(14, 34, "a")],
-    9: [(13, 35, "a")],
-    10: [(13, 35, "a")],
-    11: [(13, 35, "a")],
-    12: [(13, 35, "a")],
-    13: [(13, 35, "a")],
-    # The cuff overhangs the crown by two columns a side and is five rows deep, so
-    # inked() leaves three of colour rather than one. Flush with the crown and two
-    # rows deep it was a hatband, and a dome plus a hatband is a bowler.
-    14: [(11, 37, "b")],
-    15: [(11, 37, "b")],
-    16: [(11, 37, "b")],
-    17: [(11, 37, "b")],
-    18: [(11, 37, "b")],
-}, crown=range(0, 14)), "# Knit beanie, ears through the cuff. Slots: a crown, b cuff.")
+# No beanie. It was a dome over a cuff, which is the bucket hat with the brim
+# swapped for a band, and the two never stopped competing: every fix that made the
+# beanie read better made it look more like the bucket, and the last one -- lowering
+# the crown so it hugged the skull -- landed it right back on the bucket's outline.
+# One dome-shaped hat is enough.
 
-# A flat-topped truncated cone, which is what a bucket hat actually is and what
-# finally tells it apart from the beanie. Both were rounded domes over a
-# horizontal band, and no amount of adjusting the band fixed that -- the
-# difference has to be in the crown, because at 48px the crown is most of what
-# there is. The beanie keeps the dome; this one goes flat on top and widens all
-# the way down into a short brim.
+# A flat-topped truncated cone, which is what a bucket hat actually is. It goes flat
+# on top and widens all the way down into a short brim, so it is not the cap's shell
+# with a peak swept off one side and it is not the cowboy's creased crown either.
 emit("headwear/bucket.txt", hat({
     6: [(19, 28, "a")],
     7: [(18, 29, "a")],
@@ -540,31 +503,11 @@ emit("headwear/cowboy.txt", hat(merge(
     },
 ), crown=range(0, 14)), "# Meowdy. Slots: a creased crown, b brim.")
 
-# The board is flat and wide and does all the work. It has to clear the ear tips
-# outright rather than be clipped around them -- a board with two bites out of it
-# is not a board -- so it rides above row 6 and the crown drops into the gap
-# between the ears, where it needs almost no clipping at all. The tassel hangs
-# past column 38, the furthest the far ear reaches.
-emit("headwear/mortarboard.txt", hat(merge(
-    # Four rows of board, not three. inked() takes the outer ring, so three rows
-    # leaves a single row of colour and the board comes out as a drawn line rather
-    # than a slab. It also reaches column 41 so the cord hangs off the board's own
-    # corner: at 39 the two were diagonal neighbours, inked() treated them as
-    # separate shapes, and the tassel floated free beside the hat.
-    #
-    # Riding one row lower and pulled in at the ends. High and very wide, board
-    # and ears together made a squared arch with the crown lost inside it -- the
-    # frame read as the object. Closing the gap and widening the crown puts the
-    # mass back under the board, which is the whole shape of a mortarboard.
-    {y: [(11, 41, "a")] for y in range(4, 8)},
-    {y: [(15, 32, "a")] for y in range(8, 16)},
-    # The cord alone is invisible: two pixels wide, so every one of them is an
-    # edge and inked() paints the lot the ink colour, right beside the far ear's
-    # own ink line. It needs a terminal mass wide enough to keep an interior, and
-    # it has to hang clear of column 38, which is as far as the ear reaches.
-    {y: [(40, 42, "c")] for y in range(8, 13)},
-    {y: [(39, 43, "c")] for y in range(13, 17)},
-), crown=range(8, 16)), "# Purrfessor. Slots: a board and crown, c tassel.")
+# No mortarboard. A wide flat board over a crown needs the board to clear the ear
+# tips outright, because a board with two bites out of it is not a board -- and once
+# it clears them, the board and the ears together frame the crown and the frame is
+# what reads: a squared arch with a hat lost inside it. Dropping it low enough to
+# close that gap puts it back on the ears. There is no height that works.
 
 # Drooping to the far side, which is where the asymmetry earns its keep: almost
 # everything else worn here is bilateral, and the cat is not.
@@ -586,36 +529,17 @@ emit("headwear/nightcap.txt", hat({
     17: [(11, 37, "b")],
 }, crown=range(0, 14)), "# Nightcap with a pom. Slots: a cone, b cuff, c pom.")
 
-# A hoop that goes round the head, with the ears left in front of it.
+# No headphones. The last version read well -- band arcing over and clipped behind
+# the ears, cups dropped to cheek height where a hoop would rest on a round skull --
+# but reading well cost it the whole outline of the head. The band plus two cups is
+# the widest thing in the set by some margin and it wraps the cat from row 3 to row
+# 26, so on a small render the silhouette stopped being a cat in headphones and
+# became a rounded blob with a face in it.
 #
-# Two earlier versions put the cups up at ear height. The first sat them on top of
-# the ears with the arms diving in from outside, which read as two speakers
-# clamped on pointing at the floor; the second made them big enough to enclose the
-# ears, which is what real over-ear cups do and which deleted the ears, and with
-# them most of what makes the silhouette a cat. There is no third position up
-# there: the tips sit at columns 9 and 37, the outside edge of the skull, which is
-# exactly the line an arm has to come down.
-#
-# So the cups drop to the sides of the head at cheek height, where a hoop would
-# actually rest on a round skull, and the band is clipped against the ears like
-# any other hat so it passes behind them. Anatomically it is on-ear rather than
-# over-ear. It reads instantly, which the correct version did not.
-emit("headwear/headphones.txt", hat({
-    3: [(18, 29, "a")],
-    4: [(15, 32, "a")],
-    5: [(12, 17, "a"), (30, 35, "a")],
-    6: [(10, 15, "a"), (32, 37, "a")],
-    7: [(8, 13, "a"), (34, 39, "a")],
-    8: [(6, 12, "a"), (35, 41, "a")],
-    9: [(5, 11, "a"), (36, 42, "a")],
-    **{y: [(4, 10, "a"), (37, 43, "a")] for y in range(10, 17)},
-    # The far cup starts at 37, not 36. At 36 it took a column off the far eye's
-    # rim, and a cup overlapping an eye is a blindfold.
-    17: [(3, 11, "a"), (37, 45, "a")],
-    **{y: [(3, 11, "a"), (5, 9, "c"), (37, 45, "a"), (39, 43, "c")] for y in range(18, 25)},
-    25: [(3, 11, "a"), (37, 45, "a")],
-    26: [(4, 10, "a"), (38, 44, "a")],
-}, crown=range(0, 17)), "# Headphones. Slots: a band and cups, c pads.")
+# Worth remembering if it ever comes back: cups cannot go over a cat's ears. The
+# tips sit at columns 9 and 37, the outside edge of the skull, which is exactly the
+# line the band's arm has to come down. On top of the ears they read as two speakers
+# pointing at the floor; big enough to enclose the ears they delete them.
 
 print("clothing:")
 # Only rows 32-46 of the torso ever reach the canvas, and the chin eats the middle
