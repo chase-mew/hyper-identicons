@@ -1,16 +1,15 @@
 # Quilted puffer. Slots: a fabric, b seams.
-@ 34 4
-.........a..............................
-......aaaaaa...................aaaa.....
-....aaaaaaaaaaa...............aaaaaa....
-...aaaaaaaaaaaaaaa..........aaaaaaaaa...
-..aaaaaaaaaaaaaaaaaa.......aaaaaaaaaa...
-..aaaaaaaaaaaaaaaaaaaa....aaaaaaaaaaaa..
-.aabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbaa..
-.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa..
-.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.
-.bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba.
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+@ 35 5
+......aaaaa...................aaaa.....
+....aaaaaaaaaa...............aaaaaa....
+...aaaaaaaaaaaaaa..........aaaaaaaaa...
+..aaaaaaaaaaaaaaaaa.......aaaaaaaaaa...
+..aaaaaaaaaaaaaaaaaaa....aaaaaaaaaaaa..
+.abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbaa..
+.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa..
+.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.
+.bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba.
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

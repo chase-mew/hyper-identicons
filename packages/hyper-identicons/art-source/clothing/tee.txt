@@ -1,16 +1,15 @@
 # Plain tee. Slots: a fabric.
-@ 34 4
-.........a..............................
-......aaaaaa...................aaaa.....
-....aaaaaaaaaaa...............aaaaaa....
-...aaaaaaaaaaaaaaa..........aaaaaaaaa...
-..aaaaaaaaaaaaaaaaaa.......aaaaaaaaaa...
-..aaaaaaaaaaaaaaaaaaaa....aaaaaaaaaaaa..
-.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa..
-.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa..
-.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.
-.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+@ 35 5
+......aaaaa...................aaaa.....
+....aaaaaaaaaa...............aaaaaa....
+...aaaaaaaaaaaaaa..........aaaaaaaaa...
+..aaaaaaaaaaaaaaaaa.......aaaaaaaaaa...
+..aaaaaaaaaaaaaaaaaaa....aaaaaaaaaaaa..
+.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa..
+.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa..
+.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.
+.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

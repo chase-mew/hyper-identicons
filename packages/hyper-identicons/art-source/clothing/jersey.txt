@@ -1,16 +1,15 @@
 # Banded jersey. Slots: a fabric, b trim, h band.
-@ 34 4
-.........a..............................
-......aaaaaa...................aaaa.....
-....aaaaaaaaaaa...............aaaaaa....
-...aaaaaaaaaaaaaaa..........aaaaaaaaa...
-..aaaaaaaaaaaaaaaaaa.......aaaaaaaaaa...
-..aaaaaaaaaaaaaaaaaaaa....aaaaaaaaaaaa..
-.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa..
-.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa..
-.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.
-.bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.
-hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh.
-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+@ 35 5
+......aaaaa...................aaaa.....
+....aaaaaaaaaa...............aaaaaa....
+...aaaaaaaaaaaaaa..........aaaaaaaaa...
+..aaaaaaaaaaaaaaaaa.......aaaaaaaaaa...
+..aaaaaaaaaaaaaaaaaaa....aaaaaaaaaaaa..
+.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa..
+.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa..
+.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.
+.bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb.
+hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh.
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
