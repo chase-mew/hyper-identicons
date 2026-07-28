@@ -52,16 +52,19 @@ CROWN = {13: (21, 26), 14: (18, 30), 15: (15, 32), 16: (11, 34)}
 # The face. Rows 21-27 sit behind the sunglasses in the reference, so their
 # edges are interpolated between the brow at row 20 and the cheek at row 26.
 # The near side runs a column tighter than the trace: at full width the reference
-# reads as too much cheek on the near side. The chin tip at rows 38-39 is left
-# alone so it stays under the muzzle, which puts the whole column of slack into
-# the jaw between rows 36 and 38.
+# reads as too much cheek on the near side.
+#
+# The chin closes at row 38, where the reference's does. Carrying it one row
+# further, as it used to, made the jaw converge to a point; stopping it there
+# instead leaves it flat and wide. Row 37 gives up a column each side so the
+# taper is gentle enough to finish in the row it has.
 HEAD = {
     17: (9, 38), 18: (9, 38), 19: (9, 38), 20: (9, 38),
     21: (8, 39), 22: (8, 39), 23: (8, 39), 24: (8, 40),
     25: (7, 40), 26: (7, 40), 27: (7, 40), 28: (7, 40),
     29: (8, 40), 30: (8, 39), 31: (9, 38), 32: (10, 38),
     33: (12, 37), 34: (14, 36), 35: (16, 34), 36: (19, 33),
-    37: (22, 31), 38: (24, 30), 39: (26, 29),
+    37: (21, 32), 38: (24, 30),
 }
 
 # Both inner ears hug the outer edge of their ear, as in the reference.
