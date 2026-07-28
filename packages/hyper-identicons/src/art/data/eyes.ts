@@ -3,5 +3,5 @@ export const eyes: Record<string, string> = {
   "round": 'FhIEEwEAAwoLAAMKAQABCgENAg4BCgkAAQoBDQIOAgoDDgEKCQABCgMOAQoBAAMKCwADCgEA',
   "squint": 'FxICEwUKCQAGCgMOAQoJAAEKAw4BCg==',
   "sleepy": 'FxICEwEKAwABCgkAAQoDAAEKAQADCgsAAwoBAA==',
-  "wink": 'FhIEEg4AAwoBAAUKCAABCgENAg4BCgEAAwoJAAEKAw4BCg4AAwoBAA==',
+  "wink": 'FhIEEg4AAwoBAAEKAwABCggAAQoBDQIOAQoBAAMKCQABCgMOAQoOAAMKAQA=',
 };

@@ -1,6 +1,6 @@
 # One eye shut. Slots: k rim, e glint, i iris.
 @ 22 18
 ..............kkk.
-kkkkk........keiik
+k...k........keiik
 .kkk.........kiiik
 ..............kkk.

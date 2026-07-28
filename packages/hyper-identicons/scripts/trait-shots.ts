@@ -58,7 +58,7 @@ function draw(choices: LayerChoice[], scale: number, into: Uint8Array, width: nu
   }
 }
 
-rmSync(OUT, { recursive: true, force: true });
+if (!only) rmSync(OUT, { recursive: true, force: true });
 mkdirSync(OUT, { recursive: true });
 
 const big = CANVAS * BIG;

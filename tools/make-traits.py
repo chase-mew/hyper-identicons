@@ -235,9 +235,11 @@ emit("eyes/sleepy.txt", sockets([
     [(1, 3, "k")],
 ], top=22, left=14), "# Contentedly shut. Slots: k lid.", shift=MUZZLE)
 
+# The shut eye is built exactly as the sleepy pair is, corner ticks and all. As a
+# plain dash it read as a filled wedge rather than a closed lid.
 emit("eyes/wink.txt", {
     21: [(28, 30, "k")],
-    22: [(14, 18, "k"), (27, 27, "k"), (28, 28, "e"), (29, 30, "i"), (31, 31, "k")],
+    22: [(14, 14, "k"), (18, 18, "k"), (27, 27, "k"), (28, 28, "e"), (29, 30, "i"), (31, 31, "k")],
     23: [(15, 17, "k"), (27, 27, "k"), (28, 30, "i"), (31, 31, "k")],
     24: [(28, 30, "k")],
 }, "# One eye shut. Slots: k rim, e glint, i iris.", shift=MUZZLE)
