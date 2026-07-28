@@ -101,7 +101,7 @@ test('weights are positive integers and colourways are non-empty', () => {
 });
 
 /** The layers whose tone is part of the guarantee. See spec/v1.md §3.2. */
-const TONED = ['body', 'background', 'clothing', 'headwear', 'mouth'] as const;
+const TONED = ['body', 'background', 'clothing', 'headwear', 'mouth', 'accessory'] as const;
 
 test('every colourway that covers real area declares a tone', () => {
   for (const layer of TONED) {
@@ -172,10 +172,15 @@ test('every cat has a visible face', () => {
       assert.ok(line, `${body.id} has no '${slot}'`);
       assert.ok(apca(line, fur) >= 30, `${body.id}/${slot}: Lc ${apca(line, fur).toFixed(1)} is under 30`);
     }
-    for (const mouth of MANIFEST.mouth.colorways) {
-      if (mouth.tone === body.tone) continue;
-      const lc = apca(mouth.colors.o!, fur);
-      assert.ok(lc >= 30, `mouth/${mouth.id} on ${body.id}: Lc ${lc.toFixed(1)} is under 30`);
+    // Both are drawn straight onto the fur, so both are held to the same floor.
+    // For eyewear it is the frame that has to clear it: the lens stays dark on
+    // either tone, and is read from the frame around it.
+    for (const layer of ['mouth', 'accessory'] as const) {
+      for (const cw of MANIFEST[layer].colorways) {
+        if (cw.tone === body.tone) continue;
+        const lc = apca(cw.colors.o!, fur);
+        assert.ok(lc >= 30, `${layer}/${cw.id} on ${body.id}: Lc ${lc.toFixed(1)} is under 30`);
+      }
     }
   }
 });
@@ -227,6 +232,7 @@ test('the cat decides the tone of everything around it', () => {
     const tone = (layer: string) => choices.find((choice) => choice.layer === layer)!.colorway.tone;
     assert.notEqual(tone('background'), tone('body'), `${address}: cat and background share a tone`);
     assert.notEqual(tone('mouth'), tone('body'), `${address}: the mouth is the same tone as the fur`);
+    assert.notEqual(tone('accessory'), tone('body'), `${address}: the eyewear is the same tone as the fur`);
     assert.equal(tone('clothing'), tone('body'), `${address}: clothing does not match the cat's tone`);
     assert.equal(tone('headwear'), tone('body'), `${address}: headwear does not match the cat's tone`);
   }

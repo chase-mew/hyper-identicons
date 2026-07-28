@@ -22,14 +22,14 @@ const flip = (tone: Tone): Tone => (tone === 'deep' ? 'bright' : 'deep');
  * The tone a layer has to take once the cat's is known, or `undefined` for the
  * layers small enough not to care.
  *
- * One rule underneath all three cases: take the tone opposite whatever you are
- * drawn against. The background is drawn against the cat, so it is the cat's
- * opposite. The mouth is drawn against the fur, so it is too. A garment is drawn
- * against the background, and the background is already the cat's opposite, so
- * being the opposite of *that* lands it back on the cat's own tone.
+ * One rule underneath every case: take the tone opposite whatever you are drawn
+ * against. The background is drawn against the cat, so it is the cat's opposite.
+ * The mouth and the eyewear are drawn against the fur, so they are too. A garment
+ * is drawn against the background, and the background is already the cat's
+ * opposite, so being the opposite of *that* lands it back on the cat's own tone.
  */
 function toneFor(layer: LayerId, cat: Tone): Tone | undefined {
-  if (layer === 'background' || layer === 'mouth') return flip(cat);
+  if (layer === 'background' || layer === 'mouth' || layer === 'accessory') return flip(cat);
   if (layer === 'clothing' || layer === 'headwear') return cat;
   return undefined;
 }

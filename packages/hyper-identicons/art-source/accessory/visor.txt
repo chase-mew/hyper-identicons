@@ -1,7 +1,7 @@
-# Wraparound visor. Slots: o frame, g lens.
+# Wraparound visor with a lit scan line. Slots: o frame, g lens, h scan.
 @ 21 11
 ooooooooooooooooooooooooooooooo
 ogggggggggggggggggggggggggggggo
-ogggggggggggggggggggggggggggggo
+ogghhhhhhhhhhhhhhhhhhhhhhhhhggo
 .ogggggggggggggggggggggggggggo.
 ..ooooooooooooooooooooooooooo..

@@ -1,14 +1,14 @@
 # The reference hoodie. Slots: a body, b collar, h logo.
 @ 36 5
 ......aaaaa...................aaaa.....
-....aaaaaaaaaa...............aaaaaa....
-...aaaaaaaaaaaaa............aaaaaaaa...
-..aaaaaaaaaaaaaaaaa.......aaaaaaaaaa...
+....bbbbbbbbbb...............bbbbbb....
+...bbbbbbbbbbbbb............bbbbbbbb...
+..bbbbbbbbbbbbbbbbb.......bbbbbbbbbb...
 ..aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa..
-.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa..
-.bbbbbbbaaaaaaaaaaaaaaaaaaaaabbbbbbba..
-.bbbbbbbbbaaaaaaaaaaaaaaaaabbbbbbbbbba.
-.aaaaaaaaaaaahhaaaaaaahhaaaaaaaaaaaaaa.
-aaaaaaaaaaaaahhaaaaaaahhaaaaaaaaaaaaaa.
-aaaaaaaaaaaaahhhhhhhhhhhaaaaaaaaaaaaaaa
-aaaaaaaaaaaaahhaaaaaaahhaaaaaaaaaaaaaaa
+.aaaaaaaaaaaaaaahhaaahhaaaaaaaaaaaaaa..
+.aaaaaaaaaaaaaaahhaaahhaaaaaaaaaaaaaa..
+.aaaaaaaaaaaaaaahhhhhhhaaaaaaaaaaaaaaa.
+.aaaaaaaaaaaaaaahhhhhhhaaaaaaaaaaaaaaa.
+aaaaaaaaaaaaaaaahhaaahhaaaaaaaaaaaaaaa.
+aaaaaaaaaaaaaaaahhaaahhaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

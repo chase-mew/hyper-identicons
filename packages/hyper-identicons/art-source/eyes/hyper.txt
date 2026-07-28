@@ -1,6 +1,0 @@
-# Aquamarine glow. Slots: k rim, h glow.
-@ 22 18
-.kkk...........kkk.
-khhhk.........khhhk
-khhhk.........khhhk
-.kkk...........kkk.

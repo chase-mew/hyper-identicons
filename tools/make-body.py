@@ -190,10 +190,41 @@ def extents(mask):
     return out
 
 
+def ear_region(spans):
+    """One ear plus the outline ring around it, clipped back to the head.
+
+    Hats are cut against this so the ears stay in front, which is how the
+    reference wears its cap and is the half of the silhouette that makes the
+    character read as a cat at all. Published per ear rather than as one span:
+    a single pair of extents would swallow the whole skull between them.
+    """
+    grown = blank()
+    for y, (x0, x1) in spans.items():
+        for x in range(x0, x1 + 1):
+            for dy in (-1, 0, 1):
+                for dx in (-1, 0, 1):
+                    ny, nx = y + dy, x + dx
+                    if 0 <= ny < N and 0 <= nx < N:
+                        grown[ny][nx] = True
+    # Minus the skull, or the region would run on down the side of the head and
+    # there would be nowhere left for a hat to sit.
+    skull = paint(blank(), CROWN)
+    return extents([
+        [grown[y][x] and head[y][x] and not skull[y][x] and y in spans for x in range(N)]
+        for y in range(N)
+    ])
+
+
 # make-traits.py places features against these, so they cannot drift apart. Like
 # the tables above these are pre-DROP, which is why DROP travels with them.
 with open(ANCHORS, "w") as fh:
-    json.dump({"drop": DROP, "head": extents(head), "chest": extents(chest)}, fh, indent=1)
+    json.dump({
+        "drop": DROP,
+        "head": extents(head),
+        "chest": extents(chest),
+        "ear_near": ear_region(EAR_NEAR),
+        "ear_far": ear_region(EAR_FAR),
+    }, fh, indent=1)
 
 print(f"{OUT}  {right - left + 1}x{bottom - top + 1} at {left},{top}")
 for i, r in enumerate(rows):

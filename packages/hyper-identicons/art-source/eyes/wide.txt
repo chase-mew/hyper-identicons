@@ -1,7 +1,0 @@
-# Wide eyes. Slots: k rim, e glint, i iris.
-@ 21 17
-.kkkkk.........kkkkk.
-kiiiiik.......kiiiiik
-keiiiik.......keiiiik
-kiiiiik.......kiiiiik
-.kkkkk.........kkkkk.

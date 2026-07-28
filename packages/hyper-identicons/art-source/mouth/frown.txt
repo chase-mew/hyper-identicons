@@ -1,8 +1,0 @@
-# Inverted curve.
-@ 27 24
-..ooo..
-..ooo..
-...o...
-...o...
-.oo.oo.
-o..o..o

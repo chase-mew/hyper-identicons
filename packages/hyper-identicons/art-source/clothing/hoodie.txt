@@ -1,14 +1,14 @@
 # Hoodie with drawstrings. Slots: a fabric, b collar, c cords.
 @ 36 5
 ......aaaaa...................aaaa.....
-....aaaaaaaaaa...............aaaaaa....
-...aaaaaaaaaaaaa............aaaaaaaa...
-..aaaaaaaaaaaaaaaaa.......aaaaaaaaaa...
+....bbbbbbbbbb...............bbbbbb....
+...bbbbbbbbbbbbb............bbbbbbbb...
+..bbbbbbbbbbbbbbbbb.......bbbbbbbbbb...
 ..aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa..
-.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa..
-.bbbbbbbaaaaaaaaaaaaaaaaaaaaabbbbbbba..
-.bbbbbbbbbaaaaaaaaaaaaaaaaabbbbbbbbbba.
-.aaaaaaaaaaaaaaccaaaccaaaaaaaaaaaaaaaa.
-aaaaaaaaaaaaaaaccaaaccaaaaaaaaaaaaaaaa.
-aaaaaaaaaaaaaaaccaaaccaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaccaaaccaaaaaaaaaaaaaaaaa
+.aaaaaaaaaaaaaaaccaaaccaaaaaaaaaaaaaa..
+.aaaaaaaaaaaaaaaccaaaccaaaaaaaaaaaaaa..
+.aaaaaaaaaaaaaaaccaaaccaaaaaaaaaaaaaaa.
+.aaaaaaaaaaaaaaaccaaaccaaaaaaaaaaaaaaa.
+aaaaaaaaaaaaaaaacaaaaacaaaaaaaaaaaaaaa.
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

@@ -106,8 +106,12 @@ against.**
 |---|---|---|
 | `body` | — | free |
 | `background` | the cat | opposite the cat |
-| `mouth` | the fur | opposite the cat |
+| `mouth`, `accessory` | the fur | opposite the cat |
 | `clothing`, `headwear` | the background | opposite the background, so *the same as* the cat |
+
+For eyewear only the **frame** flips. The lens stays dark on both tones, because light
+lenses are ski goggles rather than shades, and the frame is the part a silhouette gets
+read from anyway.
 
 Garments looking like the exception are not one. A hoodie or a cap reaches past
 the cat to the canvas edge, so the neighbour it has to clear is the field; being
@@ -236,11 +240,33 @@ Around those, a small spread of warm and cool neighbours so a wallet does not
 always land on teal. Chroma is kept low on backgrounds — they are a field behind
 a character, not a subject — and allowed higher on fur.
 
-## Known gaps
+## Drawing a trait
 
-- **Accessories carry no tone.** Eyewear is the one that could arguably outgrow
-  that: lenses cover a lot of a small face. Eyes are genuinely fine without one
-  for the reason above.
+Three helpers in `tools/make-traits.py` do most of the work, and skipping any of
+them shows immediately:
+
+- **`inked()`** rings a shape in its own outline, eroding inward so it keeps its
+  authored size. Everything the cat wears needs this. Without it a hat is a flat
+  colour field on a character drawn with a one-pixel ink line everywhere else, and
+  it reads as a sticker rather than clothing. It leaves interior pixels alone, so
+  an explicitly placed `o` survives and can be used as a seam — which is how the
+  cap's peak is told apart from its shell.
+- **`hat()`** cuts the ears back out, so they sit in front. This is what the
+  reference does, and the ear triangles are most of what makes the silhouette read
+  as a cat at 24px. Pass `ears=False` only for things that genuinely go over them.
+- **`garment()`** cuts the jaw out and clips everything to the torso.
+
+Two rules of thumb learned the hard way:
+
+- **Nothing thinner than three rows survives `inked()`.** At two, every pixel is an
+  edge and the shape comes out as a bare wire. The headphone band had to be
+  thickened for this reason.
+- **The torso is only rows 32-46, and the chin covers the middle of the first six.**
+  Collars go at 36-38, where there is width either side of the jaw; anything centred
+  goes at 40 or lower. Detail below 46 is cropped, which is how the chest logo once
+  ended up as a bar along the bottom edge.
+
+## Known gaps
 - **A two-tone keyline was considered and not taken.** Wrapping the cat in an ink
   line plus a light halo guarantees Lc ≥ 50.8 against *any* sRGB colour, which
   would decouple the background from the fur entirely and let every layer draw
