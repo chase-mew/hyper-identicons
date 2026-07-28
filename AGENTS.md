@@ -360,9 +360,15 @@ Two rules of thumb learned the hard way:
 - **Hats are distinguished by silhouette, not by detail.** Beanie, bucket and cap
   were three versions of one shallow dome plus a horizontal bar, and no amount of
   adjusting the bar fixed it — the difference has to be in the *crown*, because at
-  48px the crown is most of what there is. The bucket is now a flat-topped
-  truncated cone, which is what a bucket hat actually is; the beanie keeps the
-  rounded dome; the cap is a shell with a peak swept off one side.
+  48px the crown is most of what there is. The bucket is a flat-topped truncated
+  cone, which is what a bucket hat actually is; the beanie goes wide almost at once
+  and then runs straight down, so its top is a curve; the cap is a shell with a
+  peak swept off one side.
+
+  A beanie in particular has to be **low**. Twelve rows of crown widening the whole
+  way is a cone, and a cone above a cuff is a bowler — it read as a small hard hat
+  perched on the cat rather than knitwear pulled onto it. A beanie has no crown to
+  speak of; it is the shape of the head underneath.
 - **A background cannot be a single figure, and it cannot be intricate either.**
   The cat owns the middle of the canvas; what is left is two margins about eight
   columns wide and a band across the top. The Hyperliquid mark failed here twice

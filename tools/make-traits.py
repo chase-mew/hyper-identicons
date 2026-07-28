@@ -425,25 +425,28 @@ emit("headwear/cap-h.txt", hat({
 # where it can sit clear of the crown.
 # Beanie, bucket and cap were three versions of the same shallow dome plus a
 # horizontal bar, and at 48px they were not telling each other apart. The beanie
-# takes the tall narrow crown: it starts two rows above the ear tips and slims
-# rather than widens, so its silhouette is a dome where the bucket's is a mushroom
-# and the cap's is a shell with a peak swept off one side.
+# is the one that hugs the skull: it goes wide almost immediately and then runs
+# straight down, so the top is a curve. The bucket is the straight-sided cone with
+# the flat top and the cap is a shell with a peak swept off one side.
+#
+# Low and wide, not tall and narrow. Twelve rows of crown starting at row 2 and
+# widening the whole way is a cone, which is both the bucket's shape and, perched
+# above a cuff, a bowler -- it read as a small hard hat sitting on the cat rather
+# than knitwear pulled onto it. A beanie has no crown to speak of; it is the shape
+# of the head underneath.
 #
 # Only the crown is cut. The cuff is knit and pulled down over the ear bases, so
 # it passes in front of them and the tips come out through the crown above it,
 # which is what a beanie on a cat looks like and also gives the ears somewhere to
 # be other than sliced off at the hairline.
 emit("headwear/beanie.txt", hat({
-    2: [(20, 28, "a")],
-    3: [(18, 30, "a")],
-    4: [(17, 31, "a")],
-    5: [(16, 32, "a")],
+    5: [(18, 30, "a")],
     6: [(16, 32, "a")],
     7: [(15, 33, "a")],
-    8: [(15, 33, "a")],
-    9: [(14, 34, "a")],
-    10: [(14, 34, "a")],
-    11: [(14, 34, "a")],
+    8: [(14, 34, "a")],
+    9: [(13, 35, "a")],
+    10: [(13, 35, "a")],
+    11: [(13, 35, "a")],
     12: [(13, 35, "a")],
     13: [(13, 35, "a")],
     # The cuff overhangs the crown by two columns a side and is five rows deep, so
