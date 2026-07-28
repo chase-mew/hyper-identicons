@@ -28,10 +28,14 @@ EAR_NEAR = {
 }
 
 # Far ear: the reference only shows rows 9-14 above the cap. Below that it is
-# reconstructed, kept short and narrow so it still reads as the far side.
+# reconstructed, kept short and narrow so it still reads as the far side. The
+# trace tops it off flat at row 9, which is all the reference needs because the
+# cap hides everything higher, but on a bare cat that reads as a stump. Rows 7
+# and 8 carry the staircase up to a point instead, so the ear gains a tip rather
+# than losing the width it already had.
 EAR_FAR = {
-    9: (35, 38), 10: (34, 38), 11: (33, 38), 12: (32, 38),
-    13: (31, 38), 14: (31, 38), 15: (30, 38), 16: (30, 38),
+    7: (37, 37), 8: (36, 38), 9: (35, 38), 10: (34, 38), 11: (33, 38),
+    12: (32, 38), 13: (31, 38), 14: (31, 38), 15: (30, 38), 16: (30, 38),
 }
 
 # Reconstructed: the cap covers the skull between the ears entirely. This is the
