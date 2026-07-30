@@ -124,43 +124,68 @@ Bands, in OKLab lightness:
 
 | Role | Tone | L range |
 |---|---|---|
-| background | deep | 0.30 – 0.31 |
+| background | deep | 0.34 – 0.35 |
 | background | bright | 0.87 – 0.96 |
-| fur | deep | 0.47 – 0.52 |
+| fur | deep | 0.52 – 0.54 |
 | fur | bright | 0.78 – 1.00 |
-| garment | deep | 0.28 – 0.29 |
+| garment | deep | 0.38 – 0.39 |
 | garment | bright | 0.65 |
 | mouth line | deep | 0.19 – 0.35 |
 | mouth line | bright | 0.80 – 0.81 |
 
 The gap between what a cat can be and what it can stand on is never smaller than
-0.35 in lightness, 3.8:1 by WCAG. Past the 3:1 floor for graphical objects, and
+0.35 in lightness, 3.5:1 by WCAG. Past the 3:1 floor for graphical objects, and
 it shows: the identicons have a consistent tonal drama rather than a lucky-dip of
 clashes.
 
-Three consequences worth knowing before you move anything:
+Every deep band is now within about 0.02 of its ceiling, so "make this brighter"
+is no longer a free move — it is a request to move something in the bright half
+first. `npx tsx scripts/headroom.ts` solves the coupling and prints each ceiling
+with the thing that sets it, which is worth reading before proposing a lift.
 
-- **The deep half is not the dark half.** Deep backgrounds sit at L 0.30 and deep
-  fur at 0.47-0.52, both far above where they started. The first version put them
-  at 0.14 and 0.34, on the reasoning that more separation is always better, and
-  the result was a set that looked grubby: near-black is not read as a dark colour,
-  it is read as an absence of light, and a hue at L 0.14 has no chroma left to
-  carry it. Deep and bright never share an identicon, so the only thing the deep
-  band has to clear is the bright band opposite it, and there is a great deal of
-  room between 0.31 and 0.78. Spend it.
+Four consequences worth knowing before you move anything:
+
+- **The deep half is not the dark half.** Deep backgrounds sit at L 0.345, deep
+  garments at 0.385 and deep fur at 0.52-0.54, all far above where they started.
+  The first version put them at 0.14 and 0.34, on the reasoning that more
+  separation is always better, and the result was a set that looked grubby:
+  near-black is not read as a dark colour, it is read as an absence of light, and
+  a hue at L 0.14 has no chroma left to carry it. Deep and bright never share an
+  identicon, so the only thing the deep band has to clear is the bright band
+  opposite it. Spend that room.
+- **Dullness is chroma, not lightness, and chroma is the one axis no threshold
+  constrains.** This is the trap. Every gate in the audit is a lightness or a
+  luminance ratio, so a palette can pass all of them and still look like mud —
+  which is what happened: the deep colours ran at chroma 0.01-0.09 against a
+  gamut that would hold 0.05-0.20, and the most frequently drawn background and
+  the most frequently drawn garment were both under 0.03, which is grey. There is
+  no measurement that catches this. Check the cusp column in `headroom.ts` and
+  ask why anything sits far below it.
+- **A cold hue cannot be saturated down there, and no amount of tuning changes
+  that.** sRGB holds chroma 0.058 at hue 195 and 0.194 at hue 290 for the same
+  L 0.345. The teal backgrounds are at their cusp and still look quiet next to
+  the violets; that is gamut, and the fix is weighting rather than colour. The
+  deep set was 58% Ebony, Abyss and Firefly — one grey and two hues that cannot
+  hold colour — which made the *average* tile dull however good the palette was.
 - **Garments are pinned from both sides** — above the background, below the fur —
   so they sit at a single lightness per tone rather than a range. Bright fabric is
   at L 0.653 because the lowest bright fur is Ginger at 0.781 and the soft floor
-  against fur is 0.12; that one number is what fixes the whole bright row. Chroma
-  is pushed to near the sRGB gamut cusp at those lightnesses.
+  against fur is 0.12; that one number is what fixes the whole bright row. Deep
+  fabric is pinned the same way and fur is the binding side by a distance, which
+  means **the only way to lift a deep garment is to lift the deep fur above it**.
+  Chroma is pushed to near the sRGB gamut cusp at those lightnesses.
 - **Trim is where garments go neon.** A deep fabric at L 0.15 with a seam at
   L 0.55 and chroma 0.20 does not read as a lit seam, it reads as a lit sign: the
   jump is too big and the saturation has nothing to sit against. Deep fabric now
-  runs at 0.29 with trim at 0.47 and chroma near 0.11, roughly half the step and
-  half the chroma, and the garments look like fabric. The same applies to the
+  runs at 0.385 with trim at 0.515 and cord at 0.635, even steps rather than one
+  jump across a void, and the garments look like fabric. The same applies to the
   brand mint: aquamarine at L 0.92 laid straight onto a lens at 0.14 was the most
   neon thing the palette could produce, so deep eyewear gets a muted version and
   only the logo keeps the real one.
+
+Lifting a band drags its details with it. Deep fur going up cost Void its
+whiskers, which had been comfortable at Lc 37 and landed on 28 against the new
+coat. Run the audit after moving any fur, not just after moving a line.
 
 ## Measuring
 
@@ -220,13 +245,21 @@ itself. On a deep cat the white sclera reads (Lc 94–101) where the eye outline
 cannot; on a bright cat the outline reads (Lc 63–99) where the sclera cannot.
 
 ```bash
-cd packages/hyper-identicons && npx tsx scripts/audit-colors.ts
+cd packages/hyper-identicons
+npx tsx scripts/audit-colors.ts # every contrast, and what fails
+npx tsx scripts/headroom.ts     # every ceiling, and what sets it
 ```
 
-prints every contrast the palette has to survive. The same thresholds are
-asserted in `test/identicon.test.ts`, so the build fails rather than the cat
+The first prints every contrast the palette has to survive. The same thresholds
+are asserted in `test/identicon.test.ts`, so the build fails rather than the cat
 quietly going invisible. **Do not add a colour by eye.** Pick the lightness
 first with `fromOklch(L, C, H)` in `scripts/color.ts`, then choose the hue.
+
+The second answers the question the audit cannot: not "does this pass" but "how
+much room is left, and what is holding it". The bands are coupled tightly enough
+that this is not obvious by inspection — a deep garment is bounded by the deep
+fur, which is bounded by the bright backgrounds — and the WCAG bound on fur bites
+before the lightness one, so solving it by hand tends to give the wrong answer.
 
 ## Hues
 
@@ -249,8 +282,9 @@ Bounce contributes the violet axis at hue ~285–300: `#6753F1`, `#9E88F8`,
 (`bounce.tech` names the Hyperliquid ones explicitly as `--hl-*`).
 
 Around those, a small spread of warm and cool neighbours so a wallet does not
-always land on teal. Chroma is kept low on backgrounds — they are a field behind
-a character, not a subject — and allowed higher on fur.
+always land on teal. Backgrounds are held a little under the fur in chroma —
+they are a field behind a character, not a subject — but only a little. Held
+much further under, which they were, they stop reading as a colour at all.
 
 ## The treatment, and why the palette alone was never going to be enough
 
@@ -281,6 +315,13 @@ Things worth keeping in mind:
   ellipse outwards, and the muzzle, eyes and whiskers all sit inside that. So
   every APCA number in the sections above still holds after the treatment, and
   `audit-colors.ts` is right to measure the untreated palette.
+- **The vignette lands almost entirely on the background, so it is a palette
+  decision wearing a lighting costume.** At its original 0.385 it took the
+  corners down by nearly two fifths, and since the deep field is already the
+  darkest thing on the canvas, a deep tile arrived near-black whatever hue it had
+  been given — the palette was being fixed at one end and undone at the other.
+  0.22 reads as the same lighting and costs the backgrounds far less. If the set
+  ever looks flat or muddy again, check this before reaching for the hexes.
 - **Vector and raster express it twice.** `treatmentSvg()` hands three rects to
   the browser; `treatPixels()` computes it per pixel for the PNG scripts. That
   duplication is deliberate, not an oversight waiting to be tidied: baking the

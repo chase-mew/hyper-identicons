@@ -36,8 +36,16 @@ const REACH = 0.55;
 const VIGNETTE_CX = 0.5;
 const VIGNETTE_CY = 0.45;
 const VIGNETTE_START = 0.38;
-/** Peak darkening at the corners: the gradient's own 0.55 scaled by the layer's 0.7. */
-const VIGNETTE_MAX = 0.385;
+/**
+ * Peak darkening at the corners.
+ *
+ * It was 0.385, and on a deep background that is most of what made the set look
+ * dull: the field is already the darkest thing on the canvas and the corners were
+ * being taken down another third from there, so four of the eight tiles in a row
+ * arrived at near-black whatever hue they were nominally painted. Lighting the
+ * subject needs far less than that, and the falloff is still plainly visible.
+ */
+const VIGNETTE_MAX = 0.22;
 /**
  * CSS sizes a `farthest-corner` ellipse so that its radii are the corner offsets
  * scaled by root two. Reproduced rather than eyeballed so the SVG and the raster
