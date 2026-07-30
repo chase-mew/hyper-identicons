@@ -556,18 +556,28 @@ emit("headwear/cowboy.txt", hat(merge(
 # close that gap puts it back on the ears. There is no height that works.
 
 # Drooping to the near side, which is where the asymmetry earns its keep: almost
-# everything else worn here is bilateral, and the cat is not. An exact reflection
-# through AXIS, which is why the cuff still sits centred: the skull is symmetric
-# even though the cat is not.
+# everything else worn here is bilateral, and the cat is not.
 #
-# It used to droop the other way, and two attempts to do better than a plain
-# mirror while turning it round both failed:
+# It used to droop the other way. Reflecting it through AXIS is most of the job but
+# not all of it, and the two columns it is offset by are both load-bearing:
 #
-# Giving the pom a fourth row to make it rounder is right in isolation and wrong
-# here. The pom's job is to be the far end of a diagonal, and enough mass to read
-# as a ball on its own stands it up as a vertical knob on the crown -- which is a
-# bobble hat. It also pushed the cone down into the near ear, and four rows came
-# back cut instead of two.
+# The cuff is one right of where the reflection puts it. It spans an even number of
+# columns, so it cannot straddle AXIS -- the old one sat a column right of centre
+# and the mirror inherited that as a column left, which on a skull that *is*
+# symmetric reads as the band having slipped.
+#
+# The pom is one right again, clear of the cuff's shift. Reflected exactly, its
+# lower-left corner lands on column 9 in the row directly above the near ear's tip,
+# and two outlined shapes touching corner to corner at this size are one shape: the
+# ear stopped being an ear and became part of the hat. It now clears the tip by a
+# column as well as a row.
+#
+# Lifting the pom instead is the obvious fix and it is wrong, for the same reason
+# giving it a fourth row to make it rounder is wrong: the pom's job is to be the far
+# end of a diagonal, and anything that reads as a ball in its own right stands up
+# into a knob on the crown, which is a bobble hat. It has to stay welded to the
+# cone's shoulder and get its clearance sideways. The fourth row also pushed the
+# cone down into the near ear, and four rows came back cut where two do now.
 #
 # Nor can the tip actually hang. A real nightcap flops over and the pom dangles,
 # and there is a route for it: nothing is above row 6, so the cone can arc over
@@ -580,21 +590,21 @@ emit("headwear/cowboy.txt", hat(merge(
 # So the tip points up rather than hanging, on both this and every version before
 # it. That is a real limitation of a 48px canvas with tall ears, not an oversight.
 emit("headwear/nightcap.txt", hat({
-    3: [(10, 14, "c")],
-    4: [(9, 15, "c")],
-    5: [(9, 15, "c")],
-    6: [(10, 18, "a")],
-    7: [(13, 21, "a")],
-    8: [(14, 24, "a")],
-    9: [(15, 27, "a")],
-    10: [(15, 29, "a")],
-    11: [(15, 31, "a")],
-    12: [(14, 33, "a")],
-    13: [(13, 34, "a")],
-    14: [(10, 34, "b")],
-    15: [(9, 35, "b")],
-    16: [(9, 35, "b")],
-    17: [(9, 35, "b")],
+    3: [(12, 16, "c")],
+    4: [(11, 17, "c")],
+    5: [(11, 17, "c")],
+    6: [(11, 19, "a")],
+    7: [(14, 22, "a")],
+    8: [(15, 25, "a")],
+    9: [(16, 28, "a")],
+    10: [(16, 30, "a")],
+    11: [(16, 32, "a")],
+    12: [(15, 34, "a")],
+    13: [(14, 35, "a")],
+    14: [(11, 35, "b")],
+    15: [(10, 36, "b")],
+    16: [(10, 36, "b")],
+    17: [(10, 36, "b")],
 }, crown=range(0, 14)), "# Nightcap with a pom. Slots: a cone, b cuff, c pom.")
 
 # No headphones. The last version read well -- band arcing over and clipped behind
