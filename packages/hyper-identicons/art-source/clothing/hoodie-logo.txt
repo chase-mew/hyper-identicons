@@ -1,0 +1,14 @@
+# The reference hoodie. Slots: a body, b collar, h mark.
+@ 36 5
+......ooooo...................oooo.....
+....oobbbbbooo...............obbbbo....
+...obbbbbbbbbboo............obbbbbbo...
+..obbbbbbbbbbbbbooo.......oobbbbbbbo...
+..oaaaaaaaaaaaaaaaaoooooooaaaaaaaaaao..
+.oaaaaaaaaaaaaaaaaaaaahhaaaaahhaaaaao..
+.oaaaaaaaaaaaaaaaaaaahhhhaahhhhhaaaao..
+.oaaaaaaaaaaaaaaaaaaahhhhhhhhhhhaaaaao.
+.oaaaaaaaaaaaaaaaaaaahhhhhhhhhhhaaaaao.
+oaaaaaaaaaaaaaaaaaaaahhhhaahhhhhaaaaao.
+oaaaaaaaaaaaaaaaaaaaaahhaaaaahhaaaaaaao
+oaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaao

@@ -16,11 +16,11 @@ import type { LayerChoice, LayerId } from '../src/core/types.js';
 const WANTED: Record<LayerId, [art: string, colorway: string]> = {
   background: ['plain', 'sand'],
   body: ['base', 'snow'],
-  clothing: ['hoodie-h', 'hyper'],
+  clothing: ['hoodie-logo', 'hyper'],
   mouth: ['neutral', 'coal'],
   eyes: ['round', 'coal'],
   accessory: ['shades-thug', 'noir'],
-  headwear: ['cap-h', 'hyper'],
+  headwear: ['cap-logo', 'hyper'],
 };
 
 const choices: LayerChoice[] = LAYER_ORDER.map((layer) => {

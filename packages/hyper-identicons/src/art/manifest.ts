@@ -26,7 +26,7 @@ export const MANIFEST: Manifest = {
   clothing: {
     id: 'clothing',
     art: [
-      { id: "hoodie-h", name: "Hyper Hoodie", weight: 22 },
+      { id: "hoodie-logo", name: "Hyper Hoodie", weight: 22 },
       { id: "hoodie", name: "Hoodie", weight: 19 },
       { id: "tee", name: "Tee", weight: 19 },
       { id: "puffer", name: "Puffer", weight: 17 },
@@ -51,7 +51,6 @@ export const MANIFEST: Manifest = {
       { id: "round", name: "Round", weight: 34 },
       { id: "squint", name: "Squint", weight: 20 },
       { id: "sleepy", name: "Sleepy", weight: 14 },
-      { id: "wink", name: "Wink", weight: 10 },
     ],
     colorways: COLORWAYS.eyes,
   },
@@ -70,7 +69,7 @@ export const MANIFEST: Manifest = {
     id: 'headwear',
     art: [
       { id: "none", name: "None", weight: 26 },
-      { id: "cap-h", name: "Hyper Cap", weight: 24 },
+      { id: "cap-logo", name: "Hyper Cap", weight: 24 },
       { id: "bucket", name: "Bucket", weight: 18 },
       { id: "cowboy", name: "Meowdy", weight: 14 },
       { id: "nightcap", name: "Nightcap", weight: 10 },

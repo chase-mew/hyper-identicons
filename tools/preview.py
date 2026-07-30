@@ -5,7 +5,7 @@ Colours here are a fixed debug palette approximating the reference art; the
 real colourways live in src/art/colorways.ts.
 
 Usage:
-    python3 tools/preview.py body/base headwear/cap-h accessory/shades-thug
+    python3 tools/preview.py body/base headwear/cap-logo accessory/shades-thug
     python3 tools/preview.py --ref body/base            # side by side with the trace
 """
 

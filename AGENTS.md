@@ -298,16 +298,30 @@ Things worth keeping in mind:
 Researched from the Foundation's own brand kit and sticker set rather than from
 secondhand write-ups. The things worth remembering:
 
-- **The Hyperliquid mark is not an H, and we ship an H anyway.** The real mark is
-  a "blob": two rounded lobes joined by a pinched waist, the right one taller.
-  It was drawn faithfully — box-filtered off the official path at 13x9, waist two
-  full rows deep, four columns of clearance between the lobes — and it read as a
-  bow tie. Centred on the chest, and still a bow tie moved onto the near shoulder,
-  because at this size *any* pinched horizontal shape with two round ends is a bow
-  tie and accuracy does not outvote that. Don't try it a fourth time. The `h` logo
-  on `hoodie-h` and `cap-h` is the reference artist's shorthand and it is the one
-  Hyperliquid mark in the set. It needs to be taller than it is wide with two-column
-  stems; at eleven wide with a centre bar it reads as a dumbbell.
+- **The Hyperliquid mark is a bow tie at this size, and the fix is where it sits,
+ not what shape it is.** The mark is two rounded lobes pinched to a waist about a
+ third of their height. `BLOB` in `tools/make-traits.py` is it, eleven by six, worn
+ by `cap-logo` and `hoodie-logo`.
+
+ Six rows is all there is, in both places the mark can go: the cap's crown is rows
+ 8-13, above which it tapers into its own outline and below which the seam starts;
+ the chest is rows 40-45, with row 39 taken by the ink line closing the jaw cut-out
+ and row 46 the last row of the canvas, where the mark reads as cropped. Six rows
+ cannot hold a one-third waist and look like anything but a bow tie. Flattening the
+ pinch to escape that was tried across about twenty glyphs at every width from 9 to
+ 13, and every one collapsed into a plain letter H, which is what the trait used to
+ be. There is no third shape in the range — don't go looking for one.
+
+ What actually works is position. Centred on the chest the mark lands under the
+ throat, which is exactly where a bow tie goes, and at that size the position
+ decides the reading. Out on the chest at column 26 the same pixels read as a badge
+ on a garment. The cap needs no such dodge and stays centred, because nothing wears
+ a bow tie on its head, so there is no competing reading to fall into.
+
+ Two things this cost, worth not rediscovering. Thirteen wide is a dumbbell: the
+ pinch is still one pixel deep but the span it interrupts is longer, so the lobes
+ stop being lobes and become weights. And one column further out, at 27, the outer
+ lobe crowds the edge of the torso.
 - **Hypurr is the ecosystem's cat and he already has a costume**: white fur shaded
   in pale *blue* rather than grey, a near-black hoodie, a mint blob on the chest.
   The `hypurr` fur colourway quotes his palette. His shading is `#88D5F0`, which

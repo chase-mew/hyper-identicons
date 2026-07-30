@@ -231,6 +231,52 @@ def inked(spans, slot="o", floor=None):
     return out
 
 
+# The Hyperliquid mark: two rounded lobes pinched to a waist, box-filtered off the
+# official path. Both places it goes -- the cap's crown and the chest -- have
+# exactly six usable rows, and that is what fixes the size.
+#
+# Eleven wide, not thirteen. At thirteen the waist is the same one pixel of pinch
+# across a longer span and the thing reads as a dumbbell.
+#
+# The shape is a bow tie, and there is no version of it at this size that is not:
+# the mark's waist is about a third of its lobe height, and six rows cannot hold
+# that ratio and look like anything else. Flattening the pinch to escape it was
+# tried across about twenty glyphs and every one collapsed into a plain letter H,
+# which is what this used to be. So the pinch stays and the placement does the
+# work instead -- see the hoodie.
+BLOB = (
+    ".##.....##.",
+    "####..#####",
+    "###########",
+    "###########",
+    "####..#####",
+    ".##.....##.",
+)
+
+
+def glyph(rows, top, left, ch="h"):
+    """Place an ASCII glyph as span runs, one run per unbroken stretch of '#'.
+
+    A logo is the one thing here worth authoring as a picture rather than as a
+    span table: the whole question about it is what shape it is.
+    """
+    out = {}
+    for dy, row in enumerate(rows):
+        runs, x = [], 0
+        while x < len(row):
+            if row[x] != "#":
+                x += 1
+                continue
+            x1 = x
+            while x1 + 1 < len(row) and row[x1 + 1] == "#":
+                x1 += 1
+            runs.append((left + x, left + x1, ch))
+            x = x1 + 1
+        if runs:
+            out[top + dy] = runs
+    return out
+
+
 def sockets(pattern, top, left):
     """Draw one eye socket and copy it across the face, so both eyes match."""
     span = (left, left + max(x1 for runs in pattern for _, x1, _ in runs))
@@ -251,9 +297,9 @@ emit("eyes/round.txt", sockets([
 ], top=21, left=14), "# Round eyes. Slots: k rim, e glint, i iris.", shift=MUZZLE)
 
 # A shut or narrowed eye is a dark line, and a dark line on a dark cat is nothing
-# at all -- these three were the only traits that could leave a face completely
+# at all -- these two were the only traits that could leave a face completely
 # blank at 48px. Every one of them now carries a glint row: the squint keeps the
-# round eye's highlight in its slit, and the two shut lids get a lit crease
+# round eye's highlight in its slit, and the shut lids get a lit crease
 # underneath. Whichever way the fur goes, one of the two rows contrasts with it.
 emit("eyes/squint.txt", sockets([
     [(0, 4, "k")],
@@ -265,15 +311,6 @@ emit("eyes/sleepy.txt", sockets([
     [(1, 3, "k")],
     [(1, 3, "e")],
 ], top=22, left=14), "# Contentedly shut. Slots: k lid, e crease.", shift=MUZZLE)
-
-# The shut eye is built exactly as the sleepy pair is, corner ticks and all. As a
-# plain dash it read as a filled wedge rather than a closed lid.
-emit("eyes/wink.txt", {
-    21: [(28, 30, "k")],
-    22: [(14, 14, "k"), (18, 18, "k"), (27, 27, "k"), (28, 28, "e"), (29, 30, "i"), (31, 31, "k")],
-    23: [(15, 17, "k"), (27, 27, "k"), (28, 30, "i"), (31, 31, "k")],
-    24: [(15, 17, "e"), (28, 30, "k")],
-}, "# One eye shut. Slots: k rim, e glint, i iris.", shift=MUZZLE)
 
 # Nose at rows 26-27, a philtrum down to 29, mouth from 30. The reference hangs
 # the muzzle this low: the jaw runs to row 39, and a mouth any higher than this
@@ -402,22 +439,31 @@ print("headwear:")
 # Shell and peak are inked as one shape and only the shell rows are cut against
 # the ears, so the peak stays a single unbroken sweep and the shell's sides vanish
 # under the ear rather than stopping at a black line beside it.
-emit("headwear/cap-h.txt", hat({
+#
+# The mark is bottom-anchored at row 13. Rows 8 to 13 are the only ones where the
+# crown is both wide enough and clear of the ear cut, so the glyph's height is what
+# it is because the crown has six usable rows, not because six reads best.
+#
+# Centred, unlike the one on the hoodie. The hoodie's has to move off centre to
+# stop reading as a bow tie, but nothing wears a bow tie on its head, so the cap
+# has no competing reading to dodge and a crown badge belongs in the middle.
+emit("headwear/cap-logo.txt", hat(merge({
     5: [(19, 28, "a")],
     6: [(17, 30, "a")],
     7: [(16, 32, "a")],
     8: [(15, 33, "a")],
-    9: [(14, 34, "a"), (21, 22, "h"), (26, 27, "h")],
-    10: [(14, 34, "a"), (15, 15, "c"), (21, 22, "h"), (26, 27, "h")],
-    11: [(13, 35, "a"), (14, 14, "c"), (21, 27, "h")],
-    12: [(13, 35, "a"), (14, 14, "c"), (21, 22, "h"), (26, 27, "h")],
-    13: [(13, 35, "a"), (21, 22, "h"), (26, 27, "h")],
+    9: [(14, 34, "a")],
+    10: [(14, 34, "a"), (15, 15, "c")],
+    11: [(13, 35, "a"), (14, 14, "c")],
+    12: [(13, 35, "a"), (14, 14, "c")],
+    13: [(13, 35, "a")],
     14: [(13, 36, "a")],
     15: [(13, 40, "o")],
     16: [(13, 41, "a")],
     17: [(14, 41, "a")],
     18: [(18, 40, "a")],
-}, crown=range(0, 15)), "# The reference cap. Slots: a shell, c seam, h logo, o ink.")
+}, glyph(BLOB, 8, 18)), crown=range(0, 15)),
+     "# The reference cap. Slots: a shell, c seam, h mark, o ink.")
 
 # No beanie. It was a dome over a cuff, which is the bucket hat with the brim
 # swapped for a band, and the two never stopped competing: every fix that made the
@@ -572,26 +618,20 @@ emit("clothing/tee.txt", garment({
     43: [(22, 26, "b")],
 }), "# V-neck tee. Slots: a fabric, b neckline.")
 
-# Taller than it is wide, and only two columns per stem. At eleven wide with a
-# centre bar it read as a dumbbell rather than an H.
-emit("clothing/hoodie-h.txt", garment({
-    **COLLAR,
-    40: [(21, 22, "h"), (26, 27, "h")],
-    41: [(21, 22, "h"), (26, 27, "h")],
-    42: [(21, 27, "h")],
-    43: [(21, 27, "h")],
-    44: [(21, 22, "h"), (26, 27, "h")],
-    45: [(21, 22, "h"), (26, 27, "h")],
-}), "# The reference hoodie. Slots: a body, b collar, h logo.")
-
-# No blob hoodie. The real Hyperliquid mark is two rounded lobes joined at a waist,
-# and I drew it faithfully -- box-filtered off the official path at 13x9, correct
-# waist depth, correct four-column clearance between the lobes. It is a bow tie. It
-# is a bow tie centred on the chest and it is still a bow tie moved onto the near
-# shoulder, because at this size any pinched horizontal shape with two round ends
-# is a bow tie, and accuracy does not outvote that. Redrawing it as an H just made
-# a second copy of the hoodie above, so the blob variant is gone and the reference
-# artist's H -- which the cap also wears -- is the one Hyperliquid mark in the set.
+# Row 39 is not free even though the collar stops at 38: the jaw is cut out of the
+# torso above it, so 39 carries the ink line closing that hole. That leaves rows 40
+# to 45, and it is why the mark is six rows rather than seven -- a seventh row lands
+# on the last row of the canvas and the mark reads as cropped.
+#
+# Off centre, and that is the whole reason the mark is wearable here. Centred it
+# lands under the throat, which is where a bow tie goes, and the shape is close
+# enough to one that the position decides the reading. Out on the chest the same
+# pixels read as a badge on a garment. It goes to the viewer's right: that is the
+# near side of a three-quarter view, and the wearer's left, which is the side a
+# chest logo sits on. Column 26 rather than 27 -- a column further out and the
+# outer lobe crowds the edge of the torso.
+emit("clothing/hoodie-logo.txt", garment(merge(COLLAR, glyph(BLOB, 40, 26))),
+     "# The reference hoodie. Slots: a body, b collar, h mark.")
 
 # A scarf, to replace some of what the suit and the jersey took with them when they
 # went. Overalls were the first attempt and failed the way the suit did: braces have
