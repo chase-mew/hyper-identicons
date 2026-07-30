@@ -454,6 +454,15 @@ Two rules of thumb learned the hard way:
   `a`, which flips with tone. It also cost the mortarboard its tassel: a two-pixel
   cord came out solid ink right beside the far ear's own ink line. Anything that
   dangles needs a terminal mass wide enough to keep an interior.
+- **Nothing can hang past an ear, so no worn thing on this cat actually droops.**
+  The nightcap's tip points up rather than flopping over, and it is not for want of
+  trying. There is a route — nothing sits above row 6, so a cone can arc over the
+  near ear and come down outside it — and built, it droops convincingly at 8x. At
+  48 it collapses, because the limb carrying the tip has only columns 2-7 to live
+  in once the ear takes 8-17, and two or three columns with an ink line in them is
+  a wire that vanishes behind the ear and strands the tip in the background.
+  Thickening the limb just enlarges the stranded part. Treat a hanging tip, a
+  tassel or a ponytail as unavailable rather than as a thing to get right.
 - **Read a hat's outline as if it were solid black.** That is all you get at 48px.
   By that logic one thick horizontal band is a striped jumper whatever colour it
   is — the jersey needed trim above and below the band before it read as sport.

@@ -555,24 +555,46 @@ emit("headwear/cowboy.txt", hat(merge(
 # what reads: a squared arch with a hat lost inside it. Dropping it low enough to
 # close that gap puts it back on the ears. There is no height that works.
 
-# Drooping to the far side, which is where the asymmetry earns its keep: almost
-# everything else worn here is bilateral, and the cat is not.
+# Drooping to the near side, which is where the asymmetry earns its keep: almost
+# everything else worn here is bilateral, and the cat is not. An exact reflection
+# through AXIS, which is why the cuff still sits centred: the skull is symmetric
+# even though the cat is not.
+#
+# It used to droop the other way, and two attempts to do better than a plain
+# mirror while turning it round both failed:
+#
+# Giving the pom a fourth row to make it rounder is right in isolation and wrong
+# here. The pom's job is to be the far end of a diagonal, and enough mass to read
+# as a ball on its own stands it up as a vertical knob on the crown -- which is a
+# bobble hat. It also pushed the cone down into the near ear, and four rows came
+# back cut instead of two.
+#
+# Nor can the tip actually hang. A real nightcap flops over and the pom dangles,
+# and there is a route for it: nothing is above row 6, so the cone can arc over
+# the ear and come down outside it around column 4. Built, it droops convincingly
+# at 8x and falls apart at 48 -- the limb carrying the pom has columns 2-7 to live
+# in, because 8-11 is ear and gets cut, so it is two or three columns wide with one
+# of those the ink line. At native size the limb disappears behind the ear and the
+# pom is a tab floating in the background. Thickening it only enlarges the tab.
+#
+# So the tip points up rather than hanging, on both this and every version before
+# it. That is a real limitation of a 48px canvas with tall ears, not an oversight.
 emit("headwear/nightcap.txt", hat({
-    3: [(32, 36, "c")],
-    4: [(31, 37, "c")],
-    5: [(31, 37, "c")],
-    6: [(28, 36, "a")],
-    7: [(25, 33, "a")],
-    8: [(22, 32, "a")],
-    9: [(19, 31, "a")],
-    10: [(17, 31, "a")],
+    3: [(10, 14, "c")],
+    4: [(9, 15, "c")],
+    5: [(9, 15, "c")],
+    6: [(10, 18, "a")],
+    7: [(13, 21, "a")],
+    8: [(14, 24, "a")],
+    9: [(15, 27, "a")],
+    10: [(15, 29, "a")],
     11: [(15, 31, "a")],
-    12: [(13, 32, "a")],
-    13: [(12, 33, "a")],
-    14: [(12, 36, "b")],
-    15: [(11, 37, "b")],
-    16: [(11, 37, "b")],
-    17: [(11, 37, "b")],
+    12: [(14, 33, "a")],
+    13: [(13, 34, "a")],
+    14: [(10, 34, "b")],
+    15: [(9, 35, "b")],
+    16: [(9, 35, "b")],
+    17: [(9, 35, "b")],
 }, crown=range(0, 14)), "# Nightcap with a pom. Slots: a cone, b cuff, c pom.")
 
 # No headphones. The last version read well -- band arcing over and clipped behind
