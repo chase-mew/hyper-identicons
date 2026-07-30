@@ -50,7 +50,7 @@ python3 tools/preview.py body/base mouth/smile eyes/round   # composite to PNG
 python3 tools/trait-sheet.py                                # every trait, labelled
 python3 tools/peek.py <grid> --rows 20:30 --cols 8:44       # exact coordinates
 cd packages/hyper-identicons && npx tsx scripts/render-base.ts   # root PNG
-npx tsx scripts/faces.ts [accessory]                        # every mouth x eyes
+npx tsx scripts/pairs.ts eyes mouth                         # one layer against another
 ```
 
 ### The cat is a three-quarter view
@@ -435,12 +435,12 @@ Two rules of thumb learned the hard way:
   useless for asking what the set actually contains. An expression is a property of
   the whole face: the eyepatch is good, the sleepy lids are good, and together the
   cat has no eye open at all and reads as unconscious. Put a smirk under that and
-  it reads as a stroke, which is roughly how it was reported. `faces.ts` lays out
-  every mouth against every pair of eyes, optionally through an accessory, and it
-  is the only view that catches this class of thing.
+  it reads as a stroke, which is roughly how it was reported.
 
-  The fix is `excludes` in `art-source/manifest.json`, spec §3.1 — see the
-  Combinations section below before adding one.
+  `pairs.ts <rowLayer> <columnLayer> [layer=art] [--deep]` lays any two layers out
+  against each other, optionally through a fixed third and on either tone, and it
+  is the only view that catches this class of thing. The fix is `excludes` in
+  `art-source/manifest.json`, spec §3.1 — see the Combinations section below.
 - **A dark line on the face needs a light row under it.** Shut and narrowed eyes
   were the only traits that could leave a face completely blank: on a near-black
   cat a one-pixel dark lid is nothing at all. Every closed lid now carries a glint
@@ -577,6 +577,18 @@ already drawn, then picks from what is left. Things worth knowing:
   depend on another, and a manifest full of rules is a manifest whose art needs
   redrawing. There is currently one.
 
+Every interacting pair has been through `pairs.ts` once — eyes against mouths on
+both tones and through each accessory, headwear against accessories, eyes,
+clothing and backgrounds, clothing against mouths — and the eyepatch is the only
+thing that came out of it. Two near misses were looked at and deliberately left:
+
+- **The visor stacks with every brim**, because it is a horizontal bar across the
+  eyes and most hats end in one just above them. Three bands on the cowboy. Busy
+  at 4x and perfectly legible at 48, which is the size that decides.
+- **Hyper Cap and Hyper Hoodie put the mark on the cat twice.** Two marks at
+  different sizes in different places reads as branded merch rather than as an
+  error, and on this project that is the point.
+
 Two failures cost real time and are worth recognising early:
 
 - **A face needs one open eye, or something deliberately covering both.** Shades
@@ -604,4 +616,4 @@ Two failures cost real time and are worth recognising early:
 - **Nothing checks trait pairs either.** `excludes` enforces the rules someone has
   already noticed; there is no equivalent of `audit-colors.ts` that would find the
   next bad pair on its own, and it is not obvious what one would measure. Laying
-  the grid out with `faces.ts` and looking at it is the whole method.
+  the grid out with `pairs.ts` and looking at it is the whole method.

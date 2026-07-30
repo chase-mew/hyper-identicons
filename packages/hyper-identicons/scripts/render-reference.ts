@@ -16,11 +16,15 @@ import type { LayerChoice, LayerId } from '../src/core/types.js';
 const WANTED: Record<LayerId, [art: string, colorway: string]> = {
   background: ['plain', 'sand'],
   body: ['base', 'snow'],
-  clothing: ['hoodie-logo', 'hyper'],
+  // 'ink' rather than the 'hyper' this asked for until now: that colourway went
+  // when the tone system landed, and nothing noticed because nothing runs this in
+  // CI. It is the near-black the reference dresses the cat in, and it carries the
+  // brand mint on the logo slot, which is the pairing the reference actually has.
+  clothing: ['hoodie-logo', 'ink'],
   mouth: ['neutral', 'coal'],
   eyes: ['round', 'coal'],
   accessory: ['shades-thug', 'noir'],
-  headwear: ['cap-logo', 'hyper'],
+  headwear: ['cap-logo', 'ink'],
 };
 
 const choices: LayerChoice[] = LAYER_ORDER.map((layer) => {
