@@ -395,11 +395,11 @@
         "clothing": "tee/teal",
         "mouth": "buddy/coal",
         "eyes": "sleepy/coal",
-        "accessory": "visor/tortoise",
+        "accessory": "specs/tortoise",
         "headwear": "halo/gold"
       },
       "svgSha256": {
-        "full": "be058597ade44ff8474121c345f4605f83e263f96446b57ed99e2927cb0413bb",
+        "full": "ca514adddcfdb1928b988c68c9b0ec27c048dc041f091cdb3b3cf8a96f9a9196",
         "mini": "8c1503a06c775a05c9a66e196540d4546e38c18f44db1d9627c22c7a0e178781"
       }
     },

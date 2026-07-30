@@ -61,7 +61,7 @@ export const MANIFEST: Manifest = {
       { id: "shades-thug", name: "Deal Shades", weight: 20 },
       { id: "specs", name: "Specs", weight: 14 },
       { id: "visor", name: "Visor", weight: 8 },
-      { id: "eyepatch", name: "Eyepatch", weight: 4 },
+      { id: "eyepatch", name: "Eyepatch", weight: 4, excludes: [{"layer":"eyes","art":"sleepy"}] },
     ],
     colorways: COLORWAYS.accessory,
   },

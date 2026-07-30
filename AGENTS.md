@@ -50,6 +50,7 @@ python3 tools/preview.py body/base mouth/smile eyes/round   # composite to PNG
 python3 tools/trait-sheet.py                                # every trait, labelled
 python3 tools/peek.py <grid> --rows 20:30 --cols 8:44       # exact coordinates
 cd packages/hyper-identicons && npx tsx scripts/render-base.ts   # root PNG
+npx tsx scripts/faces.ts [accessory]                        # every mouth x eyes
 ```
 
 ### The cat is a three-quarter view
@@ -428,6 +429,18 @@ Two rules of thumb learned the hard way:
   beside each blow-up for exactly this reason, and `sheet.ts` renders a wall of
   whole identicons, which is the only way to see whether forty of them read as one
   family and still tell each other apart.
+- **A trait can be faultless and still be wrong with another one, and no
+  single-trait view will ever show you.** The trait sheets each draw one trait over
+  a neutral face, which is right for asking whether a trait is drawn well and
+  useless for asking what the set actually contains. An expression is a property of
+  the whole face: the eyepatch is good, the sleepy lids are good, and together the
+  cat has no eye open at all and reads as unconscious. Put a smirk under that and
+  it reads as a stroke, which is roughly how it was reported. `faces.ts` lays out
+  every mouth against every pair of eyes, optionally through an accessory, and it
+  is the only view that catches this class of thing.
+
+  The fix is `excludes` in `art-source/manifest.json`, spec §3.1 — see the
+  Combinations section below before adding one.
 - **A dark line on the face needs a light row under it.** Shut and narrowed eyes
   were the only traits that could leave a face completely blank: on a near-black
   cat a one-pixel dark lid is nothing at all. Every closed lid now carries a glint
@@ -535,6 +548,46 @@ Two rules of thumb learned the hard way:
   dropped from the wrap's outer edge and the two together made one continuous
   L-bracket. Inset it and the same two shapes read as a scarf.
 
+## Combinations
+
+Traits are drawn from independent lists, which is what makes the space big and is
+also the only reason two of them can fight. An art entry can name pairs it may not
+be drawn with:
+
+```json
+{ "id": "eyepatch", "name": "Eyepatch", "weight": 4,
+  "excludes": [{ "layer": "eyes", "art": "sleepy" }] }
+```
+
+`selectTraits` filters a layer's candidates to those compatible with everything
+already drawn, then picks from what is left. Things worth knowing:
+
+- **The check is symmetric and the draw count is fixed.** Declare a pair on
+  whichever of the two it reads best on; `SELECT_ORDER` does not matter. Each layer
+  consumes exactly one draw whether or not anything was filtered, so an exclusion
+  changes what that layer lands on and nothing about the layers after it.
+- **The excluded weight is shared out, not re-rolled.** Barring the eyepatch from a
+  sleepy cat makes the other four accessories proportionally likelier on that cat,
+  which is why it does not distort the overall distribution much: the eyepatch is
+  weight 4 of 80 and sleepy is 14 of 68.
+- **Every rule needs a reason that is about the pair.** If a trait looks wrong next
+  to most things, it is the trait that is wrong and an exclusion is a way of not
+  fixing it. The bar is two traits that are each right and are wrong together.
+- **Reach for this last.** It is the only thing in the system that makes one trait
+  depend on another, and a manifest full of rules is a manifest whose art needs
+  redrawing. There is currently one.
+
+Two failures cost real time and are worth recognising early:
+
+- **A face needs one open eye, or something deliberately covering both.** Shades
+  and the visor hide both eyes and read fine, because concealment is plainly the
+  point. One eye covered and the other closed reads as unconscious instead — the
+  face looks like it is trying to show an eye and failing.
+- **Two asymmetries on one face fight.** A crooked mouth under a crooked eye reads
+  as palsy rather than as a smirk and a wink. This is why the Wink was dropped
+  rather than fixed; it would be viable again now that pairs can be excluded, but
+  it would need barring from both the Buddy mouth and the eyepatch.
+
 ## Known gaps
 - **A two-tone keyline was considered and not taken.** Wrapping the cat in an ink
   line plus a light halo guarantees Lc ≥ 50.8 against *any* sRGB colour, which
@@ -548,3 +601,7 @@ Two rules of thumb learned the hard way:
   encoded art, so it is cheaper to leave it than to remove it.
 - **Trait/colourway pairs are not checked for taste**, only for contrast. A
   legible combination can still be ugly.
+- **Nothing checks trait pairs either.** `excludes` enforces the rules someone has
+  already noticed; there is no equivalent of `audit-colors.ts` that would find the
+  next bad pair on its own, and it is not obvious what one would measure. Laying
+  the grid out with `faces.ts` and looking at it is the whole method.

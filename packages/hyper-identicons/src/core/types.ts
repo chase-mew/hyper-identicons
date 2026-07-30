@@ -42,6 +42,15 @@ export interface Art {
   name: string;
   /** Relative, not a percentage. Must be >= 1. */
   weight: number;
+  /**
+   * Art on other layers this one may not be drawn with. See spec/v1.md §3.1.
+   *
+   * Traits are otherwise independent, which is the whole point of them — but an
+   * expression is a property of a face rather than of a mouth, and a couple of
+   * pairs that are each fine alone are not fine together. The check is symmetric,
+   * so it does not matter which of the two declares it or which is drawn first.
+   */
+  excludes?: { layer: LayerId; art: string }[];
 }
 
 /**

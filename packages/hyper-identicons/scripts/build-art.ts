@@ -23,6 +23,7 @@ interface ArtEntry {
   id: string;
   name: string;
   weight: number;
+  excludes?: { layer: LayerId; art: string }[];
 }
 
 interface Grid {
@@ -179,9 +180,27 @@ for (const layer of LAYER_ORDER) {
   );
 }
 
+// A rule naming art that does not exist would silently never fire, which is the
+// worst way for a constraint to fail: the combination it was written to prevent
+// goes on shipping and the manifest reads as though it does not.
+for (const layer of LAYER_ORDER) {
+  for (const entry of manifest.layers[layer]) {
+    for (const pair of entry.excludes ?? []) {
+      const target = manifest.layers[pair.layer];
+      if (!target) throw new Error(`manifest.json: '${layer}/${entry.id}' excludes unknown layer '${pair.layer}'`);
+      if (!target.some((other) => other.id === pair.art)) {
+        throw new Error(`manifest.json: '${layer}/${entry.id}' excludes '${pair.layer}/${pair.art}', which does not exist`);
+      }
+    }
+  }
+}
+
 const manifestBody = LAYER_ORDER.map((layer) => {
   const art = manifest.layers[layer]
-    .map((entry) => `      { id: ${JSON.stringify(entry.id)}, name: ${JSON.stringify(entry.name)}, weight: ${entry.weight} },`)
+    .map((entry) => {
+      const excludes = entry.excludes?.length ? `, excludes: ${JSON.stringify(entry.excludes)}` : '';
+      return `      { id: ${JSON.stringify(entry.id)}, name: ${JSON.stringify(entry.name)}, weight: ${entry.weight}${excludes} },`;
+    })
     .join('\n');
   return `  ${layer}: {\n    id: '${layer}',\n    art: [\n${art}\n    ],\n    colorways: COLORWAYS.${layer},\n  },`;
 }).join('\n');

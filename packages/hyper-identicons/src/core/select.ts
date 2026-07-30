@@ -1,6 +1,6 @@
 import type { Cursor } from './cursor.js';
 import { LAYER_ORDER, SELECT_ORDER } from './types.js';
-import type { LayerChoice, LayerId, Manifest, Tone } from './types.js';
+import type { Art, LayerChoice, LayerId, Manifest, Tone } from './types.js';
 
 /** Multiply-shift weighted choice. See spec/v1.md §3.1. */
 export function pick<T extends { weight: number }>(candidates: readonly T[], cursor: Cursor): T {
@@ -35,6 +35,19 @@ function toneFor(layer: LayerId, cat: Tone): Tone | undefined {
 }
 
 /**
+ * Whether a candidate can be worn with everything drawn so far. Checked in both
+ * directions, so a pair can be declared on whichever of the two it reads best on
+ * without anyone having to remember which one `SELECT_ORDER` reaches first.
+ */
+function allowed(id: LayerId, art: Art, chosen: Map<LayerId, LayerChoice>): boolean {
+  for (const [other, choice] of chosen) {
+    if (art.excludes?.some((pair) => pair.layer === other && pair.art === choice.art.id)) return false;
+    if (choice.art.excludes?.some((pair) => pair.layer === id && pair.art === art.id)) return false;
+  }
+  return true;
+}
+
+/**
  * Draws for every layer, whatever the detail level, so that `mini` and `full` can
  * never disagree about a layer they share. Filtering happens at paint time.
  *
@@ -50,7 +63,16 @@ export function selectTraits(cursor: Cursor, manifest: Manifest): LayerChoice[] 
 
   for (const id of SELECT_ORDER) {
     const layer = manifest[id];
-    const art = pick(layer.art, cursor);
+    // Exactly one draw per layer either way, so excluding a pair changes what this
+    // layer lands on and nothing about the layers after it. The excluded weight is
+    // shared out over whatever is left rather than re-rolled.
+    //
+    // Falling back to the full list if a rule empties it is deliberate: a manifest
+    // that can strand a layer is a bug, and `test/select.test.ts` proves the shipped
+    // one cannot, but an address that throws is far worse than a face that is merely
+    // not the one intended.
+    const available = layer.art.filter((art) => allowed(id, art, chosen));
+    const art = pick(available.length > 0 ? available : layer.art, cursor);
     const wanted = cat && toneFor(id, cat);
     const candidates = wanted ? layer.colorways.filter((entry) => entry.tone === wanted) : layer.colorways;
     const colorway = pick(candidates, cursor);
