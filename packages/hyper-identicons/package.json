@@ -64,7 +64,7 @@
     "test": "tsx --test test/*.test.ts"
   },
   "dependencies": {
-    "@noble/hashes": "^1.6.1"
+    "@noble/hashes": "^2.2.0"
   },
   "devDependencies": {
     "@types/node": "^26.1.2",
