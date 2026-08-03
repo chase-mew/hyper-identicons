@@ -25,6 +25,10 @@ output is allowed to change until it is frozen.
 | `tools/` | Python art authoring — the generators that write `art-source/` |
 | `spec/v1.md` | normative spec, plus `spec/vectors.json` conformance vectors |
 | `apps/playground/` | the review site |
+| `docs/` | the two images the README uses; everything else renders to `tools/out/` |
+
+`CONTRIBUTING.md` is the outside-facing version of the pipeline notes below. When
+one of them changes, check whether the other is now wrong.
 
 ## Art pipeline
 
@@ -32,16 +36,20 @@ The `.txt` grids under `art-source/` are **generated**. Editing them by hand
 works until the next generator run overwrites it. The generators are:
 
 ```bash
-python3 tools/make-body.py      # the cat; also writes tools/anchors.json
-python3 tools/make-traits.py    # everything else, placed against those anchors
+python3 tools/make-body.py         # the cat; also writes tools/anchors.json
+python3 tools/make-backgrounds.py  # the fields, and the two empty grids
+python3 tools/make-traits.py       # everything else, placed against those anchors
 ```
 
 Run `make-body.py` first: `make-traits.py` reads the anchors it publishes, which
 is what stops the body and the things worn on it drifting apart. Then
 `pnpm build:art` re-encodes, and `pnpm vectors` refreshes the conformance file.
 
-Both generators must be idempotent. Run them twice and diff before committing;
-a generator that produces different output on a second run has state in it.
+Every generator must be idempotent. Run them twice and diff before committing;
+a generator that produces different output on a second run has state in it. CI
+runs all three against the committed grids and fails on any difference, so a
+half-regenerated change cannot merge — but it will tell you at review time rather
+than while you are still working, so keep diffing locally.
 
 Useful while iterating:
 
@@ -62,9 +70,11 @@ The whole cat is offset one row down the canvas by a `DROP` constant applied whe
 the grids are rasterised, so the span tables stay in the coordinates they were
 traced in.
 
-The reference image is `2026-07-28 11.49.26.jpg`. Where the reference hides the
-cat — the crown under the cap, the lower far ear, the shoulders under the hoodie
-— the geometry is reconstructed and the code says so.
+The reference study the spans were read off is `tools/reference/reference.jpg`,
+kept out of version control because nothing in the build needs it: `make-body.py`
+carries the geometry as literal tables. Where the study hides the cat — the crown
+under the cap, the lower far ear, the shoulders under the hoodie — the geometry is
+reconstructed and the code says so.
 
 ---
 
@@ -278,9 +288,10 @@ Anchored on Hyperliquid, whose entire identity sits on OKLab hue ~180:
 | Logo dark | `#011916` | 0.20 | the dark the logo itself is drawn in |
 | Ebony | `#04060C` | 0.12 | |
 
-Bounce contributes the violet axis at hue ~285–300: `#6753F1`, `#9E88F8`,
-`#D4BDFF`, and the indigo `#242047`. Both were read out of the live CSS
-(`bounce.tech` names the Hyperliquid ones explicitly as `--hl-*`).
+A violet axis at hue ~285–300 sits opposite them: `#6753F1`, `#9E88F8`, `#D4BDFF`,
+and the indigo `#242047`. It is there so the palette has somewhere to go that is
+not teal, and because violet holds far more chroma than teal does at the
+lightnesses the deep band runs at.
 
 Around those, a small spread of warm and cool neighbours so a wallet does not
 always land on teal. Backgrounds are held a little under the fur in chroma —
@@ -335,24 +346,21 @@ Things worth keeping in mind:
   conversion the SVG gets. Both were identical numerically. Probe values through
   a canvas rather than trusting a screenshot.
 
-## What the audience already recognises
+## Choosing what to draw
 
-Researched from the Foundation's own brand kit and sticker set rather than from
-secondhand write-ups. The things worth remembering:
+- **The mark is a bow tie at this size, and the fix is where it sits, not what
+ shape it is.** `BLOB` in `tools/make-traits.py` is two rounded lobes pinched to a
+ waist about a third of their height, eleven by six, worn by `cap-logo` and
+ `hoodie-logo`.
 
-- **The Hyperliquid mark is a bow tie at this size, and the fix is where it sits,
- not what shape it is.** The mark is two rounded lobes pinched to a waist about a
- third of their height. `BLOB` in `tools/make-traits.py` is it, eleven by six, worn
- by `cap-logo` and `hoodie-logo`.
-
- Six rows is all there is, in both places the mark can go: the cap's crown is rows
- 8-13, above which it tapers into its own outline and below which the seam starts;
- the chest is rows 40-45, with row 39 taken by the ink line closing the jaw cut-out
- and row 46 the last row of the canvas, where the mark reads as cropped. Six rows
- cannot hold a one-third waist and look like anything but a bow tie. Flattening the
- pinch to escape that was tried across about twenty glyphs at every width from 9 to
- 13, and every one collapsed into a plain letter H, which is what the trait used to
- be. There is no third shape in the range — don't go looking for one.
+ Six rows is all there is, in both places it can go: the cap's crown is rows 8-13,
+ above which it tapers into its own outline and below which the seam starts; the
+ chest is rows 40-45, with row 39 taken by the ink line closing the jaw cut-out and
+ row 46 the last row of the canvas, where the mark reads as cropped. Six rows cannot
+ hold a one-third waist and look like anything but a bow tie. Flattening the pinch
+ to escape that was tried across about twenty glyphs at every width from 9 to 13,
+ and every one collapsed into a plain letter H, which is what the trait used to be.
+ There is no third shape in the range — don't go looking for one.
 
  What actually works is position. Centred on the chest the mark lands under the
  throat, which is exactly where a bow tie goes, and at that size the position
@@ -364,31 +372,27 @@ secondhand write-ups. The things worth remembering:
  pinch is still one pixel deep but the span it interrupts is longer, so the lobes
  stop being lobes and become weights. And one column further out, at 27, the outer
  lobe crowds the edge of the torso.
-- **Hypurr is the ecosystem's cat and he already has a costume**: white fur shaded
-  in pale *blue* rather than grey, a near-black hoodie, a mint blob on the chest.
-  The `hypurr` fur colourway quotes his palette. His shading is `#88D5F0`, which
-  scores Lc 28 against white — the only detail in the palette below the floor —
-  so ours is one step deeper at `#7AC6E4`.
-- **The Foundation's 41-sticker set is a pre-approved trait list.** Anything it
-  puts on this cat is on-brand by definition: cowboy hat, kabuto, deerstalker,
-  mortarboard, beanie, nightcap, ski goggles, round spectacles. Still unbuilt from
-  that list: kabuto, deerstalker (needs simplifying — a 2px check is noise at this
-  size), ski goggles, ice block, fire halo.
-- **"Alright buddy" is the community's defining gesture** and has no fixed image,
-  so the `buddy` mouth defines rather than copies it: a level line with one corner
-  a single row up. Fond, not sneering — that distinction is the whole trait.
+- **Pale blue shades white fur better than grey does.** `frost` shades at
+ `#7AC6E4`. A step lighter at `#88D5F0` scores Lc 28 against white, under the
+ floor, which is how that value was arrived at rather than chosen.
+- **Traits people already have a word for read fastest.** Cowboy hat, mortarboard,
+ beanie, nightcap, ski goggles, round spectacles. Still unbuilt and worth having:
+ ski goggles, a deerstalker if the check can be simplified — a 2px check is noise
+ at this size — and something worn entirely on the background.
+- **A gesture with no fixed image has to be defined rather than copied.** The
+ `buddy` mouth is a level line with one corner a single row up: fond, not sneering,
+ and that distinction is the whole trait.
 
 Things to stay away from, and why:
 
-- **The JELLY incident is not a joke to them.** No jellyfish, no JELLY reference.
-- **No real people.** Not Jeff Yan, who is private and has had security problems;
-  not James Wynn, who has live allegations against him.
-- **No third-party marks.** Super Saiyan hair, the Iron Throne, console silhouettes.
-- **TinyHyperCats is already a pixel-art cat collection on Hyperliquid.** Avoid
-  their hats specifically: sombrero, Santa, Nyan rainbow.
-- **Bias clean over grimy.** The Hypurr art direction explicitly rejected Web3's
-  "dark palette and neon fatigue", and this audience's self-image is competent
-  rather than degen.
+- **No third-party marks.** Anything with an owner behind it — a studio's hair
+ silhouette, a franchise's prop, a console — costs more than a hat is worth.
+- **Nothing that puts a real person on the cat.** Not as a caricature, not as a
+ nickname, not as an in-joke.
+- **Nothing that references somebody's losses.** The audience contains the people
+ it would be about.
+- **Bias clean over grimy.** A dark palette and neon fatigue is the easy read for a
+ crypto avatar and the wrong one here.
 
 ## Drawing a trait
 

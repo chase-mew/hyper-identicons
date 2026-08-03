@@ -1,0 +1,39 @@
+name: Bug report
+description: Something renders wrong, throws, or disagrees with the spec.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Spec v1 is a draft, so an address rendering differently between releases is
+        expected rather than a bug. See the status line at the top of `spec/v1.md`.
+
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you expected, and what you got instead.
+    validations:
+      required: true
+
+  - type: input
+    id: address
+    attributes:
+      label: Address
+      description: The address that reproduces it, if it is address-specific.
+      placeholder: "0x…"
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: How to reproduce
+      description: A snippet is ideal. Include the version and the entry point you imported.
+      render: ts
+
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      placeholder: "hyper-identicons 0.1.0, node 22"
+    validations:
+      required: true

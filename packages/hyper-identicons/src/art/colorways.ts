@@ -9,9 +9,10 @@ export const HYPER = '#97FCE4';
  * prints every contrast the palette has to survive and the test suite fails the
  * build if one slips. Do not add a colour here by eye without running that.
  *
- * Hues come from Hyperliquid (aquamarine, foam, dolphin, firefly, ebony, all sitting
- * on hue 180) and from Bounce (violet and indigo, on hue 285-300), with a small
- * spread of warm and cool neighbours so a wallet does not always land on teal.
+ * Hues are anchored on Hyperliquid's teals (aquamarine, foam, dolphin, firefly,
+ * ebony, all sitting on hue 180) with a violet axis opposite them on hue 285-300,
+ * and a small spread of warm and cool neighbours so a wallet does not always land
+ * on teal.
  */
 export const COLORWAYS: Record<LayerId, Colorway[]> = {
   // Deep and bright are never mixed in one identicon: whichever tone the cat is,

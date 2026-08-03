@@ -1,11 +1,28 @@
 {
   "name": "@hyper-identicons/react",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "React component for Hyper Identicons",
+  "keywords": ["identicon", "avatar", "react", "pixel-art", "evm", "hyperevm", "web3"],
   "license": "MIT",
+  "author": "Chase Manning <chase@manning.dev>",
+  "homepage": "https://github.com/chase-mew/hyper-identicons#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chase-mew/hyper-identicons.git",
+    "directory": "packages/react"
+  },
+  "bugs": {
+    "url": "https://github.com/chase-mew/hyper-identicons/issues"
+  },
   "type": "module",
   "sideEffects": false,
-  "files": ["dist"],
+  "engines": {
+    "node": ">=22"
+  },
+  "files": ["dist", "LICENSE", "README.md"],
+  "publishConfig": {
+    "access": "public"
+  },
   "exports": {
     ".": { "types": "./dist/index.d.ts", "default": "./dist/index.js" }
   },
@@ -13,7 +30,7 @@
     "build": "tsc -p tsconfig.json"
   },
   "peerDependencies": {
-    "hyper-identicons": "workspace:*",
+    "hyper-identicons": "workspace:^",
     "react": ">=18"
   },
   "devDependencies": {

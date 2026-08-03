@@ -1,6 +1,6 @@
 /**
- * Renders the base Purrbit — the cat every other trait is drawn on top of — to a PNG
- * at the repository root, through the shipped pipeline rather than the Python preview.
+ * Renders the base Purrbit — the cat every other trait is drawn on top of — to
+ * docs/base.png, through the shipped pipeline rather than the Python preview.
  * Regenerate it whenever the body art changes. Dev-only: never ships.
  *
  *   pnpm tsx scripts/render-base.ts [scale] [out.png]
@@ -8,7 +8,7 @@
 import { writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { MANIFEST } from '../src/art/manifest.js';
-import { ART_DATA } from '../src/index.js';
+import { ART_DATA } from '../src/art/full.js';
 import { renderPixels } from '../src/core/render.js';
 import { CANVAS } from '../src/core/slots.js';
 import { treatPixels } from '../src/core/treatment.js';
@@ -34,8 +34,8 @@ const choices: LayerChoice[] = Object.entries(WANTED).map(([layer, [artId, color
 });
 
 const scale = Number(process.argv[2] ?? 20);
-// Resolved against the script, not the shell, so the file lands in the root either way.
-const out = process.argv[3] ?? fileURLToPath(new URL('../../../base-purrbit.png', import.meta.url));
+// Resolved against the script, not the shell, so the file lands in docs/ either way.
+const out = process.argv[3] ?? fileURLToPath(new URL('../../../docs/base.png', import.meta.url));
 
 const pixels = treatPixels(renderPixels(choices, ART_DATA));
 const size = CANVAS * scale;

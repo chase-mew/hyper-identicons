@@ -25,7 +25,7 @@
  */
 import { writeFileSync } from 'node:fs';
 import { MANIFEST } from '../src/art/manifest.js';
-import { ART_DATA } from '../src/index.js';
+import { ART_DATA } from '../src/art/full.js';
 import { renderPixels } from '../src/core/render.js';
 import { CANVAS } from '../src/core/slots.js';
 import { treatPixels } from '../src/core/treatment.js';
@@ -35,10 +35,17 @@ import { encodePng, hex } from './png.js';
 
 const args = process.argv.slice(2);
 const deep = args.includes('--deep');
-const [rowLayer, columnLayer] = args.filter((a) => !a.includes('=') && a !== '--deep') as LayerId[];
-if (!rowLayer || !columnLayer || !MANIFEST[rowLayer] || !MANIFEST[columnLayer]) {
-  throw new Error(`usage: pairs.ts <rowLayer> <columnLayer> [layer=art ...] [--deep]  (${LAYER_ORDER.join(' ')})`);
+const positional = args.filter((a) => !a.includes('=') && a !== '--deep');
+
+function layerArg(value: string | undefined): LayerId {
+  if (value === undefined || !Object.hasOwn(MANIFEST, value)) {
+    throw new Error(`usage: pairs.ts <rowLayer> <columnLayer> [layer=art ...] [--deep]  (${LAYER_ORDER.join(' ')})`);
+  }
+  return value as LayerId;
 }
+
+const rowLayer = layerArg(positional[0]);
+const columnLayer = layerArg(positional[1]);
 
 const fixed = new Map(
   args.filter((a) => a.includes('=')).map((a) => a.split('=') as [LayerId, string]),

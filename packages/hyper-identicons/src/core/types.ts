@@ -96,6 +96,6 @@ export interface Identicon {
   detail: DetailLevel;
   /** Every layer's draw, including layers this detail level does not paint. */
   choices: LayerChoice[];
-  /** 1024 hex colours, row-major, fully opaque. */
+  /** 2304 hex colours, row-major, fully opaque. */
   pixels: string[];
 }

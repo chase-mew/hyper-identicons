@@ -3,4 +3,15 @@ dist/
 .DS_Store
 *.tsbuildinfo
 .vite/
-tools/out/
+
+# Scratch output from the art tooling. Everything here is regenerable; the only
+# rendered images the repository keeps are the ones docs/ points at.
+**/tools/out/
+base-purrbit.png
+preview-full-4x.png
+reference.svg
+
+# Source art study and the one-off aids used to trace it onto the canvas grid.
+# make-body.py carries the resulting geometry as literal span tables, so nothing
+# in the build depends on these.
+tools/reference/

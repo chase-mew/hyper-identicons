@@ -5,7 +5,7 @@ import type { ArtData, LayerChoice } from './types.js';
 const MISSING_SLOT = '#ff00ff';
 
 /**
- * Composites into 1024 opaque hex colours. See spec/v1.md §5. A layer whose pixels are
+ * Composites into 2304 opaque hex colours. See spec/v1.md §5. A layer whose pixels are
  * absent from `artData` is skipped, which is how `mini` drops layers it never imported.
  */
 export function renderPixels(choices: readonly LayerChoice[], artData: ArtData): string[] {
