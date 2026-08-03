@@ -33,7 +33,10 @@
     "node": ">=22"
   },
   "files": [
-    "dist"
+    "dist",
+    "LICENSE",
+    "LICENSE-ART",
+    "README.md"
   ],
   "exports": {
     ".": {

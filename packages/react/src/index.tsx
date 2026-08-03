@@ -9,8 +9,7 @@ export interface HyperIdenticonProps {
   size?: number;
   /**
    * `mini` paints background, body, eyes and headwear only. Use it in lists: the
-   * detail it drops is invisible below roughly 32px, and its art never reaches the
-   * bundle.
+   * detail it drops is invisible below roughly 32px.
    */
   detail?: 'full' | 'mini';
   /** Corner radius in canvas units (0-24). 24 is a circle. */

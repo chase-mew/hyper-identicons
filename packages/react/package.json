@@ -19,7 +19,7 @@
   "engines": {
     "node": ">=22"
   },
-  "files": ["dist"],
+  "files": ["dist", "LICENSE", "README.md"],
   "publishConfig": {
     "access": "public"
   },
