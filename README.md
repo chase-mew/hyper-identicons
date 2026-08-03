@@ -1,6 +1,8 @@
 # Hyper Identicons
 
 [![CI](https://github.com/chase-mew/hyper-identicons/actions/workflows/ci.yml/badge.svg)](https://github.com/chase-mew/hyper-identicons/actions/workflows/ci.yml)
+[![npm](https://img.shields.io/npm/v/hyper-identicons.svg)](https://www.npmjs.com/package/hyper-identicons)
+[![npm](https://img.shields.io/npm/v/@hyper-identicons/react.svg?label=%40hyper-identicons%2Freact)](https://www.npmjs.com/package/@hyper-identicons/react)
 [![Code MIT](https://img.shields.io/badge/code-MIT-blue.svg)](LICENSE)
 [![Art CC0](https://img.shields.io/badge/art-CC0-brightgreen.svg)](LICENSE-ART)
 
@@ -15,6 +17,9 @@ upload.
 > users who will grow attached to their avatar yet.
 
 ## Install
+
+Packages: [hyper-identicons](https://www.npmjs.com/package/hyper-identicons) ·
+[@hyper-identicons/react](https://www.npmjs.com/package/@hyper-identicons/react)
 
 ```sh
 npm install hyper-identicons
