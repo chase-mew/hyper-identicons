@@ -16,6 +16,15 @@ upload.
 
 ## Install
 
+Not on npm yet. From a clone of this repo:
+
+```sh
+pnpm install
+pnpm build
+```
+
+Once published:
+
 ```sh
 npm install hyper-identicons
 npm install @hyper-identicons/react   # optional React wrapper
@@ -80,8 +89,9 @@ and not another.
 **Legibility is guaranteed, not hoped for.** Fur and backgrounds are split into a deep
 band and a bright band with a wide gap between them, and the background is always drawn
 from the band the cat did not take. No address can produce a cat that sinks into its
-own backdrop. `AGENTS.md` has the reasoning and the numbers, `scripts/audit-colors.ts`
-prints them, and the test suite enforces them.
+own backdrop. `AGENTS.md` has the reasoning and the numbers,
+`packages/hyper-identicons/scripts/audit-colors.ts` prints them, and the test suite
+enforces them.
 
 **Every cat carries the same wash.** Each layer picks its colourway independently,
 which makes any one cat coherent and a list of them a jumble, so a warm-over-cool split

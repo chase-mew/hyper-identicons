@@ -1,7 +1,9 @@
+import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-const pkg = (relative: string) => new URL(`../../packages/${relative}`, import.meta.url).pathname;
+const pkg = (relative: string) =>
+  fileURLToPath(new URL(`../../packages/${relative}`, import.meta.url));
 
 export default defineConfig({
   plugins: [react()],

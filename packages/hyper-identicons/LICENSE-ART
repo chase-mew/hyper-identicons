@@ -1,10 +1,10 @@
-The pixel art in this repository is dedicated to the public domain under CC0 1.0
-Universal. That covers the ASCII grids under packages/hyper-identicons/art-source/,
-the encoded art in packages/hyper-identicons/src/art/, the generators in tools/ that
-produce them, and every image rendered from them. Copy it, fork it, ship it, sell it;
-no attribution required.
+The pixel art shipped in this package is dedicated to the public domain under
+CC0 1.0 Universal. That covers the encoded art under dist/art/ (and its TypeScript
+sources under src/art/). Copy it, fork it, ship it, sell it; no attribution required.
 
-The library code is MIT and is covered by LICENSE instead.
+The library code is MIT and is covered by LICENSE instead. The ASCII source grids
+and the Python generators that produce them live in the repository and are likewise
+CC0; see the root LICENSE-ART there.
 
 ----------------------------------------------------------------------------
 

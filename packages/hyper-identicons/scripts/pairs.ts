@@ -38,7 +38,7 @@ const deep = args.includes('--deep');
 const positional = args.filter((a) => !a.includes('=') && a !== '--deep');
 
 function layerArg(value: string | undefined): LayerId {
-  if (value === undefined || !(value in MANIFEST)) {
+  if (value === undefined || !Object.hasOwn(MANIFEST, value)) {
     throw new Error(`usage: pairs.ts <rowLayer> <columnLayer> [layer=art ...] [--deep]  (${LAYER_ORDER.join(' ')})`);
   }
   return value as LayerId;
