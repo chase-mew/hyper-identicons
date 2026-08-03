@@ -1,0 +1,4 @@
+# Only the preview renderers need these. The generators that write art-source/ --
+# make-body.py, make-backgrounds.py, make-traits.py -- and peek.py are stdlib only,
+# so a contributor changing art does not need to install anything.
+Pillow>=10.0

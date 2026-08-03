@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [22, 24]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm build
+
+      - run: pnpm typecheck
+
+      - run: pnpm test
+
+      # The encoded art and the conformance vectors are both generated and both
+      # committed. A pull request that changes one without regenerating the other
+      # would otherwise pass every test here and ship a mismatch.
+      - name: Generated art and vectors are up to date
+        run: |
+          pnpm vectors
+          git diff --exit-code -- packages/hyper-identicons/src/art spec/vectors.json
+
+  art:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # The generators must be idempotent: a second run over the committed grids
+      # has to be a no-op. One that is not has state in it.
+      - name: Art generators reproduce the committed grids
+        run: |
+          python3 tools/make-body.py
+          python3 tools/make-backgrounds.py
+          python3 tools/make-traits.py
+          git diff --exit-code -- packages/hyper-identicons/art-source tools/anchors.json

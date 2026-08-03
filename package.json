@@ -2,11 +2,22 @@
   "name": "hyper-identicons-monorepo",
   "private": true,
   "type": "module",
+  "license": "MIT",
   "packageManager": "pnpm@9.15.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chase-mew/hyper-identicons.git"
+  },
   "scripts": {
     "build:art": "pnpm --filter hyper-identicons build:art",
     "build": "pnpm -r --filter=./packages/** build",
     "test": "pnpm --filter hyper-identicons test",
+    "typecheck": "tsc -p packages/hyper-identicons/tsconfig.dev.json && tsc -p packages/react/tsconfig.json --noEmit && tsc -p apps/playground/tsconfig.json",
+    "vectors": "pnpm --filter hyper-identicons vectors",
+    "audit:colors": "pnpm --filter hyper-identicons audit:colors",
     "dev": "pnpm --filter playground dev"
   },
   "devDependencies": {

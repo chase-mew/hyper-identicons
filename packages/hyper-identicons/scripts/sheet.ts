@@ -1,13 +1,14 @@
 /**
  * Renders a wall of identicons from arbitrary addresses. Dev-only.
  *
- *   pnpm tsx scripts/sheet.ts [columns] [rows]
+ *   pnpm tsx scripts/sheet.ts [columns] [rows] [out.png]
  *
  * Reviewing traits one at a time hides the thing that actually matters, which is
  * whether forty of these side by side look like one family and still tell each
  * other apart. Half the sheet is drawn at wallet size for the same reason.
  */
 import { mkdirSync, writeFileSync } from 'node:fs';
+import { dirname } from 'node:path';
 import { identiconOf } from '../src/index.js';
 import { CANVAS } from '../src/core/slots.js';
 import { treatPixels } from '../src/core/treatment.js';
@@ -46,6 +47,7 @@ for (let i = 0; i < COLS * ROWS; i++) {
   if (i < COLS * SCALE) blit(pixels, 1, (i % (COLS * SCALE)) * STRIP + PAD, ROWS * CELL + PAD);
 }
 
-mkdirSync('tools/out', { recursive: true });
-writeFileSync('tools/out/sheet.png', encodePng(width, height, rgb));
-console.log(`${COLS * ROWS} identicons in tools/out/sheet.png`);
+const out = process.argv[4] ?? 'tools/out/sheet.png';
+mkdirSync(dirname(out), { recursive: true });
+writeFileSync(out, encodePng(width, height, rgb));
+console.log(`${COLS * ROWS} identicons in ${out}`);
