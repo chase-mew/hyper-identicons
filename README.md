@@ -11,19 +11,10 @@ upload.
 ![Forty identicons, each from a different address](docs/sheet.png)
 
 > **Spec v1 is a draft and the output is not frozen.** Any address may render
-> differently between releases until `spec/v1.md` says Frozen, and neither package is
-> on npm yet. Don't ship this to users who will grow attached to their avatar.
+> differently between releases until `spec/v1.md` says Frozen. Don't ship this to
+> users who will grow attached to their avatar yet.
 
 ## Install
-
-Not on npm yet. From a clone of this repo:
-
-```sh
-pnpm install
-pnpm build
-```
-
-Once published:
 
 ```sh
 npm install hyper-identicons

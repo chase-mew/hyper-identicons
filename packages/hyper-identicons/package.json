@@ -59,6 +59,7 @@
   "scripts": {
     "build:art": "tsx scripts/build-art.ts",
     "build": "pnpm build:art && tsc -p tsconfig.json",
+    "prepack": "pnpm run build",
     "vectors": "tsx scripts/vectors.ts",
     "audit:colors": "tsx scripts/audit-colors.ts",
     "test": "tsx --test test/*.test.ts"
