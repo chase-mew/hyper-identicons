@@ -1,0 +1,34 @@
+name: Trait proposal
+description: Propose a hat, garment, expression, accessory or background.
+labels: [art]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Worth knowing before you write it up: a trait has to read at 48 pixels, hats
+        are told apart by their silhouette rather than by detail, nothing can hang
+        past an ear, and a garment has nine rows to tell its whole story in. The
+        "Drawing a trait" section of `AGENTS.md` lists what has already been tried
+        and why it did not survive.
+
+  - type: dropdown
+    id: layer
+    attributes:
+      label: Layer
+      options: [background, body, clothing, mouth, eyes, accessory, headwear]
+    validations:
+      required: true
+
+  - type: textarea
+    id: trait
+    attributes:
+      label: The trait
+      description: What it is, and what its silhouette is — the part that has to carry it.
+    validations:
+      required: true
+
+  - type: textarea
+    id: why
+    attributes:
+      label: Why this one
+      description: What it adds that the current set does not already cover.

@@ -512,8 +512,8 @@ emit("headwear/halo.txt", {
     8: [(19, 27, "a")],
 }, "# Floating halo. Slots: a ring.")
 
-# The Foundation's own sticker set puts a cowboy hat, a mortarboard and a nightcap
-# on this cat, so all three are on-brand by definition rather than by guesswork.
+# A hat everybody already has a word for reads at 48px where an invented one does
+# not, which is why the set runs to a cowboy hat, a mortarboard and a nightcap.
 #
 # Only the crown is cut against the ears. A brim is the whole point of a wide hat
 # and it has to be one unbroken sweep: clipped, it lost a bite out of each side and
