@@ -7,7 +7,7 @@
  */
 import { writeFileSync } from 'node:fs';
 import { MANIFEST } from '../src/art/manifest.js';
-import { ART_DATA } from '../src/index.js';
+import { ART_DATA } from '../src/art/full.js';
 import { renderPixels } from '../src/core/render.js';
 import { toSvg } from '../src/core/svg.js';
 import { LAYER_ORDER } from '../src/core/types.js';

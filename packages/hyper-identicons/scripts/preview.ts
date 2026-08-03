@@ -7,8 +7,8 @@
 import { writeFileSync } from 'node:fs';
 import { keccak_256 } from '@noble/hashes/sha3';
 import { MANIFEST } from '../src/art/manifest.js';
-import { ART_DATA } from '../src/index.js';
-import { MINI_ART_DATA } from '../src/mini.js';
+import { ART_DATA } from '../src/art/full.js';
+import { MINI_ART_DATA } from '../src/art/mini.js';
 import { generate } from '../src/core/index.js';
 import { CANVAS } from '../src/core/slots.js';
 import { treatPixels } from '../src/core/treatment.js';

@@ -1,26 +1,70 @@
 {
   "name": "hyper-identicons",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Deterministic pixel-art identicons for HyperEVM addresses",
+  "keywords": [
+    "identicon",
+    "avatar",
+    "blockies",
+    "jazzicon",
+    "pixel-art",
+    "ethereum",
+    "evm",
+    "hyperevm",
+    "hyperliquid",
+    "web3",
+    "svg",
+    "deterministic"
+  ],
   "license": "MIT",
+  "author": "Chase Manning <chase@manning.dev>",
+  "homepage": "https://github.com/chase-mew/hyper-identicons#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chase-mew/hyper-identicons.git",
+    "directory": "packages/hyper-identicons"
+  },
+  "bugs": {
+    "url": "https://github.com/chase-mew/hyper-identicons/issues"
+  },
   "type": "module",
   "sideEffects": false,
-  "files": ["dist", "spec"],
+  "engines": {
+    "node": ">=22"
+  },
+  "files": [
+    "dist"
+  ],
   "exports": {
-    ".": { "types": "./dist/index.d.ts", "default": "./dist/index.js" },
-    "./mini": { "types": "./dist/mini.d.ts", "default": "./dist/mini.js" },
-    "./core": { "types": "./dist/core/index.d.ts", "default": "./dist/core/index.js" }
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./mini": {
+      "types": "./dist/mini.d.ts",
+      "default": "./dist/mini.js"
+    },
+    "./core": {
+      "types": "./dist/core/index.d.ts",
+      "default": "./dist/core/index.js"
+    },
+    "./art": {
+      "types": "./dist/art/index.d.ts",
+      "default": "./dist/art/index.js"
+    }
   },
   "scripts": {
     "build:art": "tsx scripts/build-art.ts",
     "build": "pnpm build:art && tsc -p tsconfig.json",
     "vectors": "tsx scripts/vectors.ts",
+    "audit:colors": "tsx scripts/audit-colors.ts",
     "test": "tsx --test test/*.test.ts"
   },
   "dependencies": {
     "@noble/hashes": "^1.6.1"
   },
   "devDependencies": {
+    "@types/node": "^26.1.2",
     "tsx": "^4.19.2",
     "typescript": "^5.7.2"
   }

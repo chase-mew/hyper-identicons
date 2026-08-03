@@ -6,18 +6,24 @@
  * Eyes are in the set despite contributing almost nothing at this size: without them
  * the face reads as blank and unsettling rather than simplified.
  */
-import { background } from './art/data/background.js';
-import { body } from './art/data/body.js';
-import { eyes } from './art/data/eyes.js';
-import { headwear } from './art/data/headwear.js';
+import { MINI_ART_DATA } from './art/mini.js';
 import { createApi } from './bind.js';
-import type { ArtData } from './core/types.js';
-
-export const MINI_ART_DATA: ArtData = { background, body, eyes, headwear };
 
 const api = createApi(MINI_ART_DATA, 'mini');
 
+/**
+ * An SVG string painting the mini layer set. Omit `size` for a scale-free SVG.
+ *
+ * Throws `InvalidAddressError` unless `address` is 20 bytes of hex, with or without a
+ * `0x` prefix and in any casing.
+ */
 export const identicon = api.identicon;
+
+/** The same SVG as a `data:` URI, ready for an `<img src>`. */
 export const identiconUri = api.identiconUri;
+
+/** The full result: normalised address, every layer's draw, and the raw pixels. */
 export const identiconOf = api.identiconOf;
+
+/** Every layer's draw, including the layers this detail level does not paint. */
 export const identiconTraits = api.identiconTraits;

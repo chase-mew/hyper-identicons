@@ -1,16 +1,7 @@
 import { useMemo, useState } from 'react';
-import {
-  ART_DATA,
-  COLORWAYS,
-  LAYER_ORDER,
-  MANIFEST,
-  identiconTraits,
-  identiconUri,
-  isAddress,
-  renderPixels,
-  toDataUri,
-  toSvg,
-} from 'hyper-identicons';
+import { identiconTraits, identiconUri, isAddress } from 'hyper-identicons';
+import { ART_DATA, COLORWAYS, MANIFEST } from 'hyper-identicons/art';
+import { LAYER_ORDER, renderPixels, toDataUri, toSvg } from 'hyper-identicons/core';
 import { identiconUri as identiconUriMini } from 'hyper-identicons/mini';
 import type { DetailLevel, LayerChoice, LayerId, Tone } from 'hyper-identicons';
 

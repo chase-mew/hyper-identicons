@@ -8,11 +8,12 @@ export interface HyperIdenticonProps {
   /** Rendered size in CSS pixels. */
   size?: number;
   /**
-   * `mini` paints background, body and headwear only. Use it in lists: the detail it
-   * drops is invisible below roughly 32px, and its art never reaches the bundle.
+   * `mini` paints background, body, eyes and headwear only. Use it in lists: the
+   * detail it drops is invisible below roughly 32px, and its art never reaches the
+   * bundle.
    */
   detail?: 'full' | 'mini';
-  /** Corner radius in canvas units (0-16). 16 is a circle. */
+  /** Corner radius in canvas units (0-24). 24 is a circle. */
   radius?: number;
   /** Rendered instead of throwing when `address` is not a 20-byte hex address. */
   fallback?: React.ReactNode;

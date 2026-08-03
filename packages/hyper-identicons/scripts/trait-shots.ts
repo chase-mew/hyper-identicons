@@ -11,7 +11,7 @@
  */
 import { mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { MANIFEST } from '../src/art/manifest.js';
-import { ART_DATA } from '../src/index.js';
+import { ART_DATA } from '../src/art/full.js';
 import { renderPixels } from '../src/core/render.js';
 import { CANVAS } from '../src/core/slots.js';
 import { treatPixels } from '../src/core/treatment.js';

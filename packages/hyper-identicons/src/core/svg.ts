@@ -6,7 +6,17 @@ export interface SvgOptions {
   size?: number;
   /** Corner radius in canvas units (0-24). 24 is a circle. */
   radius?: number;
+  /** Accessible name, emitted as `<title>`. Escaped, so it may be untrusted. */
   title?: string;
+}
+
+/**
+ * Callers pass an address or a display name here, and an SVG string is a document
+ * rather than a value: an unescaped `<` would let whatever produced the name close
+ * the title and open an element instead.
+ */
+function escapeXml(text: string): string {
+  return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
 /** One rect per horizontal run of identical colour. See spec/v1.md §5. */
@@ -32,7 +42,7 @@ export function toSvg(pixels: readonly string[], options: SvgOptions = {}): stri
   const clip = rounded
     ? `<clipPath id="c"><rect width="${CANVAS}" height="${CANVAS}" rx="${radius}" ry="${radius}"/></clipPath>`
     : '';
-  const label = title ? `<title>${title}</title>` : '';
+  const label = title ? `<title>${escapeXml(title)}</title>` : '';
 
   // The treatment's soft-light rects blend with whatever is behind them, so the group
   // has to be its own stacking context. Without `isolation` an inline SVG blends with

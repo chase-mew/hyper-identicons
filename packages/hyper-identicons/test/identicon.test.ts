@@ -2,13 +2,14 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { keccak_256 } from '@noble/hashes/sha3';
 import { MANIFEST } from '../src/art/manifest.js';
-import { ART_DATA, identicon, identiconOf, identiconTraits } from '../src/index.js';
-import { MINI_ART_DATA, identiconOf as identiconOfMini } from '../src/mini.js';
+import { ART_DATA, MINI_ART_DATA } from '../src/art/index.js';
+import { identicon, identiconOf, identiconTraits } from '../src/index.js';
+import { identiconOf as identiconOfMini } from '../src/mini.js';
 import { InvalidAddressError, decodeRle, encodeRle, normalizeAddress } from '../src/core/index.js';
 import { CANVAS } from '../src/core/slots.js';
 import { LAYER_ORDER, MINI_LAYERS } from '../src/core/types.js';
 import type { Tone } from '../src/core/types.js';
-import { apca, contrast, lightness, separation } from '../../hyper-identicons/scripts/color.js';
+import { apca, contrast, lightness, separation } from '../scripts/color.js';
 
 const VITALIK = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045';
 
@@ -280,4 +281,11 @@ test('svg output is well formed and scalable', () => {
   assert.match(svg, /shape-rendering="crispEdges"/);
   assert.ok(svg.endsWith('</svg>'));
   assert.doesNotMatch(identicon(VITALIK), /^<svg[^>]*\swidth=/, 'size must be optional');
+});
+
+test('a title cannot close its own element', () => {
+  const svg = identicon(VITALIK, { title: '</title><script>alert(1)</script>' });
+  assert.doesNotMatch(svg, /<script/);
+  assert.match(svg, /<title>&lt;\/title&gt;&lt;script&gt;alert\(1\)&lt;\/script&gt;<\/title>/);
+  assert.match(identicon(VITALIK, { title: 'Bob & Alice' }), /<title>Bob &amp; Alice<\/title>/);
 });
